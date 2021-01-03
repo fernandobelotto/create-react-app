@@ -1,13 +1,13 @@
 ---
 id: pre-rendering-into-static-html-files
-title: Pre-Rendering into Static HTML Files
-sidebar_label: Pre-Rendering Static HTML
+title: Pré-renderizando em arquivos HTML estáticos
+sidebar_label: Pré-renderizando HTML estático
 ---
 
-If you’re hosting your `build` with a static hosting provider you can use [react-snapshot](https://www.npmjs.com/package/react-snapshot) or [react-snap](https://github.com/stereobooster/react-snap) to generate HTML pages for each route, or relative link, in your application. These pages will then seamlessly become active, or “hydrated”, when the JavaScript bundle has loaded.
+Se você estiver hospedando seu `build` com um provedor de hospedagem estática, pode usar [react-snapshot](https://www.npmjs.com/package/react-snapshot) ou [react-snap](https://github.com/stereobooster/react-snap) para gerar páginas HTML para cada rota, ou link relativo, em seu aplicativo. Essas páginas se tornarão perfeitamente ativas, ou “hidratadas”, quando o pacote JavaScript for carregado.
 
-There are also opportunities to use this outside of static hosting, to take the pressure off the server when generating and caching routes.
+Também existem oportunidades de usar isso fora da hospedagem estática, para tirar a pressão do servidor ao gerar e armazenar rotas em cache.
 
-The primary benefit of pre-rendering is that you get the core content of each page _with_ the HTML payload—regardless of whether or not your JavaScript bundle successfully downloads. It also increases the likelihood that each route of your application will be picked up by search engines.
+O principal benefício da pré-renderização é que você obtém o conteúdo principal de cada página _com_ a carga HTML - independentemente de seu pacote de JavaScript ser baixado com sucesso ou não. Também aumenta a probabilidade de que cada rota de seu aplicativo seja escolhida por mecanismos de pesquisa.
 
-You can read more about [zero-configuration pre-rendering (also called snapshotting) here](https://medium.com/superhighfives/an-almost-static-stack-6df0a2791319).
+Você pode ler mais sobre [pré-renderização com configuração zero (também chamada de captura instantânea) aqui](https://medium.com/superhighfives/an-almost-static-stack-6df0a2791319).

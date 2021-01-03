@@ -1,46 +1,46 @@
 ---
 id: proxying-api-requests-in-development
-title: Proxying API Requests in Development
+title: Solicitações de proxy de API em desenvolvimento
 sidebar_label: Proxying in Development
 ---
 
 > Note: this feature is available with `react-scripts@0.2.3` and higher.
 
 People often serve the front-end React app from the same host and port as their backend implementation.
+Muitas vezes, as pessoas veiculam o aplicativo React de front-end no mesmo host e porta de sua implementação de back-end.
 
 For example, a production setup might look like this after the app is deployed:
+Por exemplo, um setup de produção pode ter esta aparência depois que o aplicativo é implantado:
 
-    /             - static server returns index.html with React app
-    /todos        - static server returns index.html with React app
-    /api/todos    - server handles any /api/* requests using the backend implementation
+    /             - o servidor estático retorna index.html com o aplicativo React
+    /todos        - o servidor estático retorna index.html com o aplicativo React
+    /api/todos    - servidor lida com quaisquer solicitações /api/* usando a implementação de backend
 
-Such setup is **not** required. However, if you **do** have a setup like this, it is convenient to write requests like `fetch('/api/todos')` without worrying about redirecting them to another host or port during development.
+Essa configuração **não** é necessária. No entanto, se você **tiver** uma configuração como esta, é conveniente escrever pedidos como `fetch('/api/todos')` sem se preocupar em redirecioná-los para outro host ou porta durante o desenvolvimento.
 
 To tell the development server to proxy any unknown requests to your API server in development, add a `proxy` field to your `package.json`, for example:
+Para dizer ao servidor de desenvolvimento para fazer proxy de quaisquer solicitações desconhecidas para seu servidor em desenvolvimento, adicione um campo `proxy` ao seu `package.json`, por exemplo:
 
 ```json
   "proxy": "http://localhost:4000",
 ```
+Desta forma, quando você executar `fetch('/api/todos')` no desenvolvimento, o servidor de desenvolvimento reconhecerá que não é um asset estático e enviará o proxy de sua solicitação para `http://localhost:4000/api/todos` como uma alternativa. O servidor de desenvolvimento **apenas** tentará enviar solicitações sem `text/html` em seu cabeçalho `Accept` para o proxy.
 
-This way, when you `fetch('/api/todos')` in development, the development server will recognize that it’s not a static asset, and will proxy your request to `http://localhost:4000/api/todos` as a fallback. The development server will **only** attempt to send requests without `text/html` in its `Accept` header to the proxy.
-
-Conveniently, this avoids [CORS issues](https://stackoverflow.com/questions/21854516/understanding-ajax-cors-and-security-considerations) and error messages like this in development:
+Convenientemente, isso evita [problemas de CORS](https://stackoverflow.com/questions/21854516/understanding-ajax-cors-and-security-considerations) e mensagens de erro como esta em desenvolvimento:
 
 ```
 Fetch API cannot load http://localhost:4000/api/todos. No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:3000' is therefore not allowed access. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
 ```
+Lembre-se de que `proxy` só tem efeito no desenvolvimento (com `npm start`), e cabe a você garantir que URLs como `/api/todos` apontem para o endpoint certo na produção. Você não precisa usar o prefixo `/api`. Qualquer solicitação não reconhecida sem um cabeçalho de aceitação `text/html` será redirecionada para o `proxy` especificado.
+A opção `proxy` suporta conexões HTTP, HTTPS e WebSocket.
 
-Keep in mind that `proxy` only has effect in development (with `npm start`), and it is up to you to ensure that URLs like `/api/todos` point to the right thing in production. You don’t have to use the `/api` prefix. Any unrecognized request without a `text/html` accept header will be redirected to the specified `proxy`.
+Se a opção `proxy` **não** for flexível o suficiente para você, alternativamente, você pode:
 
-The `proxy` option supports HTTP, HTTPS and WebSocket connections.
+- [Configure o proxy você mesmo](#configurando-o-proxy-manualmente)
+- Habilite o CORS em seu servidor ([aqui está como fazê-lo com o Express](https://enable-cors.org/server_expressjs.html)).
+- Use [variáveis ​​de ambiente](add-custom-environment-variables.md) para injetar o host de servidor e a porta correta em seu aplicativo.
 
-If the `proxy` option is **not** flexible enough for you, alternatively you can:
-
-- [Configure the proxy yourself](#configuring-the-proxy-manually)
-- Enable CORS on your server ([here’s how to do it for Express](https://enable-cors.org/server_expressjs.html)).
-- Use [environment variables](adding-custom-environment-variables.md) to inject the right server host and port into your app.
-
-## "Invalid Host Header" Errors After Configuring Proxy
+## Erros "Invalid Host Header" após configurar o proxy
 
 When you enable the `proxy` option, you opt into a more strict set of host checks. This is necessary because leaving the backend open to remote hosts makes your computer vulnerable to DNS rebinding attacks. The issue is explained in [this article](https://medium.com/webpack/webpack-dev-server-middleware-security-issues-1489d950874a) and [this issue](https://github.com/webpack/webpack-dev-server/issues/887).
 
@@ -66,7 +66,7 @@ DANGEROUSLY_DISABLE_HOST_CHECK=true
 
 We don’t recommend this approach.
 
-## Configuring the Proxy Manually
+## Configurando o Proxy Manualmente
 
 > Note: this feature is available with `react-scripts@2.0.0` and higher.
 
@@ -78,7 +78,7 @@ First, install `http-proxy-middleware` using npm or Yarn:
 
 ```sh
 $ npm install http-proxy-middleware --save
-$ # or
+$ # ou
 $ yarn add http-proxy-middleware
 ```
 
@@ -91,8 +91,7 @@ module.exports = function(app) {
   // ...
 };
 ```
-
-You can now register proxies as you wish! Here's an example using the above `http-proxy-middleware`:
+Agora você pode registrar proxies como desejar! Aqui está um exemplo usando o `http-proxy-middleware` acima:
 
 ```js
 const { createProxyMiddleware } = require('http-proxy-middleware');
@@ -108,8 +107,8 @@ module.exports = function(app) {
 };
 ```
 
-> **Note:** You do not need to import this file anywhere. It is automatically registered when you start the development server.
+> **Nota:** Você não precisa importar este arquivo para lugar nenhum. Ele é registrado automaticamente quando você inicia o servidor de desenvolvimento.
 
-> **Note:** This file only supports Node's JavaScript syntax. Be sure to only use supported language features (i.e. no support for Flow, ES Modules, etc).
+> **Nota:** Este arquivo suporta apenas a sintaxe JavaScript do Node. Certifique-se de usar apenas recursos de idioma compatíveis (ou seja, sem suporte para Flow, Módulos ES, etc.).
 
-> **Note:** Passing the path to the proxy function allows you to use globbing and/or pattern matching on the path, which is more flexible than the express route matching.
+> **Nota:** Passar o caminho para a função proxy permite que você use globbing e/ou correspondência de padrões no caminho, que é mais flexível do que a correspondência de rota expressa.
