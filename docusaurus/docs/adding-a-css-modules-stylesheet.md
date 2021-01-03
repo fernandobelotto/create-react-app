@@ -8,7 +8,7 @@ sidebar_label: Adicionando CSS Modules
 
 Este projeto suporta [Módulos CSS](https://github.com/css-modules/css-modules) junto com folhas de estilo regulares usando a convenção de nomenclatura de arquivo `[name].module.css`. Os Módulos CSS permitem o escopo do CSS criando automaticamente um nome de classe exclusivo do formato `[nome do arquivo]\_[nome da classe]\_\_[hash]`.
 
-> **Dica:** se você quiser pré-processar uma folha de estilo com o Sass, certifique-se de [seguir as instruções de instalação](adicionar-a-sass-stylesheet.md) e alterar a extensão do arquivo da folha de estilo da seguinte maneira: `[nome].module.scss` ou `[nome].module.sass`.
+> **Dica:** se você quiser pré-processar uma folha de estilo com o Sass, certifique-se de [seguir as instruções de instalação](adding-a-sass-stylesheet.md) e alterar a extensão do arquivo da folha de estilo da seguinte maneira: `[nome].module.scss` ou `[nome].module.sass`.
 
 Os módulos CSS permitem que você use o mesmo nome de classe CSS em arquivos diferentes sem se preocupar com conflitos de nomes. Saiba mais sobre os CSS Modules [aqui](https://css-tricks.com/css-modules-part-1-need/).
 

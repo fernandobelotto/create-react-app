@@ -48,7 +48,7 @@ Se você definir `SASS_PATH=node_modules:src`, isso permitirá que você faça i
 > SASS_PATH=./node_modules;./src
 > ```
 
-> **Dica:** você também pode optar por usar este recurso com [módulos CSS](add-a-css-modules-stylesheet.md) também!
+> **Dica:** você também pode optar por usar este recurso com [módulos CSS](adding-a-css-modules-stylesheet.md) também!
 
 > **Observação:** se você estiver usando o Flow, substitua a configuração [module.file_ext](https://flow.org/en/docs/config/options/#toc-module-file-ext-string) em seu `.flowconfig` para que ele reconheça os arquivos `.sass` ou `.scss`. Você também precisará incluir as configurações padrão `module.file_ext` para os arquivos `.js`, `.jsx`, `.mjs` e `.json`.
 >

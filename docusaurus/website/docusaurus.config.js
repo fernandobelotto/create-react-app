@@ -8,10 +8,10 @@
 const siteConfig = {
   title: 'Create React App',
   tagline: 'Configure um aplicativo da web moderno executando um comando.',
-  url: 'https://create-react-app.dev',
-  baseUrl: '/',
+  url: 'https://fernandobelotto.github.io',
+  baseUrl: '/create-react-app/',
   projectName: 'create-react-app',
-  organizationName: 'facebook',
+  organizationName: 'fernandobelotto',
   favicon: 'img/favicon/favicon.ico',
   presets: [
     [

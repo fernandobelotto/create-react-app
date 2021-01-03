@@ -82,7 +82,7 @@ Você pode iniciar um novo aplicativo TypeScript usando modelos. Para usar nosso
 ```sh
 npx create-react-app my-app --template typescript
 ```
-Se você já tem um projeto e gostaria de adicionar TypeScript, consulte nossa documentação [Adicionando TypeScript](add-typescript.md).
+Se você já tem um projeto e gostaria de adicionar TypeScript, consulte nossa documentação [Adicionando TypeScript](adding-typescript.md).
 
 ### Selecionando um package manager
 
