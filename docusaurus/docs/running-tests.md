@@ -1,55 +1,56 @@
 ---
 id: running-tests
-title: Running Tests
+title: Executando testes
 ---
 
-> Note: this feature is available with `react-scripts@0.3.0` and higher.
+> Nota: este recurso está disponível com `react-scripts@0.3.0` e superior.
 
-> [Read the migration guide to learn how to enable it in older projects!](https://github.com/facebook/create-react-app/blob/master/CHANGELOG-0.x.md#migrating-from-023-to-030)
+> [Leia o guia de migração para aprender como habilitá-lo em projetos mais antigos!](Https://github.com/facebook/create-react-app/blob/master/CHANGELOG-0.x.md#migrating-from-023-a-030)
 
-Create React App uses [Jest](https://jestjs.io/) as its test runner. To prepare for this integration, we did a [major revamp](https://jestjs.io/blog/2016/09/01/jest-15.html) of Jest so if you heard bad things about it years ago, give it another try.
+O Create React App usa [Jest](https://jestjs.io/) como executor de teste. Para se preparar para essa integração, fizemos uma [grande reformulação](https://jestjs.io/blog/2016/09/01/jest-15.html) do Jest, então, se você ouviu coisas ruins sobre isso anos atrás, dê outra tentativa.
 
-Jest is a Node-based runner. This means that the tests always run in a Node environment and not in a real browser. This lets us enable fast iteration speed and prevent flakiness.
+Jest é um runner baseado em Node. Isso significa que os testes sempre são executados em um ambiente Node e não em um navegador real. Isso nos permite habilitar a velocidade de iteração rápida e evitar falhas.
 
-While Jest provides browser globals such as `window` thanks to [jsdom](https://github.com/tmpvar/jsdom), they are only approximations of the real browser behavior. Jest is intended to be used for unit tests of your logic and your components rather than the DOM quirks.
+Embora Jest forneça variáveis globais de navegador, como `window` graças a [jsdom](https://github.com/tmpvar/jsdom), eles são apenas aproximações do comportamento real do navegador. Jest se destina a ser usado para testes unitários de sua lógica e seus componentes, em vez de peculiaridades do DOM.
 
-We recommend that you use a separate tool for browser end-to-end tests if you need them. They are beyond the scope of Create React App.
+Recomendamos que você use uma ferramenta separada para testes de ponta a ponta do navegador, se necessário. Eles estão além do escopo do Create React App.
 
-## Filename Conventions
+## Convenções de nome de arquivo
 
-Jest will look for test files with any of the following popular naming conventions:
+Jest procurará arquivos de teste com qualquer uma das seguintes convenções de nomenclatura populares:
 
-- Files with `.js` suffix in `__tests__` folders.
-- Files with `.test.js` suffix.
-- Files with `.spec.js` suffix.
+- Arquivos com sufixo `.js` em pastas `__tests__`.
+- Arquivos com sufixo `.test.js`.
+- Arquivos com sufixo `.spec.js`.
 
-The `.test.js` / `.spec.js` files (or the `__tests__` folders) can be located at any depth under the `src` top level folder.
+Os arquivos `.test.js` / `.spec.js` (ou as pastas `__tests__`) podem ser localizados em qualquer profundidade na pasta `src`.
 
-We recommend to put the test files (or `__tests__` folders) next to the code they are testing so that relative imports appear shorter. For example, if `App.test.js` and `App.js` are in the same folder, the test only needs to `import App from './App'` instead of a long relative path. Collocation also helps find tests more quickly in larger projects.
+Recomendamos colocar os arquivos de teste (ou pastas `__tests__`) ao lado do código que eles estão testando para que as importações relativas pareçam menores. Por exemplo, se `App.test.js` e `App.js` estão na mesma pasta, o teste só precisa `importar App de './App'` em vez de um longo caminho relativo. A colocação também ajuda a encontrar testes mais rapidamente em projetos maiores.
 
-## Command Line Interface
+## Interface da Linha de comando (CLI)
 
-When you run `npm test`, Jest will launch in watch mode<sup>\*</sup>. Every time you save a file, it will re-run the tests, like how `npm start` recompiles the code.
+Ao executar o `npm test`, o Jest será iniciado no modo de observação <sup>\*</sup>. Cada vez que você salva um arquivo, ele irá reexecutar os testes, como `npm start` recompila o código.
 
-The watcher includes an interactive command-line interface with the ability to run all tests, or focus on a search pattern. It is designed this way so that you can keep it open and enjoy fast re-runs. You can learn the commands from the “Watch Usage” note that the watcher prints after every run:
+O watcher inclui uma interface de linha de comando interativa com a capacidade de executar todos os testes ou focar em um padrão de pesquisa. Ele foi projetado dessa forma para que você possa mantê-lo aberto e desfrutar de novas execuções rápidas. Você pode aprender os comandos da nota "Observar uso" que o observador imprime após cada execução:
 
 ![Jest watch mode](https://jestjs.io/img/blog/15-watch.gif)
 
 > \*Although we recommend running your tests in watch mode during development, you can disable this behavior by passing in the `--watchAll=false` flag. In most CI environments, this is handled for you (see [On CI servers](#on-ci-servers)).
+> \*Embora recomendemos executar seus testes no modo de observação durante o desenvolvimento, você pode desabilitar este comportamento passando o sinalizador `--watchAll=false`. Na maioria dos ambientes de CI, isso é feito para você (consulte [Em servidores de CI](#em-servidores-ci)).
 
-## Version Control Integration
+## Integração de controle de versão
 
-By default, when you run `npm test`, Jest will only run the tests related to files changed since the last commit. This is an optimization designed to make your tests run fast regardless of how many tests you have. However it assumes that you don’t often commit the code that doesn’t pass the tests.
+Por padrão, quando você executa o `npm test`, o Jest só executa os testes relacionados aos arquivos alterados desde o último commit. Esta é uma otimização projetada para fazer seus testes serem executados mais rapidamente, independentemente de quantos testes você tenha. No entanto, presume que você não costuma enviar o código que não passa nos testes.
 
-Jest will always explicitly mention that it only ran tests related to the files changed since the last commit. You can also press `a` in the watch mode to force Jest to run all tests.
+Jest sempre mencionará explicitamente que só executou testes relacionados aos arquivos alterados desde o último commit. Você também pode pressionar `a` no modo de observação para forçar Jest a executar todos os testes.
 
-Jest will always run all tests on a [continuous integration](#continuous-integration) server or if the project is not inside a Git or Mercurial repository.
+O Jest sempre executará todos os testes em um servidor de [integração contínua](#integraçãoicontínua) ou se o projeto não estiver dentro de um repositório Git ou Mercurial.
 
-## Writing Tests
+## Escrevendo testes
 
-To create tests, add `it()` (or `test()`) blocks with the name of the test and its code. You may optionally wrap them in `describe()` blocks for logical grouping but this is neither required nor recommended.
+Para criar testes, adicione os blocos `it()` (ou `test()`) com o nome do teste e seu código. Você pode opcionalmente envolvê-los em blocos `describe()` para agrupamento lógico, mas isso não é necessário nem recomendado.
 
-Jest provides a built-in `expect()` global function for making assertions. A basic test could look like this:
+Jest fornece uma função global `expect()` embutida para fazer asserções. Um teste básico pode ser assim:
 
 ```js
 import sum from './sum';
@@ -59,16 +60,15 @@ it('sums numbers', () => {
   expect(sum(2, 2)).toEqual(4);
 });
 ```
+Todos os matchers `expect()` suportados pelo Jest são [amplamente documentados aqui](https://jestjs.io/docs/en/expect.html#content).
 
-All `expect()` matchers supported by Jest are [extensively documented here](https://jestjs.io/docs/en/expect.html#content).
+Você também pode usar [`jest.fn()` e `expect(fn).toBeCalled()`](https://jestjs.io/docs/en/expect.html#tohavebeencalled) para criar “espiões” ou simulação funções.
 
-You can also use [`jest.fn()` and `expect(fn).toBeCalled()`](https://jestjs.io/docs/en/expect.html#tohavebeencalled) to create “spies” or mock functions.
+## Testando Componentes
 
-## Testing Components
+Existe um amplo espectro de técnicas de teste de componentes. Eles variam de um “teste de fumaça” verificando se um componente é renderizado sem lançar, para renderização superficial e testar algumas das saídas, para renderização completa e testar o ciclo de vida do componente e mudanças de estado.
 
-There is a broad spectrum of component testing techniques. They range from a “smoke test” verifying that a component renders without throwing, to shallow rendering and testing some of the output, to full rendering and testing component lifecycle and state changes.
-
-Different projects choose different testing tradeoffs based on how often components change, and how much logic they contain. If you haven’t decided on a testing strategy yet, we recommend that you start with creating basic smoke tests for your components:
+Diferentes projetos escolhem diferentes compensações de teste com base na frequência de alteração dos componentes e na quantidade de lógica que eles contêm. Se você ainda não decidiu uma estratégia de teste, recomendamos que comece criando testes básicos de fumaça para seus componentes:
 
 ```js
 import React from 'react';
@@ -81,35 +81,36 @@ it('renders without crashing', () => {
 });
 ```
 
-This test mounts a component and makes sure that it didn’t throw during rendering. Tests like this provide a lot of value with very little effort so they are great as a starting point, and this is the test you will find in `src/App.test.js`.
+Este teste monta um componente e certifica-se de que ele não foi lançado durante a renderização. Testes como esse fornecem muito valor com muito pouco esforço, portanto, são ótimos como ponto de partida, e este é o teste que você encontrará em `src/App.test.js`.
 
-When you encounter bugs caused by changing components, you will gain a deeper insight into which parts of them are worth testing in your application. This might be a good time to introduce more specific tests asserting specific expected output or behavior.
+Ao encontrar bugs causados ​​pela alteração de componentes, você obterá um insight mais profundo sobre quais partes deles vale a pena testar em seu aplicativo. Este pode ser um bom momento para introduzir testes mais específicos, afirmando resultados ou comportamentos esperados específicos.
 
 ### React Testing Library
 
-If you’d like to test components in isolation from the child components they render, we recommend using `react-testing-library`. [`react-testing-library`](https://github.com/testing-library/react-testing-library) is a library for testing React components in a way that resembles the way the components are used by end users. It is well suited for unit, integration, and end-to-end testing of React components and applications. It works more directly with DOM nodes, and therefore it's recommended to use with [`jest-dom`](https://github.com/testing-library/jest-dom) for improved assertions.
+Se você deseja testar componentes isolados dos componentes filhos que eles renderizam, recomendamos o uso de `react-testing-library`. [`react-testing-library`](https://github.com/testing-library/react-testing-library) é uma biblioteca para testar componentes React de uma forma que se assemelha à forma como os componentes são usados ​​pelos usuários finais. Ele é adequado para testes unitários, integração e ponta a ponta de componentes e aplicativos React. Ele funciona mais diretamente com nós DOM e, portanto, é recomendado usar com [`jest-dom`](https://github.com/testing-library/jest-dom) para asserções aprimoradas.
 
-To install `react-testing-library` and `jest-dom`, you can run:
+Para instalar `react-testing-library` e `jest-dom`, você pode executar:
 
 ```sh
 npm install --save @testing-library/react @testing-library/jest-dom
 ```
 
-Alternatively you may use `yarn`:
+Alternativamente, você pode usar `yarn`:
 
 ```sh
 yarn add @testing-library/react @testing-library/jest-dom
 ```
 
 If you want to avoid boilerplate in your test files, you can create a [`src/setupTests.js`](#initializing-test-environment) file:
+Se você quiser evitar boilerplate em seus arquivos de teste, você pode criar um arquivo [`src/setupTests.js`](#iniciando-o-ambiente-de-testes):
 
 ```js
-// react-testing-library renders your components to document.body,
-// this adds jest-dom's custom assertions
+// react-testing-library renderiza seus componentes para document.body,
+// isto adiciona asserções personalizadas de jest-dom
 import '@testing-library/jest-dom';
 ```
 
-Here's an example of using `react-testing-library` and `jest-dom` for testing that the `<App />` component renders "Learn React".
+Aqui está um exemplo do uso de `react-testing-library` e `jest-dom` para testar se o componente `<App />` renderiza "Learn React".
 
 ```js
 import React from 'react';
@@ -121,29 +122,29 @@ it('renders welcome message', () => {
   expect(screen.getByText('Learn React')).toBeInTheDocument();
 });
 ```
+Saiba mais sobre os utilitários fornecidos pela `react-testing-library` para facilitar o teste de interações assíncronas, bem como a seleção de elementos de formulário da [documentação da `react-testing-library`](https://testing-library.com/react) e [exemplos](https://codesandbox.io/s/github/kentcdodds/react-testing-library-examples).
 
-Learn more about the utilities provided by `react-testing-library` to facilitate testing asynchronous interactions as well as selecting form elements from the [`react-testing-library` documentation](https://testing-library.com/react) and [examples](https://codesandbox.io/s/github/kentcdodds/react-testing-library-examples).
-
-## Using Third Party Assertion Libraries
+## Usando Bibliotecas de Asserção de Terceiros
 
 We recommend that you use `expect()` for assertions and `jest.fn()` for spies. If you are having issues with them please [file those against Jest](https://github.com/facebook/jest/issues/new), and we’ll fix them. We intend to keep making them better for React, supporting, for example, [pretty-printing React elements as JSX](https://github.com/facebook/jest/pull/1566).
+Recomendamos que você use `expect()` para asserções e `jest.fn()` para espiões. Se você estiver tendo problemas com eles, [arquive-os contra Jest](https://github.com/facebook/jest/issues/new) e nós os corrigiremos. Pretendemos continuar a torná-los melhores para o React, suportando, por exemplo, [elementos do React pretty-printing como JSX](https://github.com/facebook/jest/pull/1566).
 
-However, if you are used to other libraries, such as [Chai](https://www.chaijs.com/) and [Sinon](https://sinonjs.org/), or if you have existing code using them that you’d like to port over, you can import them normally like this:
+No entanto, se você estiver acostumado com outras bibliotecas, como [Chai](https://www.chaijs.com/) e [Sinon](https://sinonjs.org/), ou se já houver código usando-as que você gostaria de transferir, você pode importá-los normalmente desta forma:
 
 ```js
 import sinon from 'sinon';
 import { expect } from 'chai';
 ```
 
-and then use them in your tests like you normally do.
+e, em seguida, use-os em seus testes como você faz normalmente.
 
-## Initializing Test Environment
+## Inicializando o ambiente de teste
 
-> Note: this feature is available with `react-scripts@0.4.0` and higher.
+> Nota: este recurso está disponível com `react-scripts@0.4.0` e superior.
 
-If your app uses a browser API that you need to mock in your tests or if you need a global setup before running your tests, add a `src/setupTests.js` to your project. It will be automatically executed before running your tests.
+Se seu aplicativo usa uma API de navegador que você precisa simular em seus testes ou se você precisa de uma configuração global antes de executar seus testes, adicione `src/setupTests.js` ao seu projeto. Ele será executado automaticamente antes de executar seus testes.
 
-For example:
+Por exemplo:
 
 ### `src/setupTests.js`
 
@@ -157,7 +158,7 @@ const localStorageMock = {
 global.localStorage = localStorageMock;
 ```
 
-> Note: Keep in mind that if you decide to "eject" before creating `src/setupTests.js`, the resulting `package.json` file won't contain any reference to it, so you should manually create the property `setupFilesAfterEnv` in the configuration for Jest, something like the following:
+> Nota: Tenha em mente que se você decidir "ejetar" antes de criar `src/setupTests.js`, o arquivo `package.json` resultante não conterá nenhuma referência a ele, então você deve criar manualmente a propriedade `setupFilesAfterEnv` na configuração do Jest, algo como o seguinte:
 
 > ```js
 > "jest": {
@@ -166,27 +167,27 @@ global.localStorage = localStorageMock;
 >  }
 > ```
 
-## Focusing and Excluding Tests
+## Focando e Excluindo Testes
 
-You can replace `it()` with `xit()` to temporarily exclude a test from being executed.
+Você pode substituir `it()` por `xit()` para excluir temporariamente a execução de um teste.
 
-Similarly, `fit()` lets you focus on a specific test without running any other tests.
+Da mesma forma, `fit()` permite que você se concentre em um teste específico sem executar nenhum outro teste.
 
-## Coverage Reporting
+## Relatório de cobertura
 
-Jest has an integrated coverage reporter that works well with ES6 and requires no configuration.
+Jest tem um relator de cobertura integrado que funciona bem com ES6 e não requer configuração.
 
-Run `npm test -- --coverage` (note extra `--` in the middle) to include a coverage report like this:
+Execute `npm test -- --coverage` (observe o extra `--` no meio) para incluir um relatório de cobertura como este:
 
 ![coverage report](https://i.imgur.com/5bFhnTS.png)
 
-Note that tests run much slower with coverage so it is recommended to run it separately from your normal workflow.
+Observe que os testes são executados muito mais lentamente com cobertura, portanto, é recomendável executá-los separadamente do fluxo de trabalho normal.
 
-### Configuration
+### Configuração
 
-The default Jest coverage configuration can be overridden by adding any of the following supported keys to a Jest config in your package.json.
+A configuração de cobertura Jest padrão pode ser substituída adicionando qualquer uma das seguintes chaves suportadas a uma configuração Jest em seu package.json.
 
-Supported overrides:
+Substituições suportadas:
 
 - [`clearMocks`](https://jestjs.io/docs/en/configuration.html#clearmocks-boolean)
 - [`collectCoverageFrom`](https://jestjs.io/docs/en/configuration.html#collectcoveragefrom-array)
@@ -204,7 +205,7 @@ Supported overrides:
 - [`transformIgnorePatterns`](https://jestjs.io/docs/en/configuration.html#transformignorepatterns-array-string)
 - [`watchPathIgnorePatterns`](https://jestjs.io/docs/en/configuration.html#watchpathignorepatterns-array-string)
 
-Example package.json:
+Exemplo package.json:
 
 ```json
 {
@@ -229,20 +230,20 @@ Example package.json:
 }
 ```
 
-## Continuous Integration
+## Integração contínua
 
-By default `npm test` runs the watcher with interactive CLI. However, you can force it to run tests once and finish the process by setting an environment variable called `CI`.
+Por padrão, o `npm test` executa o observador com CLI interativa. No entanto, você pode forçá-lo a executar testes uma vez e concluir o processo definindo uma variável de ambiente chamada `CI`.
 
-When creating a build of your application with `npm run build` linter warnings are not checked by default. Like `npm test`, you can force the build to perform a linter warning check by setting the environment variable `CI`. If any warnings are encountered then the build fails.
+Ao criar uma versão do seu aplicativo com `npm run build`, os avisos do linter não são verificados por padrão. Como o `npm test`, você pode forçar a construção a executar uma verificação de aviso do linter definindo a variável de ambiente `CI`. Se algum aviso for encontrado, a construção falhará.
 
-Popular CI servers already set the environment variable `CI` by default but you can do this yourself too:
+Servidores CI populares já definem a variável de ambiente `CI` por padrão, mas você também pode fazer isso:
 
-## On CI servers
+## Em servidores CI
 
 ### Travis CI
 
-1. Following the [Travis Getting started](https://docs.travis-ci.com/user/getting-started/) guide for syncing your GitHub repository with Travis. You may need to initialize some settings manually in your [profile](https://travis-ci.org/profile) page.
-1. Add a `.travis.yml` file to your git repository.
+1. Seguindo o guia [Travis Getting started](https://docs.travis-ci.com/user/getting-started/) para sincronizar seu repositório GitHub com Travis. Pode ser necessário inicializar algumas configurações manualmente em sua página [perfil](https://travis-ci.org/profile).
+2. Adicione um arquivo `.travis.yml` ao seu repositório git.
 
 ```yaml
 language: node_js
@@ -256,14 +257,14 @@ script:
   - npm test
 ```
 
-1. Trigger your first build with a git push.
-1. [Customize your Travis CI Build](https://docs.travis-ci.com/user/customizing-the-build/) if needed.
+1. Acione sua primeira build com um push git.
+2. [Personalize seu Travis CI Build](https://docs.travis-ci.com/user/customizing-the-build/) se necessário.
 
 ### CircleCI
 
-Follow [this article](https://medium.com/@knowbody/circleci-and-zeits-now-sh-c9b7eebcd3c1) to set up CircleCI with a Create React App project.
+Siga [este artigo](https://medium.com/@knowbody/circleci-and-zeits-now-sh-c9b7eebcd3c1) para configurar o CircleCI com um projeto Create React App.
 
-## On your own environment
+## Em seu próprio ambiente
 
 #### Windows (cmd.exe)
 
@@ -275,7 +276,7 @@ set CI=true&&npm test
 set CI=true&&npm run build
 ```
 
-(Note: the lack of whitespace is intentional.)
+(Observação: a falta de espaço em branco é intencional.)
 
 #### Windows (Powershell)
 
@@ -297,15 +298,15 @@ CI=true npm test
 CI=true npm run build
 ```
 
-The test command will force Jest to run in CI-mode, and tests will only run once instead of launching the watcher.
+O comando de teste forçará Jest a ser executado no modo CI e os testes serão executados apenas uma vez, em vez de iniciar o inspetor.
 
-For non-CI environments, you can pass the `--watchAll=false` flag to disable test-watching.
+Para ambientes não CI, você pode passar o sinalizador `--watchAll=false` para desativar a observação de teste.
 
-The build command will check for linter warnings and fail if any are found.
+O comando build verificará se há avisos do linter e falhará se algum for encontrado.
 
-## Disabling jsdom
+## Desativando jsdom
 
-If you know that none of your tests depend on [jsdom](https://github.com/tmpvar/jsdom), you can safely set `--env=node`, and your tests will run faster:
+Se você sabe que nenhum de seus testes depende de [jsdom] (https://github.com/tmpvar/jsdom), você pode definir com segurança `--env = node`, e seus testes serão executados mais rapidamente:
 
 ```diff
   "scripts": {
@@ -315,27 +316,27 @@ If you know that none of your tests depend on [jsdom](https://github.com/tmpvar/
 +   "test": "react-scripts test --env=node"
 ```
 
-To help you make up your mind, here is a list of APIs that **need jsdom**:
+Para ajudá-lo a se decidir, aqui está uma lista de APIs que **precisam do jsdom**:
 
-- Any browser globals like `window` and `document`
+- Qualquer variável global do navegador, como `window` e` document`
 - [`ReactDOM.render()`](https://facebook.github.io/react/docs/top-level-api.html#reactdom.render)
 - [`TestUtils.renderIntoDocument()`](https://facebook.github.io/react/docs/test-utils.html#renderintodocument) ([a shortcut](https://github.com/facebook/react/blob/34761cf9a252964abfaab6faf74d473ad95d1f21/src/test/ReactTestUtils.js#L83-L91) for the above)
 - [`mount()`](https://airbnb.io/enzyme/docs/api/mount.html) in [Enzyme](https://airbnb.io/enzyme/index.html)
 - [`render()`](https://testing-library.com/docs/react-testing-library/api/#render) in [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 
-In contrast, **jsdom is not needed** for the following APIs:
+Em contraste, **jsdom não é necessário** para as seguintes APIs:
 
 - [`TestUtils.createRenderer()`](https://facebook.github.io/react/docs/test-utils.html#shallow-rendering) (shallow rendering)
 - [`shallow()`](https://airbnb.io/enzyme/docs/api/shallow.html) in [Enzyme](https://airbnb.io/enzyme/index.html)
 
-Finally, jsdom is also not needed for [snapshot testing](https://jestjs.io/blog/2016/07/27/jest-14.html).
+Por fim, jsdom também não é necessário para [teste de snapshot](https://jestjs.io/blog/2016/07/27/jest-14.html).
 
-## Snapshot Testing
+## Teste de Snapshot
 
-Snapshot testing is a feature of Jest that automatically generates text snapshots of your components and saves them on the disk so if the UI output changes, you get notified without manually writing any assertions on the component output. [Read more about snapshot testing.](https://jestjs.io/blog/2016/07/27/jest-14.html)
+O teste de snapshot é um recurso do Jest que gera automaticamente snapshots de texto de seus componentes e os salva no disco para que, se a saída da UI mudar, você seja notificado sem escrever manualmente nenhuma asserção na saída do componente. [Leia mais sobre o teste de snapshots.](Https://jestjs.io/blog/2016/07/27/jest-14.html)
 
-## Editor Integration
+## Integração com Editor
 
-If you use [Visual Studio Code](https://code.visualstudio.com), there is a [Jest extension](https://github.com/orta/vscode-jest) which works with Create React App out of the box. This provides a lot of IDE-like features while using a text editor: showing the status of a test run with potential fail messages inline, starting and stopping the watcher automatically, and offering one-click snapshot updates.
+Se você usar [Visual Studio Code](https://code.visualstudio.com), há uma [extensão para Jest](https://github.com/orta/vscode-jest) que funciona com Create React App fora direta para uso. Isso fornece muitos recursos do tipo IDE ao usar um editor de texto: mostrar o status de uma execução de teste com mensagens de falha em potencial, iniciar e parar o inspetor automaticamente e oferecer atualizações instantâneas com um clique.
 
 ![VS Code Jest Preview](https://cloud.githubusercontent.com/assets/49038/20795349/a032308a-b7c8-11e6-9b34-7eeac781003f.png)
