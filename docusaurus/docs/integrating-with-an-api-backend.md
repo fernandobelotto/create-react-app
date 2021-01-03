@@ -1,29 +1,28 @@
 ---
 id: integrating-with-an-api-backend
-title: Integrating with an API Backend
-sidebar_label: Integrating with an API
+title: Integrando com uma API de back-end
+sidebar_label: Integrando com uma API
 ---
 
-These tutorials will help you to integrate your app with an API backend running on another port,
-using `fetch()` to access it.
+Estes tutoriais irão ajudá-lo a integrar seu aplicativo com uma API de backend rodando em outra porta, usando `fetch ()` para acessá-la.
 
 ## Node
 
-Check out [this tutorial](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/).
-You can find the companion GitHub repository [here](https://github.com/fullstackreact/food-lookup-demo).
+Confira [este tutorial](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/).
+Você pode encontrar o repositório GitHub complementar [aqui](https://github.com/fullstackreact/food-lookup-demo).
 
 ## Ruby on Rails
 
-Check out [this tutorial](https://www.fullstackreact.com/articles/how-to-get-create-react-app-to-work-with-your-rails-api/).
-You can find the companion GitHub repository [here](https://github.com/fullstackreact/food-lookup-demo-rails).
+Confira [este tutorial](https://www.fullstackreact.com/articles/how-to-get-create-react-app-to-work-with-your-rails-api/).
+Você pode encontrar o repositório GitHub complementar [aqui](https://github.com/fullstackreact/food-lookup-demo-rails).
 
-## API Platform (PHP and Symfony)
+## Plataforma de API (PHP e Symfony)
 
-[API Platform](https://api-platform.com) is a framework designed to build API-driven projects.
-It allows creating hypermedia and GraphQL APIs in minutes.
-It is shipped with an official Progressive Web App generator as well as a dynamic administration interface, both built for Create React App.
-Check out [this tutorial](https://api-platform.com/docs/distribution).
+[API Platform](https://api-platform.com) é uma estrutura projetada para construir projetos baseados em API.
+Ele permite a criação de APIs de hipermídia e GraphQL em minutos.
+Ele é fornecido com um gerador oficial de Progressive Web App, bem como uma interface de administração dinâmica, ambos desenvolvidos para Create React App.
+Confira [este tutorial](https://api-platform.com/docs/distribution).
 
 ## C# (ASP.NET Core)
 
-ASP.NET Core has a React project template that uses Create React App. Check out [their documentation](https://docs.microsoft.com/en-us/aspnet/core/client-side/spa/react).
+ASP.NET Core tem um modelo de projeto React que usa o Create React App. Verifique [a documentação](https://docs.microsoft.com/en-us/aspnet/core/client-side/spa/react).

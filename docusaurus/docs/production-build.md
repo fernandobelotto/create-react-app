@@ -1,36 +1,35 @@
 ---
 id: production-build
-title: Creating a Production Build
+title: Criando o build de produção
 ---
 
-`npm run build` creates a `build` directory with a production build of your app. Inside the `build/static` directory will be your JavaScript and CSS files. Each filename inside of `build/static` will contain a unique hash of the file contents. This hash in the file name enables [long term caching techniques](#static-file-caching).
+`npm run build` cria um diretório `build` com uma build (construção) de produção de seu aplicativo. Dentro do diretório `build/static` estarão seus arquivos JavaScript e CSS. Cada nome de arquivo dentro de `build/static` conterá um hash único do conteúdo do arquivo. Este hash no nome do arquivo habilita [técnicas de cache de longo prazo](#static-file-caching).
 
 When running a production build of freshly created Create React App application, there are a number of `.js` files (called _chunks_) that are generated and placed in the `build/static/js` directory:
+Ao executar uma versão de produção do aplicativo Create React App criado recentemente, há uma série de arquivos `.js` (chamados _chunks_) que são gerados e colocados no diretório `build/static/js`:
 
 `main.[hash].chunk.js`
 
-- This is your _application_ code. `App.js`, etc.
+- Este é o código da sua _aplicação_. `App.js`, etc.
 
 `[number].[hash].chunk.js`
 
-- These files can either be _vendor_ code, or [code splitting chunks](code-splitting.md). _Vendor_ code includes modules that you've imported from within `node_modules`. One of the potential advantages with splitting your _vendor_ and _application_ code is to enable [long term caching techniques](#static-file-caching) to improve application loading performance. Since _vendor_ code tends to change less often than the actual _application_ code, the browser will be able to cache them separately, and won't re-download them each time the app code changes.
+- Esses arquivos podem ser código de _terceiros_ ou [code splitting chunks](code-splitting.md). O código de _terceiros_ inclui módulos que você importou de `node_modules`. Uma das vantagens potenciais de dividir seu código de _terceiros_ e _aplicação_ é habilitar [técnicas de cache de longo prazo](#static-file-caching) para melhorar o desempenho de carregamento do aplicativo. Como o código do _terceiro_ tende a mudar com menos frequência do que o código da _aplicação_ real, o navegador poderá armazená-los em cache separadamente e não baixará novamente cada vez que o código do aplicativo mudar.
 
 `runtime-main.[hash].js`
 
-- This is a small chunk of [webpack runtime](https://webpack.js.org/configuration/optimization/#optimization-runtimechunk) logic which is used to load and run your application. The contents of this will be embedded in your `build/index.html` file by default to save an additional network request. You can opt out of this by specifying `INLINE_RUNTIME_CHUNK=false` as documented in our [advanced configuration](advanced-configuration.md), which will load this chunk instead of embedding it in your `index.html`.
+- Este é um pequeno pedaço da lógica do [webpack runtime](https://webpack.js.org/configuration/optimization/#optimization-runtimechunk) que é usado para carregar e executar seu aplicativo. O conteúdo disso será embutido em seu arquivo `build/index.html` por padrão para salvar uma solicitação de rede adicional. Você pode cancelar especificando `INLINE_RUNTIME_CHUNK=false` conforme documentado em nossa [configuração avançada](advanced-configuration.md), que irá carregar este trecho em vez de incorporá-lo em seu` index.html`.
 
-If you're using [code splitting](code-splitting.md) to split up your application, this will create additional chunks in the `build/static` folder as well.
+Se você estiver usando [code splitting](code-splitting.md) para dividir seu aplicativo, isso criará pedaços adicionais na pasta `build/static` também.
 
-## Static File Caching
+## Cache de arquivo estático
 
-Each file inside of the `build/static` directory will have a unique hash appended to the filename that is generated based on the contents of the file, which allows you to use [aggressive caching techniques](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching#invalidating_and_updating_cached_responses) to avoid the browser re-downloading your assets if the file contents haven't changed. If the contents of a file changes in a subsequent build, the filename hash that is generated will be different.
+Cada arquivo dentro do diretório `build/static` terá um hash único anexado ao nome do arquivo que é gerado com base no conteúdo do arquivo, o que permite que você use [técnicas agressivas de cache](https://developers.google.com/web/fundals/performance/optimizing-content-fficiency/http-caching#invalidating_and_updating_cached_responses) para evitar que o navegador baixe novamente seus assets se o conteúdo do arquivo não tiver mudado. Se o conteúdo de um arquivo for alterado em uma construção subsequente, o hash do nome do arquivo gerado será diferente.
 
-To deliver the best performance to your users, it's best practice to specify a `Cache-Control` header for `index.html`, as well as the files within `build/static`. This header allows you to control the length of time that the browser as well as CDNs will cache your static assets. If you aren't familiar with what `Cache-Control` does, see [this article](https://jakearchibald.com/2016/caching-best-practices/) for a great introduction.
+Para oferecer o melhor desempenho aos seus usuários, é uma prática recomendada especificar um cabeçalho `Cache-Control` para` index.html`, bem como os arquivos dentro de `build/static`. Este cabeçalho permite que você controle por quanto tempo o navegador e também os CDNs armazenarão em cache seus assets estáticos. Se você não está familiarizado com o que `Cache-Control` faz, consulte [este artigo](https://jakearchibald.com/2016/caching-best-practices/) para uma ótima introdução.
 
-Using `Cache-Control: max-age=31536000` for your `build/static` assets, and `Cache-Control: no-cache` for everything else is a safe and effective starting point that ensures your user's browser will always check for an updated `index.html` file, and will cache all of the `build/static` files for one year. Note that you can use the one year expiration on `build/static` safely because the file contents hash is embedded into the filename.
+Usar `Cache-Control: max-age=31536000` para seus assets `build/static` e `Cache-Control: no-cache` para todo o resto é um ponto de partida seguro e eficaz que garante que o navegador do usuário sempre verifique um arquivo `index.html` atualizado, e armazenará em cache todos os arquivos `build/static` por um ano. Observe que você pode usar a expiração de um ano em `build/static` com segurança porque o hash do conteúdo do arquivo está embutido no nome do arquivo.
 
 ## Profiling
 
-ReactDOM automatically supports profiling in development mode for v16.5+, but since profiling adds some small
-additional overhead it is opt-in for production mode. You can opt-in by using the `--profile` flag. Use `npm run build -- --profile` or `yarn build --profile` to enable profiling in the production build. See the [React docs](https://reactjs.org/docs/optimizing-performance.html#profiling-components-with-the-devtools-profiler) for details about profiling
-using the React DevTools.
+O ReactDOM suporta automaticamente profiling no modo de desenvolvimento para a versão 16.5+, mas como a profilling adiciona algumas pequenas sobrecargas adicionais, é opcional para o modo de produção. Você pode optar por usar o sinalizador `--profile`. Use `npm run build - --profile` ou `yarn build --profile` para habilitar o profilling no build de produção. Consulte os [documentos do React](https://reactjs.org/docs/optimizing-performance.html#profiling-components-with-the-devtools-profiler) para obter detalhes sobre profilling usando o React DevTools.

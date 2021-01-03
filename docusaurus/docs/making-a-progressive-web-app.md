@@ -1,176 +1,87 @@
 ---
 id: making-a-progressive-web-app
-title: Making a Progressive Web App
+title: Fazendo um Progressive Web App
 ---
 
-The production build has all the tools necessary to generate a first-class
-[Progressive Web App](https://developers.google.com/web/progressive-web-apps/),
-but **the offline/cache-first behavior is opt-in only**.
+A construção de produção (build) tem todas as ferramentas necessárias para gerar um
+[Progressive Web App](https://developers.google.com/web/progressive-web-apps/) de primeira classe, mas **o comportamento offline/cache-first é apenas opicional**.
 
-Starting with Create React App 4, you can add a `src/service-worker.js` file to
-your project to use the built-in support for
-[Workbox](https://developers.google.com/web/tools/workbox/)'s
-[`InjectManifest`](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-webpack-plugin.InjectManifest)
-plugin, which will
-[compile](https://developers.google.com/web/tools/workbox/guides/using-bundlers)
-your service worker and inject into it a list of URLs to
-[precache](https://developers.google.com/web/tools/workbox/guides/precache-files).
+A partir da versão 4 do Create React App, você pode adicionar um arquivo `src/service-worker.js` ao seu projeto para usar o suporte integrado para [Workbox](https://developers.google.com/web/tools/plug-in)'s [`InjectManifest`](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-webpack-plugin.InjectManifest), que irá [compilar](https://developers.google.com/web/tools/workbox/guides/using-bundlers) seu service worker e injete nele uma lista de URLs para [pré-cache](https://developers.google.com/web/tools/workbox/guides/precache-files).
 
-If you start a new project using one of the PWA [custom
-templates](https://create-react-app.dev/docs/custom-templates/), you'll get a
-`src/service-worker.js` file that serves as a good starting point for an
-offline-first service worker:
+Se você iniciar um novo projeto usando um dos PWA [modelos personalizados](https://create-react-app.dev/docs/custom-templates/), você obterá um arquivo `src/service-worker.js` que serve como um bom ponto de partida para um service worker off-line prioritário:
 
 ```sh
 npx create-react-app my-app --template cra-template-pwa
 ```
 
-The TypeScript equivalent is:
+O equivalente em TypeScript é:
 
 ```sh
 npx create-react-app my-app --template cra-template-pwa-typescript
 ```
+Se você sabe que não usará service workers, ou se preferir usar uma abordagem diferente para lidar com o service worker, não crie um arquivo `src/service-worker.js`. O plugin `InjectManifest` não será executado neste caso.
 
-If you know that you won't be using service workers, or if you'd prefer to use a
-different approach to creating your service worker, don't create a
-`src/service-worker.js` file. The `InjectManifest` plugin won't be run in that
-case.
-
-In addition to creating your local `src/service-worker.js` file, it needs to be
-registered before it will be used. In order to opt-in to the offline-first
-behavior, developers should look for the following in their
-[`src/index.js`](https://github.com/facebook/create-react-app/blob/master/packages/cra-template/template/src/index.js)
-file:
+In addition to creating your local `src/service-worker.js` file, it needs to be registered before it will be used. In order to opt-in to the offline-first behavior, developers should look for the following in their [`src/index.js`](https://github.com/facebook/create-react-app/blob/master/packages/cra-template/template/src/index.js)
+Além de criar seu arquivo local `src/service-worker.js`, ele precisa ser registrado antes de ser usado. Para optar pelo comportamento offline-first, os desenvolvedores devem procurar em seu arquivo [`src/index.js`](https://github.com/facebook/create-react-app/blob/master/packages/cra-template/template/src/index.js):
 
 ```js
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://cra.link/PWA
+// Se você deseja que seu aplicativo funcione offline e carregue mais rápido, você pode alterar
+// unregister() para register() abaixo. Observe que isso traz algumas armadilhas.
+// Saiba mais sobre service workers: https://cra.link/PWA
 serviceWorker.unregister();
 ```
 
-As the comment states, switching `serviceWorker.unregister()` to
-`serviceWorker.register()` will opt you in to using the service worker.
+Como afirma o comentário, alternar `serviceWorker.unregister()` para `serviceWorker.register()` irá permitir que você use o service worker.
 
-## Why Opt-in?
+## Por que ativar?
 
-Offline-first Progressive Web Apps are faster and more reliable than traditional
-web pages, and provide an engaging mobile experience:
+Os Progressive Web Apps Offline-first são mais rápidos e confiáveis ​​do que as páginas da web tradicionais e fornecem uma experiência móvel envolvente:
 
-- All static site assets that are a part of your `webpack` build are cached so
-  that your page loads fast on subsequent visits, regardless of network
-  connectivity (such as 2G or 3G). Updates are downloaded in the background.
-- Your app will work regardless of network state, even if offline. This means
-  your users will be able to use your app at 10,000 feet and on the subway.
-- On mobile devices, your app can be added directly to the user's home screen,
-  app icon and all. This eliminates the need for the app store.
+- Todos os ativos estáticos do site que fazem parte da sua build `webpack` são armazenados em cache para que sua página carregue rapidamente nas visitas subsequentes, independentemente da conectividade de rede (como 2G ou 3G). As atualizações são baixadas em segundo plano.
+- Seu aplicativo funcionará independentemente do estado da rede, mesmo offline. Isso significa que seus usuários poderão usar seu aplicativo a 10.000 pés e no metrô.
+- Em dispositivos móveis, seu aplicativo pode ser adicionado diretamente à tela inicial do usuário, ícone do aplicativo e tudo. Isso elimina a necessidade da loja de aplicativos.
 
-However, they [can make debugging deployments more
-challenging](https://github.com/facebook/create-react-app/issues/2398).
+However, they [can make debugging deployments more challenging](https://github.com/facebook/create-react-app/issues/2398).
+No entanto, eles [podem tornar depuração de implantação mais desafiadoras](https://github.com/facebook/create-react-app/issues/2398).
 
-The
-[`workbox-webpack-plugin`](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin)
-is integrated into production configuration, and it will take care of compiling
-a service worker file that will automatically precache all of your
-`webpack`-generated assets and keep them up to date as you deploy updates. The
-service worker will use a [cache-first
-strategy](https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/#cache-falling-back-to-network)
-for handling all requests for `webpack`-generated assets, including [navigation
-requests](https://developers.google.com/web/fundamentals/primers/service-workers/high-performance-loading#first_what_are_navigation_requests)
-for your HTML, ensuring that your web app is consistently fast, even on a slow
-or unreliable network.
+O [`workbox-webpack-plugin`](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin) é integrado à configuração de produção e se encarregará de compilar um arquivo service worker que irá pré-armazenar em cache automaticamente todos os seus ativos gerados pelo `webpack` e mantê-los atualizados conforme você implanta atualizações. O service worker usará uma [estratégia de cache-first](https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/#cache-falling-back-to-network) para lidar com todas as solicitações de recursos gerados pelo `webpack`, incluindo [solicitações de navegação](https://developers.google.com/web/fundamentals/primers/service-workers/high-performance-loading#first_what_are_navigation_requests) para seu HTML, garantindo que seu aplicativo da web seja consistentemente rápido, mesmo em uma rede lenta ou não confiável.
 
-Note: Resources that are not generated by `webpack`, such as static files that are
-copied over from your local
-[`public/` directory](https://github.com/facebook/create-react-app/blob/master/packages/cra-template/template/public/)
-or third-party resources, will not be precached. You can optionally set up Workbox
-[routes](https://developers.google.com/web/tools/workbox/guides/route-requests)
-to apply the runtime caching strategy of your choice to those resources.
+Nota: Recursos que não são gerados pelo `webpack`, como arquivos estáticos que são copiados de seu [diretório local `public/`](https://github.com/facebook/create-react-app/blob/master/packages/cra-template/template/public/) ou recursos de terceiros, não serão pré-armazenados. Você pode configurar opcionalmente o Workbox [routes](https://developers.google.com/web/tools/workbox/guides/route-requests) para aplicar a estratégia de cache de tempo de execução de sua escolha a esses recursos.
 
-## Customization
+## Personalização
 
-Starting with Create React App 4, you have full control over customizing the
-logic in this service worker, by creating your own `src/service-worker.js` file,
-or customizing the one added by the `cra-template-pwa` (or
-`cra-template-pwa-typescript`) template. You can use [additional
-modules](https://developers.google.com/web/tools/workbox/modules) from the
-Workbox project, add in a push notification library, or remove some of the
-default caching logic. The one requirement is that you keep `self.__WB_MANIFEST`
-somewhere in your file, as the Workbox compilation plugin checks for this value
-when generating a manifest of URLs to precache. If you would prefer not to use
-precaching, you can assign `self.__WB_MANIFEST` to a variable that will be
-ignored, like:
+A partir do Create React App 4, você tem controle total sobre a personalização da lógica neste service worker, criando seu próprio arquivo `src/service-worker.js`, ou personalizando aquele adicionado pelo template `cra-template-pwa` ( ou `cra-template-pwa-typescript`). Você pode usar [módulos adicionais](https://developers.google.com/web/tools/workbox/modules) do projeto Workbox, adicionar uma biblioteca de notificação push ou remover parte da lógica de cache padrão. O único requisito é que você mantenha `self.__WB_MANIFEST` em algum lugar em seu arquivo, já que o plugin de compilação do Workbox verifica este valor ao gerar um manifesto de URLs para pré-armazenar em cache. Se você preferir não usar o precaching, pode atribuir `self.__WB_MANIFEST` a uma variável que será ignorada, como:
 
 ```js
 // eslint-disable-next-line no-restricted-globals
 const ignored = self.__WB_MANIFEST;
 
-// Your custom service worker code goes here.
+// Seu código do service worker customizado vai aqui.
 ```
 
-## Offline-First Considerations
+## Considerações sobre Offline-First
 
-If you do decide to opt-in to service worker registration, please take the
-following into account:
+Se você decidir aceitar o registro do service worker, leve em consideração o seguinte:
 
-1. After the initial caching is done, the [service worker lifecycle](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle)
-   controls when updated content ends up being shown to users. In order to guard against
-   [race conditions with lazy-loaded content](https://github.com/facebook/create-react-app/issues/3613#issuecomment-353467430),
-   the default behavior is to conservatively keep the updated service worker in the "[waiting](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle#waiting)"
-   state. This means that users will end up seeing older content until they close (reloading is not
-   enough) their existing, open tabs. See [this blog post](https://jeffy.info/2018/10/10/sw-in-c-r-a.html)
-   for more details about this behavior.
+1. Depois que o cache inicial é feito, o [ciclo de vida do service worker](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle) controla quando o conteúdo atualizado acaba sendo mostrado aos usuários. Para se proteger contra [condições de corrida com conteúdo carregado lentamente](https://github.com/facebook/create-react-app/issues/3613#issuecomment-353467430), o comportamento padrão é manter o serviço atualizado de forma conservadora trabalhador no estado "[em espera](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle#waiting)". Isso significa que os usuários acabarão vendo o conteúdo mais antigo até que fechem (recarregar não é suficiente) suas guias abertas existentes. Consulte [esta postagem do blog](https://jeffy.info/2018/10/10/sw-in-c-r-a.html) para obter mais detalhes sobre esse comportamento.
 
-1. Users aren't always familiar with offline-first web apps. It can be useful to
-   [let the user know](https://developers.google.com/web/fundamentals/instant-and-offline/offline-ux#inform_the_user_when_the_app_is_ready_for_offline_consumption)
-   when the service worker has finished populating your caches (showing a "This web
-   app works offline!" message) and also let them know when the service worker has
-   fetched the latest updates that will be available the next time they load the
-   page (showing a "New content is available once existing tabs are closed." message). Showing
-   these messages is currently left as an exercise to the developer, but as a
-   starting point, you can make use of the logic included in [`src/serviceWorker.js`](https://github.com/facebook/create-react-app/blob/master/packages/cra-template/template/src/serviceWorker.js), which
-   demonstrates which service worker lifecycle events to listen for to detect each
-   scenario, and which as a default, only logs appropriate messages to the
-   JavaScript console.
+2. Os usuários nem sempre estão familiarizados com os aplicativos da web offline. Pode ser útil [informar o usuário](https://developers.google.com/web/fundamentals/instant-and-offline/offline-ux#inform_the_user_when_the_app_is_ready_for_offline_consumption) quando o service worker terminar de preencher seus caches (mostrando um Mensagem "Este aplicativo da web funciona offline!") E também informá-los quando o service worker tiver obtido as atualizações mais recentes que estarão disponíveis na próxima vez que carregar a página (mostrando uma mensagem "Novo conteúdo disponível assim que as guias existentes forem fechadas".). Mostrar essas mensagens é deixado como um exercício para o desenvolvedor, mas como ponto de partida, você pode fazer uso da lógica incluída em [`src/serviceWorker.js`](https://github.com/facebook/create-react-app/blob/master/packages/cra-template/template/src/serviceWorker.js), que demonstra quais eventos do ciclo de vida do service worker ouvir para detectar cada cenário e que, por padrão, registra apenas as mensagens apropriadas para o Console JavaScript.
 
-1. Service workers [require HTTPS](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers#you_need_https),
-   although to facilitate local testing, that policy
-   [does not apply to `localhost`](https://stackoverflow.com/questions/34160509/options-for-testing-service-workers-via-http/34161385#34161385).
-   If your production web server does not support HTTPS, then the service worker
-   registration will fail, but the rest of your web app will remain functional.
+3. Service workers [requerem HTTPS](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers#you_need_https), embora para facilitar o teste local, essa política [não se aplica a `localhost`](https://stackoverflow.com/questions/34160509/options-for-testing-service-workers-via-http/34161385#34161385). Se o seu servidor web de produção não for compatível com HTTPS, o registro do service worker falhará, mas o resto do seu aplicativo web permanecerá funcional.
 
-1. The service worker is only enabled in the [production environment](deployment.md),
-   e.g. the output of `npm run build`. It's recommended that you do not enable an
-   offline-first service worker in a development environment, as it can lead to
-   frustration when previously cached assets are used and do not include the latest
-   changes you've made locally.
+4. O service worker está habilitado apenas no [ambiente de produção](deployment.md), por exemplo, a saída de `npm run build`. É recomendável que você não habilite um service worker off-line-first em um ambiente de desenvolvimento, pois isso pode causar frustração quando ativos armazenados em cache anteriormente são usados ​​e não incluem as alterações mais recentes feitas localmente.
 
-1. If you _need_ to test your offline-first service worker locally, build
-   the application (using `npm run build`) and run a standard http server from your
-   build directory. After running the build script, `create-react-app` will give
-   instructions for one way to test your production build locally and the [deployment instructions](deployment.md) have
-   instructions for using other methods. _Be sure to always use an
-   incognito window to avoid complications with your browser cache._
+5. Se você _precisa_ testar seu service worker offline-first localmente, construa o aplicativo (usando `npm run build`) e execute um servidor http padrão a partir de seu diretório de construção. Depois de executar o script de construção, `create-react-app` dará instruções para uma maneira de testar sua construção de produção localmente e as [instruções de implantação](deployment.md) tem instruções para usar outros métodos. _Certifique-se de usar sempre uma janela anônima para evitar complicações com o cache do navegador._
 
-1. By default, the generated service worker file will not intercept or cache any
-   cross-origin traffic, like HTTP [API requests](integrating-with-an-api-backend.md),
-   images, or embeds loaded from a different domain. Starting with Create
-   React App 4, this can be customized, as explained above.
+6. Por padrão, o arquivo do service worker gerado não interceptará ou armazenará em cache qualquer tráfego de origem cruzada, como HTTP [solicitações de API](integrating-with-an-api-backend.md), imagens ou incorporações carregadas de um domínio diferente. A partir do Create React App 4, ele pode ser personalizado, conforme explicado acima.
+ 
+## Metadata do Progressive Web App
 
-## Progressive Web App Metadata
+A configuração padrão inclui um manifesto de aplicativo da web localizado em [`public/manifest.json`](https://github.com/facebook/create-react-app/blob/master/packages/cra-template/template/public/manifest.json), que você pode personalizar com detalhes específicos para seu aplicativo da web.
 
-The default configuration includes a web app manifest located at
-[`public/manifest.json`](https://github.com/facebook/create-react-app/blob/master/packages/cra-template/template/public/manifest.json), that you can customize with
-details specific to your web application.
+Quando um usuário adiciona um aplicativo da web à tela inicial usando o Chrome ou Firefox no
+Android, os metadados em [`manifest.json`](https://github.com/facebook/create-react-app/blob/master/packages/cra-template/template/public/manifest.json) determina o que
+ícones, nomes e cores de marca a serem usados ​​quando o aplicativo da web for exibido.
+[Guia do Manifesto do Aplicativo da Web](https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/) fornece mais contexto sobre o que cada campo significa e como suas personalizações afetará a experiência de seus usuários.
 
-When a user adds a web app to their homescreen using Chrome or Firefox on
-Android, the metadata in [`manifest.json`](https://github.com/facebook/create-react-app/blob/master/packages/cra-template/template/public/manifest.json) determines what
-icons, names, and branding colors to use when the web app is displayed.
-[The Web App Manifest guide](https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/)
-provides more context about what each field means, and how your customizations
-will affect your users' experience.
-
-Progressive web apps that have been added to the homescreen will load faster and
-work offline when there's an active service worker. That being said, the
-metadata from the web app manifest will still be used regardless of whether or
-not you opt-in to service worker registration.
+Progressive Web Apps que foram adicionados à tela inicial serão carregados mais rapidamente e vão funcionar offline quando houver um service worker ativo. Dito isto, os metadados do manifesto do aplicativo da web ainda serão usados ​​independentemente de não você opta pelo registro do service worker.
