@@ -1,20 +1,20 @@
 ---
 id: can-i-use-decorators
-title: Can I Use Decorators?
+title: Posso usar decorators?
 ---
 
-Some popular libraries use [decorators](https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841) in their documentation.
+Algumas bibliotecas populares usam [decorators](https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841) em sua documentação.
 
-Create React App intentionally doesn’t support decorator syntax at the moment because:
+Creat React App intencionalmente não suporta a sintaxe de decorator no momento porque:
 
-- It is an experimental proposal and is subject to change (in fact, it has already changed once, and will change again).
-- Most libraries currently support only the old version of the proposal — which will never be a standard.
+- É uma proposta experimental e está sujeita a alterações (na verdade, já mudou uma vez, e vai mudar novamente).
+- A maioria das bibliotecas atualmente suportam apenas a versão antiga da proposta - que nunca será um padrão.
 
-However in many cases you can rewrite decorator-based code without decorators and achieve the same result.
+No entanto, em muitos casos, você pode reescrever o código baseado em decorator sem decorators e obter o mesmo resultado.
 
-Please refer to these two threads for reference:
+Consulte estes dois tópicos para referência:
 
 - [#214](https://github.com/facebook/create-react-app/issues/214)
 - [#411](https://github.com/facebook/create-react-app/issues/411)
 
-Create React App will add decorator support when the specification advances to a stable stage.
+Criar aplicativo React adicionará suporte aos decorators quando a especificação avançar para um estágio estável.

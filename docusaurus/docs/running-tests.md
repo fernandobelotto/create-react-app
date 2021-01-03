@@ -35,7 +35,6 @@ O watcher inclui uma interface de linha de comando interativa com a capacidade d
 
 ![Jest watch mode](https://jestjs.io/img/blog/15-watch.gif)
 
-> \*Although we recommend running your tests in watch mode during development, you can disable this behavior by passing in the `--watchAll=false` flag. In most CI environments, this is handled for you (see [On CI servers](#on-ci-servers)).
 > \*Embora recomendemos executar seus testes no modo de observação durante o desenvolvimento, você pode desabilitar este comportamento passando o sinalizador `--watchAll=false`. Na maioria dos ambientes de CI, isso é feito para você (consulte [Em servidores de CI](#em-servidores-ci)).
 
 ## Integração de controle de versão

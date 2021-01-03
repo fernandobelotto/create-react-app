@@ -1,54 +1,54 @@
 ---
 id: troubleshooting
-title: Troubleshooting
-sidebar_label: Troubleshooting
+title: Solução de problemas
+sidebar_label: Solução de problemas
 ---
 
-## `npm start` doesn’t detect changes
+## `npm start` não detecta mudanças
 
-When you save a file while `npm start` is running, the browser should refresh with the updated code.
+Quando você salva um arquivo enquanto `npm start` está em execução, o navegador deve ser atualizado com o código atualizado.
 
-If this doesn’t happen, try one of the following workarounds:
+Se isso não acontecer, tente uma das seguintes soluções alternativas:
 
-- Check that your file is imported by your entrypoint. TypeScript will show errors on any of your source files, but webpack only reloads your files if they are directly or indirectly imported by one of your entrypoints.
-- If your project is in a Dropbox folder, try moving it out.
-- If the watcher doesn’t see a file called `index.js` and you’re referencing it by the folder name, you [need to restart the watcher](https://github.com/facebook/create-react-app/issues/1164) due to a webpack bug.
-- Some editors like Vim and IntelliJ have a “safe write” feature that currently breaks the watcher. You will need to disable it. Follow the instructions in [“Adjusting Your Text Editor”](https://webpack.js.org/guides/development/#adjusting-your-text-editor).
-- If your project path contains parentheses, try moving the project to a path without them. This is caused by a [webpack watcher bug](https://github.com/webpack/watchpack/issues/42).
-- On Linux and macOS, you might need to [tweak system settings](https://github.com/webpack/docs/wiki/troubleshooting#not-enough-watchers) to allow more watchers.
-- If the project runs inside a virtual machine such as (a Vagrant provisioned) VirtualBox, create an `.env` file in your project directory if it doesn’t exist, and add `CHOKIDAR_USEPOLLING=true` to it. This ensures that the next time you run `npm start`, the watcher uses the polling mode, as necessary inside a VM.
+- Verifique se o seu arquivo foi importado pelo seu entrypoint. O TypeScript mostrará erros em qualquer um de seus arquivos de origem, mas o webpack só recarrega seus arquivos se eles forem importados direta ou indiretamente por um de seus pontos de entrada.
+- Se o seu projeto estiver em uma pasta do Dropbox, tente movê-lo para fora.
+- Se o inspetor não vê um arquivo chamado `index.js` e você o faz referência pelo nome da pasta, você [precisa reiniciar o observador](https://github.com/facebook/create-react-app/issues/1164) devido a um bug do webpack.
+- Alguns editores como Vim e IntelliJ têm um recurso de “gravação segura” que atualmente quebra o observador. Você precisará desativá-lo. Siga as instruções em [“Ajustando seu editor de texto”](https://webpack.js.org/guides/development/#adjusting-your-text-editor).
+- Se o caminho do seu projeto contém parênteses, tente mover o projeto para um caminho sem eles. Isso é causado por um [bug do observador do webpack](https://github.com/webpack/watchpack/issues/42).
+- No Linux e no macOS, você pode precisar [ajustar as configurações do sistema](https://github.com/webpack/docs/wiki/troureenshot#not-enough-watchers) para permitir mais observadores.
+- Se o projeto for executado dentro de uma máquina virtual, como (um Vagrant provisionado) VirtualBox, crie um arquivo `.env` no diretório do seu projeto se ele não existir e adicione `CHOKIDAR_USEPOLLING=true` a ele. Isso garante que na próxima vez que você executar `npm start`, o observador use o modo de pesquisa, conforme necessário dentro de uma VM.
 
-If none of these solutions help please leave a comment [in this thread](https://github.com/facebook/create-react-app/issues/659).
+Se nenhuma dessas soluções ajudar, deixe um comentário [neste tópico](https://github.com/facebook/create-react-app/issues/659).
 
-## `npm start` fail due to watch error
+## `npm start` falha devido a um erro de relógio
 
-If you are using a Linux operating system and see an error similar to: `ENOSPC: System limit for number of file watchers reached`, you can fix the issue by increasing the `fs.inotify.max_user_watches` setting of your operating system.
+Se você estiver usando um sistema operacional Linux e vir um erro semelhante a: `ENOSPC: System limit for number of file watchers reached`, você pode corrigir o problema aumentando a configuração `fs.inotify.max_user_watches` do seu sistema operacional.
 
-If you are running Debian, RedHat, or another similar Linux distribution, run the following in a terminal:
+Se você estiver executando o Debian, RedHat ou outra distribuição Linux semelhante, execute o seguinte em um terminal:
 
 ```sh
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 ```
 
-If you are running ArchLinux, run the following command instead:
+Se você estiver executando o ArchLinux, execute o seguinte comando:
 
 ```sh
 echo fs.inotify.max_user_watches=524288 | sudo tee /etc/sysctl.d/40-max-user-watches.conf && sudo sysctl --system
 ```
 
-Then paste it in your terminal and press on enter to run it. You could find more information [here](https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers#the-technical-details).
+Em seguida, cole-o no seu terminal e pressione Enter para executá-lo. Você pode encontrar mais informações [aqui](https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers#the-technical-details).
 
-## `npm test` hangs or crashes on macOS Sierra
+## `npm test` trava ou falha no macOS Sierra
 
-If you run `npm test` and the console gets stuck after printing `react-scripts test` to the console there might be a problem with your [Watchman](https://facebook.github.io/watchman/) installation as described in [facebook/create-react-app#713](https://github.com/facebook/create-react-app/issues/713).
+Se você executar `npm test` e o console travar após imprimir `react-scripts test` no console, pode haver um problema com a instalação do seu [Watchman](https://facebook.github.io/watchman/) conforme descrito em [facebook/ create-react-app#713](https://github.com/facebook/create-react-app/issues/713).
 
-We recommend deleting `node_modules` in your project and running `npm install` (or `yarn` if you use it) first. If it doesn't help, you can try one of the numerous workarounds mentioned in these issues:
+Recomendamos deletar `node_modules` em seu projeto e executar `npm install` (ou `yarn` se você usá-lo) primeiro. Se não ajudar, você pode tentar uma das várias soluções alternativas mencionadas nestes problemas:
 
 - [facebook/jest#1767](https://github.com/facebook/jest/issues/1767)
 - [facebook/watchman#358](https://github.com/facebook/watchman/issues/358)
 - [ember-cli/ember-cli#6259](https://github.com/ember-cli/ember-cli/issues/6259)
 
-It is reported that installing Watchman 4.7.0 or newer fixes the issue. If you use [Homebrew](https://brew.sh/), you can run these commands to update it:
+É relatado que a instalação do Watchman 4.7.0 ou mais recente corrige o problema. Se você usar [Homebrew](https://brew.sh/), poderá executar estes comandos para atualizá-lo:
 
 ```
 watchman shutdown-server
@@ -56,39 +56,39 @@ brew update
 brew reinstall watchman
 ```
 
-You can find [other installation methods](https://facebook.github.io/watchman/docs/install.html#build-install) on the Watchman documentation page.
+Você pode encontrar [outros métodos de instalação](https://facebook.github.io/watchman/docs/install.html#build-install) na página de documentação do Watchman.
 
-If this still doesn’t help, try running `launchctl unload -F ~/Library/LaunchAgents/com.github.facebook.watchman.plist`.
+Se isso ainda não ajudar, tente executar `launchctl unload -F ~/Library/ LaunchAgents/com.github.facebook.watchman.plist`.
 
-There are also reports that _uninstalling_ Watchman fixes the issue. So if nothing else helps, remove it from your system and try again.
+Também há relatos de que _desinstalar_ Watchman corrige o problema. Portanto, se nada mais ajudar, remova-o do sistema e tente novamente.
 
-## `npm run build` exits too early
+## `npm run build` sai muito cedo
 
-It is reported that `npm run build` can fail on machines with limited memory and no swap space, which is common in cloud environments. Even with small projects this command can increase RAM usage in your system by hundreds of megabytes, so if you have less than 1 GB of available memory your build is likely to fail with the following message:
+É relatado que `npm run build` pode falhar em máquinas com memória limitada e sem espaço de troca, o que é comum em ambientes de nuvem. Mesmo com projetos pequenos, esse comando pode aumentar o uso de RAM em seu sistema em centenas de megabytes, portanto, se você tiver menos de 1 GB de memória disponível, sua compilação provavelmente falhará com a seguinte mensagem:
 
 > The build failed because the process exited too early. This probably means the system ran out of memory or someone called `kill -9` on the process.
 
-If you are completely sure that you didn't terminate the process, consider [adding some swap space](https://www.digitalocean.com/community/tutorials/how-to-add-swap-on-ubuntu-14-04) to the machine you’re building on, or build the project locally.
+Se você tem certeza de que não encerrou o processo, considere [adicionar algum espaço de troca](https://www.digitalocean.com/community/tutorials/how-to-add-swap-on-ubuntu-14-04) para a máquina em que você está construindo, ou construa o projeto localmente.
 
-## `npm run build` fails on Heroku
+## `npm run build` falha no Heroku
 
-This may be a problem with case sensitive filenames.
-Please refer to [this section](deployment.md#resolving-heroku-deployment-errors).
+Isso pode ser um problema com nomes de arquivo que diferenciam maiúsculas de minúsculas.
+Consulte [esta seção](deployment.md#resolving-heroku-deployment-errors).
 
-## Moment.js locales are missing
+## Locales Moment.js estão faltando
 
-If you use a [Moment.js](https://momentjs.com/), you might notice that only the English locale is available by default. This is because the locale files are large, and you probably only need a subset of [all the locales provided by Moment.js](https://momentjs.com/#multiple-locale-support).
+Se você usar [Moment.js](https://momentjs.com/), poderá notar que apenas a localidade em inglês está disponível por padrão. Isso ocorre porque os arquivos de localidade são grandes e você provavelmente só precisa de um subconjunto de [todas as localidades fornecidas por Moment.js](https://momentjs.com/#multiple-locale-support).
 
-To add a specific Moment.js locale to your bundle, you need to import it explicitly.
+Para adicionar um local específico do Moment.js ao seu pacote, você precisa importá-lo explicitamente.
 
-For example:
+Por exemplo:
 
 ```js
 import moment from 'moment';
 import 'moment/locale/fr';
 ```
 
-If you are importing multiple locales this way, you can later switch between them by calling `moment.locale()` with the locale name:
+Se você estiver importando vários locais desta forma, você pode alternar entre eles posteriormente chamando `moment.locale()` com o nome do local:
 
 ```js
 import moment from 'moment';
@@ -100,10 +100,10 @@ import 'moment/locale/es';
 moment.locale('fr');
 ```
 
-This will only work for locales that have been explicitly imported before.
+Isso só funcionará para localidades que foram importadas explicitamente antes.
 
-## `npm run build` fails to minify
+## `npm run build` falha ao minificar
 
-Before `react-scripts@2.0.0`, this problem was caused by third party `node_modules` using modern JavaScript features because the minifier couldn't handle them during the build. This has been solved by compiling standard modern JavaScript features inside `node_modules` in `react-scripts@2.0.0` and higher.
+Antes de `react-scripts@2.0.0`, este problema era causado por `node_modules` de terceiros usando recursos JavaScript modernos porque o minificador não conseguia lidar com eles durante a construção. Isso foi resolvido compilando recursos JavaScript modernos padrão dentro de `node_modules` em `react-scripts@2.0.0` e superior.
 
-If you're seeing this error, you're likely using an old version of `react-scripts`. You can either fix it by avoiding a dependency that uses modern syntax, or by upgrading to `react-scripts@>=2.0.0` and following the migration instructions in the changelog.
+Se você está vendo esse erro, provavelmente está usando uma versão antiga do `react-scripts`. Você pode corrigi-lo evitando uma dependência que usa sintaxe moderna ou atualizando para `react-scripts@>=2.0.0` e seguindo as instruções de migração no changelog.

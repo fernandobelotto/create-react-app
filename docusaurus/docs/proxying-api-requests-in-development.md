@@ -1,7 +1,7 @@
 ---
 id: proxying-api-requests-in-development
 title: Solicitações de proxy de API em desenvolvimento
-sidebar_label: Proxying in Development
+sidebar_label: Proxying em desenvolvimento
 ---
 
 > Note: this feature is available with `react-scripts@0.2.3` and higher.

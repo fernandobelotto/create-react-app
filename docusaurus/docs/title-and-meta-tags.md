@@ -1,22 +1,22 @@
 ---
 id: title-and-meta-tags
-title: Title and Meta Tags
-sidebar_label: Title & Meta Tags
+title: Tags Title e Meta
+sidebar_label: Tags Title & Meta
 ---
 
-## Changing the title tag
+## Alterando a tag de título
 
-You can find the source HTML file in the `public` folder of the generated project. You may edit the `<title>` tag in it to change the title from “React App” to anything else.
+Você pode encontrar o arquivo HTML de origem na pasta `public` do projeto gerado. Você pode editar a tag `<title>` nela para alterar o título de “React App” para qualquer outra coisa.
 
-Note that normally you wouldn’t edit files in the `public` folder very often. For example, [adding a stylesheet](adding-a-stylesheet.md) is done without touching the HTML.
+Observe que normalmente você não edita arquivos na pasta `public` com muita frequência. Por exemplo, [adicionar uma stylesheet](adding-a-stylesheet.md) é feito sem tocar no HTML.
 
-If you need to dynamically update the page title based on the content, you can use the browser [`document.title`](https://developer.mozilla.org/en-US/docs/Web/API/Document/title) API. For more complex scenarios when you want to change the title from React components, you can use [React Helmet](https://github.com/nfl/react-helmet), a third party library.
+Se você precisar atualizar dinamicamente o título da página com base no conteúdo, você pode usar o a API do navegador [`document.title`](https://developer.mozilla.org/en-US/docs/Web/API/Document/title ). Para cenários mais complexos quando você deseja alterar o título dos componentes do React, você pode usar [React Helmet](https://github.com/nfl/react-helmet), uma biblioteca de terceiros.
 
-If you use a custom server for your app in production and want to modify the title before it gets sent to the browser, you can follow advice in [this section](#generating-dynamic-meta-tags-on-the-server). Alternatively, you can pre-build each page as a static HTML file which then loads the JavaScript bundle, which is covered [here](pre-rendering-into-static-html-files.md).
+Se você usa um servidor personalizado para seu aplicativo em produção e deseja modificar o título antes de enviá-lo ao navegador, pode seguir os conselhos [nesta seção](#generation-dynamic-meta-tags-on-the-server). Alternativamente, você pode pré-construir cada página como um arquivo HTML estático que então carrega o pacote JavaScript, que é coberto [aqui](pre-rendering-into-static-html-files.md).
 
-## Generating Dynamic `<meta>` Tags on the Server
+## Gerando tags `<meta>` dinâmicas no servidor
 
-Since Create React App doesn’t support server rendering, you might be wondering how to make `<meta>` tags dynamic and reflect the current URL. To solve this, we recommend to add placeholders into the HTML, like this:
+Como o aplicativo Create React não oferece suporte para renderização de servidor, você deve estar se perguntando como tornar as tags `<meta>` dinâmicas e refletir a URL atual. Para resolver isso, recomendamos adicionar marcadores de posição no HTML, como este:
 
 ```html
 <!DOCTYPE html>
@@ -28,13 +28,13 @@ Since Create React App doesn’t support server rendering, you might be wonderin
 </html>
 ```
 
-Then, on the server, regardless of the backend you use, you can read `index.html` into memory and replace `__OG_TITLE__`, `__OG_DESCRIPTION__`, and any other placeholders with values depending on the current URL. Make sure to sanitize and escape the interpolated values so that they are safe to embed into HTML!
+Então, no servidor, independentemente do backend que você usa, você pode ler `index.html` na memória e substituir `__OG_TITLE__`, `__OG_DESCRIPTION__`, e quaisquer outros marcadores de posição com valores dependendo da URL atual. Certifique-se de limpar e escapar dos valores interpolados para que eles possam ser incorporados em HTML com segurança!
 
-If you use a Node server, you can even share the route matching logic between the client and the server. However duplicating it also works fine in basic cases.
+Se você usar um servidor Node, poderá até mesmo compartilhar a lógica de correspondência de rota entre o cliente e o servidor. No entanto, duplicá-lo também funciona bem em casos básicos.
 
-## Injecting Data from the Server into the Page
+## Injetando dados do servidor na página
 
-Similarly to the previous section, you can leave some placeholders in the HTML that inject global variables, for example:
+Da mesma forma que na seção anterior, você pode deixar alguns marcadores de posição no HTML que injetam variáveis ​​globais, por exemplo:
 
 ```js
 <!doctype html>
@@ -45,4 +45,4 @@ Similarly to the previous section, you can leave some placeholders in the HTML t
     </script>
 ```
 
-Then, on the server, you can replace `__SERVER_DATA__` with a JSON of real data right before sending the response. The client code can then read `window.SERVER_DATA` to use it. **Make sure to [sanitize the JSON before sending it to the client](https://medium.com/node-security/the-most-common-xss-vulnerability-in-react-js-applications-2bdffbcc1fa0) as it makes your app vulnerable to XSS attacks.**
+Então, no servidor, você pode substituir `__SERVER_DATA__` por um JSON de dados reais antes de enviar a resposta. O código do cliente pode então ler `window.SERVER_DATA` para usá-lo. **Certifique-se de [higienizar o JSON antes de enviá-lo ao cliente](https://medium.com/node-security/the-most-common-xss-vulnerability-in-react-js-applications-2bdffbcc1fa0) como isso torna seu aplicativo vulnerável a ataques XSS.**

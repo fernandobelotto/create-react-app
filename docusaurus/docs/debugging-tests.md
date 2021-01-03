@@ -1,14 +1,14 @@
 ---
 id: debugging-tests
-title: Debugging Tests
-sidebar_label: Debugging Tests
+title: Depurando testes
+sidebar_label: Depurando testes
 ---
 
-There are various ways to setup a debugger for your Jest tests. We cover debugging in Chrome and [Visual Studio Code](https://code.visualstudio.com/).
+Existem várias maneiras de configurar um depurador para seus testes Jest. Cobrimos a depuração no Chrome e [Visual Studio Code](https://code.visualstudio.com/).
 
-## Debugging Tests in Chrome
+## Depuração de testes no Chrome
 
-Add the following to the `scripts` section in your project's `package.json`
+Adicione o seguinte à seção `scripts` no `package.json` do seu projeto
 
 ```json
 "scripts": {
@@ -16,29 +16,29 @@ Add the following to the `scripts` section in your project's `package.json`
   }
 ```
 
-Place `debugger;` statements in any test and run:
+Coloque as instruções `debugger;` em qualquer teste e execute:
 
 ```sh
 $ npm run test:debug
 ```
 
-This will start running your Jest tests, but pause before executing to allow a debugger to attach to the process.
+Isso iniciará a execução de seus testes de Jest, mas fará uma pausa antes de executar para permitir que um depurador se conecte ao processo.
 
-Open the following in Chrome
+Abra o seguinte no Chrome
 
 ```
 about:inspect
 ```
 
-After opening that link, the Chrome Developer Tools will be displayed. Select `inspect` on your process and a breakpoint will be set at the first line of the react script (this is done to give you time to open the developer tools and to prevent Jest from executing before you have time to do so). Click the button that looks like a "play" button in the upper right hand side of the screen to continue execution. When Jest executes the test that contains the debugger statement, execution will pause and you can examine the current scope and call stack.
+Depois de abrir esse link, as Ferramentas do desenvolvedor do Chrome serão exibidas. Selecione `inspect` em seu processo e um ponto de interrupção será definido na primeira linha do script react (isso é feito para lhe dar tempo para abrir as ferramentas do desenvolvedor e para evitar que Jest seja executado antes que você tenha tempo para fazê-lo). Clique no botão que se parece com um botão "play" no lado superior direito da tela para continuar a execução. Quando Jest executa o teste que contém a instrução do depurador, a execução pausa e você pode examinar o escopo atual e a pilha de chamadas (callstack).
 
-> Note: the --runInBand cli option makes sure Jest runs test in the same process rather than spawning processes for individual tests. Normally Jest parallelizes test runs across processes but it is hard to debug many processes at the same time.
+> Nota: a opção --runInBand cli garante que o Jest execute o teste no mesmo processo em vez de gerar processos para testes individuais. Normalmente, o Jest paraleliza as execuções de teste entre processos, mas é difícil depurar muitos processos ao mesmo tempo.
 
-## Debugging Tests in Visual Studio Code
+## Depuração de testes no Visual Studio Code
 
-Debugging Jest tests is supported out of the box for [Visual Studio Code](https://code.visualstudio.com).
+Depuração de testes do Jest têm suporte imediato para [Visual Studio Code](https://code.visualstudio.com).
 
-Use the following [`launch.json`](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations) configuration file:
+Use o seguinte arquivo de configuração [`launch.json`](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations):
 
 ```json
 {
