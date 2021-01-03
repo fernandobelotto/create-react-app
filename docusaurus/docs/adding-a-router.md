@@ -1,22 +1,22 @@
 ---
 id: adding-a-router
-title: Adding a Router
+title: Adicionando um Router
 ---
 
-Create React App doesn't prescribe a specific routing solution, but [React Router](https://reacttraining.com/react-router/web/) is the most popular one.
+O aplicativo Create React não prescreve uma solução de roteamento específica, mas [React Router](https://reacttraining.com/react-router/web/) é a mais popular.
 
-To add it, run:
+Para adicioná-lo, execute:
 
 ```sh
 npm install --save react-router-dom
 ```
 
-Alternatively you may use `yarn`:
+Alternativamente, você pode usar `yarn`:
 
 ```sh
 yarn add react-router-dom
 ```
 
-To try it, delete all the code in `src/App.js` and replace it with any of the examples on its website. The [Basic Example](https://reacttraining.com/react-router/web/example/basic) is a good place to get started.
+Para experimentar, exclua todo o código em `src/App.js` e substitua-o por qualquer um dos exemplos em seu site. O [Exemplo básico](https://reacttraining.com/react-router/web/example/basic) é um bom lugar para começar.
 
-Note that [you may need to configure your production server to support client-side routing](deployment.md#serving-apps-with-client-side-routing) before deploying your app.
+Observe que [você pode precisar configurar seu servidor de produção para suportar o roteamento do lado do cliente](deployment.md#serving-apps-with-client-side-routing) antes de implantar seu aplicativo.

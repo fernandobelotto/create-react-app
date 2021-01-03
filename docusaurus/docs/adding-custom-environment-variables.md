@@ -1,34 +1,34 @@
 ---
 id: adding-custom-environment-variables
-title: Adding Custom Environment Variables
-sidebar_label: Environment Variables
+title: Adicionando Variáveis ​​de Ambiente Personalizadas
+sidebar_label: Variáveis de Ambiente
 ---
 
-> Note: this feature is available with `react-scripts@0.2.3` and higher.
+> Nota: este recurso está disponível com `react-scripts@0.2.3` e superior.
 
-Your project can consume variables declared in your environment as if they were declared locally in your JS files. By default you will have `NODE_ENV` defined for you, and any other environment variables starting with `REACT_APP_`.
+Seu projeto pode consumir variáveis ​​declaradas em seu ambiente como se fossem declaradas localmente em seus arquivos JS. Por padrão, você terá `NODE_ENV` definido para você, e quaisquer outras variáveis ​​de ambiente começando com` REACT_APP_`.
 
-> WARNING: Do not store any secrets (such as private API keys) in your React app!
+> AVISO: Não armazene nenhum segredo (como chaves de API privadas) em seu aplicativo React!
 >
-> Environment variables are embedded into the build, meaning anyone can view them by inspecting your app's files.
+> Variáveis ​​de ambiente são incorporadas ao build, o que significa que qualquer pessoa pode visualizá-las inspecionando os arquivos do seu aplicativo.
 
-**The environment variables are embedded during the build time**. Since Create React App produces a static HTML/CSS/JS bundle, it can’t possibly read them at runtime. To read them at runtime, you would need to load HTML into memory on the server and replace placeholders in runtime, as [described here](title-and-meta-tags.md#injecting-data-from-the-server-into-the-page). Alternatively you can rebuild the app on the server anytime you change them.
+**As variáveis ​​de ambiente são incorporadas durante o tempo de build**. Uma vez que Create React App produz um pacote HTML/CSS/JS estático, não é possível lê-los em tempo de execução. Para lê-los em tempo de execução, você precisa carregar o HTML na memória do servidor e substituir os marcadores no tempo de execução, conforme [descrito aqui](title-and-meta-tags.md#injecting-data-from-the-server-into-the-page). Como alternativa, você pode reconstruir o aplicativo no servidor sempre que alterá-los.
 
-> Note: You must create custom environment variables beginning with `REACT_APP_`. Any other variables except `NODE_ENV` will be ignored to avoid accidentally [exposing a private key on the machine that could have the same name](https://github.com/facebook/create-react-app/issues/865#issuecomment-252199527). Changing any environment variables will require you to restart the development server if it is running.
+> Nota: Você deve criar variáveis ​​de ambiente personalizadas começando com `REACT_APP_`. Quaisquer outras variáveis, exceto `NODE_ENV` serão ignoradas para evitar acidentalmente [expor uma chave privada na máquina que pode ter o mesmo nome](https://github.com/facebook/create-react-app/issues/865#issuecomment-252199527). A alteração de quaisquer variáveis ​​de ambiente exigirá que você reinicie o servidor de desenvolvimento se ele estiver em execução.
 
-These environment variables will be defined for you on `process.env`. For example, having an environment variable named `REACT_APP_NOT_SECRET_CODE` will be exposed in your JS as `process.env.REACT_APP_NOT_SECRET_CODE`.
+Essas variáveis ​​de ambiente serão definidas para você em `process.env`. Por exemplo, ter uma variável de ambiente chamada `REACT_APP_NOT_SECRET_CODE` será exposta em seu JS como` process.env.REACT_APP_NOT_SECRET_CODE`.
 
-There is also a built-in environment variable called `NODE_ENV`. You can read it from `process.env.NODE_ENV`. When you run `npm start`, it is always equal to `'development'`, when you run `npm test` it is always equal to `'test'`, and when you run `npm run build` to make a production bundle, it is always equal to `'production'`. **You cannot override `NODE_ENV` manually.** This prevents developers from accidentally deploying a slow development build to production.
+Também existe uma variável de ambiente embutida chamada `NODE_ENV`. Você pode ler em `process.env.NODE_ENV`. Quando você executa `npm start`, é sempre igual a `'development'`, quando você executa `npm test` é sempre igual a `'test'`, e quando você executa `npm run build` para fazer uma produção do build, é sempre igual a `'production'`. **Você não pode sobrescrever `NODE_ENV` manualmente.** Isso evita que os desenvolvedores acidentalmente implantem um build de desenvolvimento lento para produção.
 
-These environment variables can be useful for displaying information conditionally based on where the project is deployed or consuming sensitive data that lives outside of version control.
+Essas variáveis ​​de ambiente podem ser úteis para exibir informações condicionalmente com base em onde o projeto é implantado ou consumir dados confidenciais que residem fora do controle de versão.
 
-First, you need to have environment variables defined. For example, let’s say you wanted to consume an environment variable inside a `<form>`:
+Primeiro, você precisa ter variáveis ​​de ambiente definidas. Por exemplo, digamos que você queira consumir uma variável de ambiente dentro de um `<form>`:
 
 ```jsx
 render() {
   return (
     <div>
-      <small>You are running this application in <b>{process.env.NODE_ENV}</b> mode.</small>
+      <small>Você está executando este aplicativo em modo de <b>{process.env.NODE_ENV}</b>.</small>
       <form>
         <input type="hidden" defaultValue={process.env.REACT_APP_NOT_SECRET_CODE} />
       </form>
@@ -37,15 +37,15 @@ render() {
 }
 ```
 
-During the build, `process.env.REACT_APP_NOT_SECRET_CODE` will be replaced with the current value of the `REACT_APP_NOT_SECRET_CODE` environment variable. Remember that the `NODE_ENV` variable will be set for you automatically.
+Durante a construção, `process.env.REACT_APP_NOT_SECRET_CODE` será substituído pelo valor atual da variável de ambiente `REACT_APP_NOT_SECRET_CODE`. Lembre-se de que a variável `NODE_ENV` será configurada para você automaticamente.
 
-When you load the app in the browser and inspect the `<input>`, you will see its value set to `abcdef`, and the bold text will show the environment provided when using `npm start`:
+Ao carregar o aplicativo no navegador e inspecionar o `<input>`, você verá seu valor definido como `abcdef`, e o texto em negrito mostrará o ambiente fornecido ao usar `npm start`:
 
 <!-- prettier-ignore-start -->
 
 ```html
 <div>
-  <small>You are running this application in <b>development</b> mode.</small>
+  <small>Você está executando este aplicativo em mode de <b>development</b>.</small>
   <form>
     <input type="hidden" value="abcdef" />
   </form>
@@ -54,36 +54,35 @@ When you load the app in the browser and inspect the `<input>`, you will see its
 
 <!-- prettier-ignore-end -->
 
-The above form is looking for a variable called `REACT_APP_NOT_SECRET_CODE` from the environment. In order to consume this value, we need to have it defined in the environment. This can be done using two ways: either in your shell or in a `.env` file. Both of these ways are described in the next few sections.
+O formulário acima está procurando por uma variável de ambiente chamada `REACT_APP_NOT_SECRET_CODE`. Para consumir esse valor, precisamos defini-lo no ambiente. Isso pode ser feito de duas maneiras: em seu shell ou em um arquivo `.env`. Ambas as formas são descritas nas próximas seções.
 
-Having access to the `NODE_ENV` is also useful for performing actions conditionally:
+Ter acesso ao `NODE_ENV` também é útil para realizar ações condicionalmente:
 
 ```js
 if (process.env.NODE_ENV !== 'production') {
   analytics.disable();
 }
 ```
+Ao compilar o aplicativo com `npm run build`, a etapa de minificação eliminará essa condição e o pacote resultante será menor.
 
-When you compile the app with `npm run build`, the minification step will strip out this condition, and the resulting bundle will be smaller.
+## Referenciando Variáveis ​​de Ambiente no HTML
 
-## Referencing Environment Variables in the HTML
+> Nota: este recurso está disponível com `react-scripts@0.9.0` e superior.
 
-> Note: this feature is available with `react-scripts@0.9.0` and higher.
-
-You can also access the environment variables starting with `REACT_APP_` in the `public/index.html`. For example:
+Você também pode acessar as variáveis ​​de ambiente começando com `REACT_APP_` em `public/index.html`. Por exemplo:
 
 ```html
 <title>%REACT_APP_WEBSITE_NAME%</title>
 ```
 
-Note that the caveats from the above section apply:
+Observe que as advertências da seção acima se aplicam:
 
-- Apart from a few built-in variables (`NODE_ENV` and `PUBLIC_URL`), variable names must start with `REACT_APP_` to work.
-- The environment variables are injected at build time. If you need to inject them at runtime, [follow this approach instead](title-and-meta-tags.md#generating-dynamic-meta-tags-on-the-server).
+- Além de algumas variáveis ​​embutidas (`NODE_ENV` e` PUBLIC_URL`), os nomes das variáveis ​​devem começar com `REACT_APP_` para funcionar.
+- As variáveis ​​de ambiente são injetadas no momento do build. Se você precisar injetá-los em tempo de execução, [siga esta abordagem](title-and-meta-tags.md#generating-dynamic-meta-tags-on-the-server).
 
-## Adding Temporary Environment Variables In Your Shell
+## Adicionando Variáveis ​​de Ambiente Temporárias em Seu Shell
 
-Defining environment variables can vary between OSes. It’s also important to know that this manner is temporary for the life of the shell session.
+A definição de variáveis ​​de ambiente pode variar entre os sistemas operacionais. Também é importante saber que essa maneira é temporária durante a duração da sessão shell.
 
 ### Windows (cmd.exe)
 
@@ -91,7 +90,7 @@ Defining environment variables can vary between OSes. It’s also important to k
 set "REACT_APP_NOT_SECRET_CODE=abcdef" && npm start
 ```
 
-(Note: Quotes around the variable assignment are required to avoid a trailing whitespace.)
+(Observação: as aspas em torno da atribuição de variável são necessárias para evitar um espaço em branco à direita.)
 
 ### Windows (Powershell)
 
@@ -105,59 +104,59 @@ set "REACT_APP_NOT_SECRET_CODE=abcdef" && npm start
 REACT_APP_NOT_SECRET_CODE=abcdef npm start
 ```
 
-## Adding Development Environment Variables In `.env`
+## Adicionando Variáveis ​​de Ambiente de Desenvolvimento em `.env`
 
-> Note: this feature is available with `react-scripts@0.5.0` and higher.
+> Nota: este recurso está disponível com `react-scripts@0.5.0` e superior.
 
-To define permanent environment variables, create a file called `.env` in the root of your project:
+Para definir variáveis ​​de ambiente permanentes, crie um arquivo chamado `.env` na raiz do seu projeto:
 
 ```
 REACT_APP_NOT_SECRET_CODE=abcdef
 ```
 
-> Note: You must create custom environment variables beginning with `REACT_APP_`. Any other variables except `NODE_ENV` will be ignored to avoid [accidentally exposing a private key on the machine that could have the same name](https://github.com/facebook/create-react-app/issues/865#issuecomment-252199527). Changing any environment variables will require you to restart the development server if it is running.
+> Nota: Você deve criar variáveis ​​de ambiente personalizadas começando com `REACT_APP_`. Quaisquer outras variáveis, exceto `NODE_ENV` serão ignoradas para evitar [a exposição acidental de uma chave privada na máquina que pode ter o mesmo nome](https://github.com/facebook/create-react-app/issues/865#issuecomment-252199527). A alteração de quaisquer variáveis ​​de ambiente exigirá que você reinicie o servidor de desenvolvimento se ele estiver em execução.
 
-> Note: You need to restart the development server after changing `.env` files.
+> Nota: Você precisa reiniciar o servidor de desenvolvimento após alterar os arquivos `.env`.
 
-`.env` files **should be** checked into source control (with the exclusion of `.env*.local`).
+Arquivos `.env` **devem ser** verificados no controle de origem (com a exclusão de` .env*.local`).
 
-### What other `.env` files can be used?
+### Que outros arquivos `.env` podem ser usados?
 
-> Note: this feature is **available with `react-scripts@1.0.0` and higher**.
+> Nota: este recurso está **disponível com `react-scripts@1.0.0` e superior**.
 
-- `.env`: Default.
-- `.env.local`: Local overrides. **This file is loaded for all environments except test.**
-- `.env.development`, `.env.test`, `.env.production`: Environment-specific settings.
-- `.env.development.local`, `.env.test.local`, `.env.production.local`: Local overrides of environment-specific settings.
+- `.env`: Padrão.
+- `.env.local`: Substituições locais. **Este arquivo é carregado para todos os ambientes, exceto teste.**
+- `.env.development`, `.env.test`, `.env.production`: Configurações específicas do ambiente.
+- `.env.development.local`, `.env.test.local`, `.env.production.local`: Substituições locais de configurações específicas do ambiente.
 
-Files on the left have more priority than files on the right:
+Os arquivos à esquerda têm mais prioridade do que os arquivos à direita:
 
 - `npm start`: `.env.development.local`, `.env.local`, `.env.development`, `.env`
 - `npm run build`: `.env.production.local`, `.env.local`, `.env.production`, `.env`
 - `npm test`: `.env.test.local`, `.env.test`, `.env` (note `.env.local` is missing)
 
-These variables will act as the defaults if the machine does not explicitly set them.
+Essas variáveis ​​funcionarão como padrões se a máquina não as definir explicitamente.
 
-Please refer to the [dotenv documentation](https://github.com/motdotla/dotenv) for more details.
+Consulte a [documentação do dotenv](https://github.com/motdotla/dotenv) para obter mais detalhes.
 
-> Note: If you are defining environment variables for development, your CI and/or hosting platform will most likely need
-> these defined as well. Consult their documentation how to do this. For example, see the documentation for [Travis CI](https://docs.travis-ci.com/user/environment-variables/) or [Heroku](https://devcenter.heroku.com/articles/config-vars).
+> Observação: se você estiver definindo variáveis ​​de ambiente para desenvolvimento, seu CI e/ou plataforma de hospedagem provavelmente precisará estes também definidos.
+> Consulte sua documentação para saber como fazer isso. Por exemplo, consulte a documentação para [Travis CI](https://docs.travis-ci.com/user/environment-variables/) ou [Heroku](https://devcenter.heroku.com/articles/config-vars).
 
-### Expanding Environment Variables In `.env`
+### Expandindo variáveis ​​de ambiente em `.env`
 
-> Note: this feature is available with `react-scripts@1.1.0` and higher.
+> Nota: este recurso está disponível com `react-scripts@1.1.0` e superior.
 
-Expand variables already on your machine for use in your `.env` file (using [dotenv-expand](https://github.com/motdotla/dotenv-expand)).
+Expanda as variáveis ​​que já estão em sua máquina para uso em seu arquivo `.env` (usando [dotenv-expand](https://github.com/motdotla/dotenv-expand)).
 
-For example, to get the environment variable `npm_package_version`:
+Por exemplo, para obter a variável de ambiente `npm_package_version`:
 
 ```
 REACT_APP_VERSION=$npm_package_version
-# also works:
+# também funciona:
 # REACT_APP_VERSION=${npm_package_version}
 ```
 
-Or expand variables local to the current `.env` file:
+Ou expanda as variáveis ​​locais para o arquivo `.env` atual:
 
 ```
 DOMAIN=www.example.com
