@@ -1,15 +1,15 @@
 ---
 id: post-processing-css
-title: Post-Processing CSS
+title: Pós-processamento CSS
 ---
 
-This project setup minifies your CSS and adds vendor prefixes to it automatically through [Autoprefixer](https://github.com/postcss/autoprefixer) so you don’t need to worry about it.
+Esta configuração de projeto minimiza seu CSS e adiciona prefixos de fornecedor a ele automaticamente por meio do [Autoprefixer](https://github.com/postcss/autoprefixer) para que você não precise se preocupar com isso.
 
-Support for new CSS features like the [`all` property](https://developer.mozilla.org/en-US/docs/Web/CSS/all), [`break` properties](https://www.w3.org/TR/css-break-3/#breaking-controls), [custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables), and [media query ranges](https://www.w3.org/TR/mediaqueries-4/#range-context) are automatically polyfilled to add support for older browsers.
+Suporte para novos recursos CSS como a [propriedade `all`](https://developer.mozilla.org/en-US/docs/Web/CSS/all), [propriedades `break`](https://www.w3.org/TR/css-break-3/#breaking-controls), [propriedades personalizadas](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables) e [media query ranges](https://www.w3.org/TR/mediaqueries-4/#range-context) são automaticamente polyfilled para adicionar suporte para navegadores mais antigos.
 
-You can customize your target support browsers by adjusting the `browserslist` key in `package.json` according to the [Browserslist specification](https://github.com/browserslist/browserslist#readme).
+Você pode personalizar seus navegadores de suporte de destino ajustando a chave `browserslist` em `package.json` de acordo com a [especificação de Browserslist](https://github.com/browserslist/browserslist#readme).
 
-For example, this:
+Por exemplo, este:
 
 ```css
 .App {
@@ -19,7 +19,7 @@ For example, this:
 }
 ```
 
-becomes this:
+se torna isso:
 
 ```css
 .App {
@@ -35,10 +35,9 @@ becomes this:
   align-items: center;
 }
 ```
+Se você precisar desativar o autoprefixing por algum motivo, [siga esta seção](https://github.com/postcss/autoprefixer#disabling).
 
-If you need to disable autoprefixing for some reason, [follow this section](https://github.com/postcss/autoprefixer#disabling).
+[Layout de CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) a prefixação está desabilitada por padrão, mas **não** tira a prefixação manual.
+Se você gostaria de aderir ao prefixo CSS Grid, [primeiro familiarize-se com suas limitações](https://github.com/postcss/autoprefixer#does-autoprefixer-polyfill-grid-layout-for-ie).
 
-[CSS Grid Layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) prefixing is disabled by default, but it will **not** strip manual prefixing.
-If you'd like to opt-in to CSS Grid prefixing, [first familiarize yourself about its limitations](https://github.com/postcss/autoprefixer#does-autoprefixer-polyfill-grid-layout-for-ie).
-
-To enable CSS Grid prefixing, add `/* autoprefixer grid: autoplace */` to the top of your CSS file.
+Para habilitar a prefixação CSS Grid, adicione `/* autoprefixer grid:autoplace */` no topo de seu arquivo CSS.

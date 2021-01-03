@@ -1,16 +1,16 @@
 ---
 id: adding-a-css-modules-stylesheet
-title: Adding a CSS Modules Stylesheet
-sidebar_label: Adding CSS Modules
+title: Adicionando uma stylesheet de CSS Modules
+sidebar_label: Adicionando CSS Modules
 ---
 
-> Note: this feature is available with `react-scripts@2.0.0` and higher.
+> Nota: este recurso está disponível com `react-scripts@2.0.0` e superior.
 
-This project supports [CSS Modules](https://github.com/css-modules/css-modules) alongside regular stylesheets using the `[name].module.css` file naming convention. CSS Modules allows the scoping of CSS by automatically creating a unique classname of the format `[filename]\_[classname]\_\_[hash]`.
+Este projeto suporta [Módulos CSS](https://github.com/css-modules/css-modules) junto com folhas de estilo regulares usando a convenção de nomenclatura de arquivo `[name].module.css`. Os Módulos CSS permitem o escopo do CSS criando automaticamente um nome de classe exclusivo do formato `[nome do arquivo]\_[nome da classe]\_\_[hash]`.
 
-> **Tip:** Should you want to preprocess a stylesheet with Sass then make sure to [follow the installation instructions](adding-a-sass-stylesheet.md) and then change the stylesheet file extension as follows: `[name].module.scss` or `[name].module.sass`.
+> **Dica:** se você quiser pré-processar uma folha de estilo com o Sass, certifique-se de [seguir as instruções de instalação](adicionar-a-sass-stylesheet.md) e alterar a extensão do arquivo da folha de estilo da seguinte maneira: `[nome].module.scss` ou `[nome].module.sass`.
 
-CSS Modules let you use the same CSS class name in different files without worrying about naming clashes. Learn more about CSS Modules [here](https://css-tricks.com/css-modules-part-1-need/).
+Os módulos CSS permitem que você use o mesmo nome de classe CSS em arquivos diferentes sem se preocupar com conflitos de nomes. Saiba mais sobre os CSS Modules [aqui](https://css-tricks.com/css-modules-part-1-need/).
 
 ## `Button.module.css`
 
@@ -32,12 +32,12 @@ CSS Modules let you use the same CSS class name in different files without worry
 
 ```js
 import React, { Component } from 'react';
-import styles from './Button.module.css'; // Import css modules stylesheet as styles
-import './another-stylesheet.css'; // Import regular stylesheet
+import styles from './Button.module.css'; // Importar stylesheet de CSS Modules
+import './another-stylesheet.css'; // Importar uma stylesheet regular
 
 class Button extends Component {
   render() {
-    // reference as a js object
+    // referência como um objeto js
     return <button className={styles.error}>Error Button</button>;
   }
 }
@@ -45,11 +45,10 @@ class Button extends Component {
 
 ## Result
 
-No clashes from other `.error` class names
+Sem confrontos com outros nomes de classe `.error`
 
 ```html
-<!-- This button has red background but not red text -->
+<!-- Este botão tem fundo vermelho, mas não texto vermelho -->
 <button class="Button_error_ax7yz">Error Button</button>
 ```
-
-**This is an optional feature.** Regular `<link>` stylesheets and CSS files are fully supported. CSS Modules are turned on for files ending with the `.module.css` extension.
+**Este é um recurso opcional.** Stylesheets `<link>` regulares e arquivos CSS são totalmente suportados. Módulos CSS são ativados para arquivos que terminam com a extensão `.module.css`.

@@ -1,18 +1,18 @@
 ---
 id: installing-a-dependency
-title: Installing a Dependency
+title: Instalando uma Dependência
 ---
 
-The generated project includes React and ReactDOM as dependencies. It also includes a set of scripts used by Create React App as a development dependency. You may install other dependencies (for example, React Router) with `npm`:
+O projeto gerado inclui React e ReactDOM como dependências. Ele também inclui um conjunto de scripts usados ​​pelo Create React App como uma dependência de desenvolvimento. Você pode instalar outras dependências (por exemplo, React Router) com `npm`:
 
 ```sh
 npm install --save react-router-dom
 ```
 
-Alternatively you may use `yarn`:
+Alternativamente, você pode usar `yarn`:
 
 ```sh
 yarn add react-router-dom
 ```
 
-This works for any library, not only `react-router-dom`.
+Isso funciona para qualquer biblioteca, não apenas `react-router-dom`.

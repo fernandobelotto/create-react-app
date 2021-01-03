@@ -1,22 +1,22 @@
 ---
 id: loading-graphql-files
-title: Loading .graphql Files
-sidebar_label: Loading .graphql Files
+title: Carregando arquivos .graphql
+sidebar_label: Carregando arquivos .graphql
 ---
 
-To load `.gql` and `.graphql` files, first install the [`graphql`](https://www.npmjs.com/package/graphql) and [`graphql.macro`](https://www.npmjs.com/package/graphql.macro) packages by running:
+Para carregar os arquivos `.gql` e `.graphql`, primeiro instale os pacotes [`graphql`](https://www.npmjs.com/package/graphql) e [`graphql.macro`](https://www.npmjs.com/package/graphql.macro) executando:
 
 ```sh
 npm install --save graphql graphql.macro
 ```
 
-Alternatively you may use `yarn`:
+Alternativamente, você pode usar `yarn`:
 
 ```sh
 yarn add graphql graphql.macro
 ```
 
-Then, whenever you want to load `.gql` or `.graphql` files, import the `loader` from the macro package:
+Então, sempre que você quiser carregar arquivos `.gql` ou `.graphql`, importe o `loader` do pacote de macro:
 
 ```js
 import { loader } from 'graphql.macro';
@@ -24,7 +24,7 @@ import { loader } from 'graphql.macro';
 const query = loader('./foo.graphql');
 ```
 
-And your results get automatically inlined! This means that if the file above, `foo.graphql`, contains the following:
+E seus resultados são automaticamente embutidos! Isso significa que se o arquivo acima, `foo.graphql`, contém o seguinte:
 
 ```graphql
 query {
@@ -33,8 +33,7 @@ query {
   }
 }
 ```
-
-The previous example turns into:
+O exemplo anterior se transforma em:
 
 ```javascript
 const query = {
@@ -53,7 +52,7 @@ const query = {
 };
 ```
 
-You can also use the `gql` template tag the same way you would use the non-macro version from `graphql-tag` package with the added benefit of inlined parsing results.
+Você também pode usar a tag de modelo `gql` da mesma forma que usaria a versão não macro do pacote `graphql-tag` com o benefício adicional de resultados de análise inline.
 
 ```js
 import { gql } from 'graphql.macro';

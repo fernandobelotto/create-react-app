@@ -1,26 +1,25 @@
 ---
 id: analyzing-the-bundle-size
-title: Analyzing the Bundle Size
-sidebar_label: Analyzing Bundle Size
+title: Analisando o tamanho do bundle
+sidebar_label: Analisando o tamanho do bundle
 ---
 
-[Source map explorer](https://www.npmjs.com/package/source-map-explorer) analyzes
-JavaScript bundles using the source maps. This helps you understand where code
-bloat is coming from.
+[Source map explorer](https://www.npmjs.com/package/source-map-explorer) analisa pacotes JavaScript usando os mapas de origem (source maps). Isso ajuda a entender de onde vem o inchaço do código (code bloat).
 
 To add Source map explorer to a Create React App project, follow these steps:
+Para adicionar o Source map explorer a um projeto Criar React App, siga estas etapas:
 
 ```sh
 npm install --save source-map-explorer
 ```
 
-Alternatively you may use `yarn`:
+Alternativamente, você pode usar `yarn`:
 
 ```sh
 yarn add source-map-explorer
 ```
 
-Then in `package.json`, add the following line to `scripts`:
+Então, em `package.json`, adicione a seguinte linha aos `scripts`:
 
 ```diff
    "scripts": {
@@ -30,8 +29,7 @@ Then in `package.json`, add the following line to `scripts`:
      "test": "react-scripts test",
 ```
 
-Then to analyze the bundle run the production build then run the analyze
-script.
+Em seguida, para analisar o bundle, execute a construção de produção e, em seguida, execute o script de análise.
 
 ```sh
 npm run build

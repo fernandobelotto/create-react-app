@@ -3,11 +3,11 @@ id: code-splitting
 title: Code Splitting
 ---
 
-Instead of downloading the entire app before users can use it, code splitting allows you to split your code into small chunks which you can then load on demand.
+Em vez de baixar o aplicativo inteiro antes que os usuários possam usá-lo, o Code Splitting (divisão de código) permite que você divida seu código em pequenos pedaços que você pode carregar sob demanda.
 
-This project setup supports code splitting via [dynamic `import()`](http://2ality.com/2017/01/import-operator.html#loading-code-on-demand). Its [proposal](https://github.com/tc39/proposal-dynamic-import) is in stage 4. The `import()` function-like form takes the module name as an argument and returns a [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) which always resolves to the namespace object of the module.
+Esta configuração de projeto suporta code splitting via [dynamic `import()`](http://2ality.com/2017/01/import-operator.html#loading-code-on-demand). Sua [proposta](https://github.com/tc39/proposal-dynamic-import) está no estágio 4. A forma semelhante à função `import()` leva o nome do módulo como um argumento e retorna uma [`Promessa`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) que sempre resolve para o objeto de namespace do módulo.
 
-Here is an example:
+Aqui está um exemplo:
 
 ## `moduleA.js`
 
@@ -26,10 +26,10 @@ class App extends Component {
   handleClick = () => {
     import('./moduleA')
       .then(({ moduleA }) => {
-        // Use moduleA
+        // Usa moduleA
       })
       .catch(err => {
-        // Handle failure
+        // Lidar com falha
       });
   };
 
@@ -45,12 +45,12 @@ class App extends Component {
 export default App;
 ```
 
-This will make `moduleA.js` and all its unique dependencies as a separate chunk that only loads after the user clicks the 'Load' button. For more information on the chunks that are created, see the [production build](production-build.md) section.
+Isso fará com que `moduleA.js` e todas as suas dependências exclusivas sejam um trecho separado que só carrega após o usuário clicar no botão 'Load'. Para obter mais informações sobre os blocos que são criados, consulte a seção [build de produção](production-build.md).
 
-You can also use it with `async` / `await` syntax if you prefer it.
+Você também pode usá-lo com a sintaxe `async` / `await` se preferir.
 
-## With React Router
+## Com React Router
 
-If you are using React Router check out [this tutorial](https://reactjs.org/docs/code-splitting.html#route-based-code-splitting)
+Se você estiver usando o React Router, confira [este tutorial](https://reactjs.org/docs/code-splitting.html#route-based-code-splitting)
 
-Also check out the [Code Splitting](https://reactjs.org/docs/code-splitting.html) section in React documentation.
+Verifique também a seção [Code Splitting](https://reactjs.org/docs/code-splitting.html) na documentação do React.

@@ -1,13 +1,13 @@
 ---
 id: importing-a-component
-title: Importing a Component
+title: Importando um Componente
 ---
 
-This project setup supports ES6 modules thanks to webpack.
+Esta configuração de projeto suporta módulos ES6 graças ao webpack.
 
-While you can still use `require()` and `module.exports`, we encourage you to use [`import` and `export`](http://exploringjs.com/es6/ch_modules.html) instead.
+Enquanto você ainda pode usar `require()` e `module.exports`, nós encorajamos você a usar ao invés [`import` e `export`](http://exploringjs.com/es6/ch_modules.html).
 
-For example:
+Por exemplo:
 
 ## `Button.js`
 
@@ -20,14 +20,14 @@ class Button extends Component {
   }
 }
 
-export default Button; // Don’t forget to use export default!
+export default Button; // Não se esqueça de usar o export dafault!
 ```
 
 ## `DangerButton.js`
 
 ```js
 import React, { Component } from 'react';
-import Button from './Button'; // Import a component from another file
+import Button from './Button'; // Importe um componente de outro arquivo
 
 class DangerButton extends Component {
   render() {
@@ -38,23 +38,23 @@ class DangerButton extends Component {
 export default DangerButton;
 ```
 
-Be aware of the [difference between default and named exports](https://stackoverflow.com/questions/36795819/react-native-es-6-when-should-i-use-curly-braces-for-import/36796281#36796281). It is a common source of mistakes.
+Esteja ciente da [diferença entre as exportações default e nomeadas](https://stackoverflow.com/questions/36795819/react-native-es-6-when-should-i-use-curly-braces-for-import/36796281#36796281). É uma fonte comum de erros.
 
-We suggest that you stick to using default imports and exports when a module only exports a single thing (for example, a component). That’s what you get when you use `export default Button` and `import Button from './Button'`.
+Sugerimos que você continue usando importações e exportações default quando um módulo exportar apenas uma coisa (por exemplo, um componente). Isso é o que você obtém quando usa `export default Button` e `import Button from './Button'`.
 
-Named exports are useful for utility modules that export several functions. A module may have at most one default export and as many named exports as you like.
+As exportações nomeadas são úteis para módulos utilitários que exportam várias funções. Um módulo pode ter no máximo uma exportação padrão e quantas exportações nomeadas você desejar.
 
-Learn more about ES6 modules:
+Saiba mais sobre os módulos ES6:
 
-- [When to use the curly braces?](https://stackoverflow.com/questions/36795819/react-native-es-6-when-should-i-use-curly-braces-for-import/36796281#36796281)
-- [Exploring ES6: Modules](http://exploringjs.com/es6/ch_modules.html)
-- [Understanding ES6: Modules](https://leanpub.com/understandinges6/read#leanpub-auto-encapsulating-code-with-modules)
+- [Quando usar as chaves?](https://stackoverflow.com/questions/36795819/react-native-es-6-when-should-i-use-curly-braces-for-import/36796281#36796281)
+- [Explorando ES6: Módulos](http://exploringjs.com/es6/ch_modules.html)
+- [Compreendendo ES6: Módulos](https://leanpub.com/understandinges6/read#leanpub-auto-encapsulating-code-with-modules)
 
-## Absolute Imports
+## Importações absolutas
 
-You can configure your application to support importing modules using absolute paths. This can be done by configuring a `jsconfig.json` or `tsconfig.json` file in the root of your project. If you're using TypeScript in your project, you will already have a `tsconfig.json` file.
+Você pode configurar seu aplicativo para suportar a importação de módulos usando caminhos absolutos. Isso pode ser feito configurando um arquivo `jsconfig.json` ou `tsconfig.json` na raiz do seu projeto. Se estiver usando o TypeScript em seu projeto, você já terá um arquivo `tsconfig.json`.
 
-Below is an example `jsconfig.json` file for a JavaScript project. You can create the file if it doesn't already exist:
+Abaixo está um exemplo de arquivo `jsconfig.json` para um projeto JavaScript. Você pode criar o arquivo se ele ainda não existir:
 
 ```json
 {
@@ -64,13 +64,11 @@ Below is an example `jsconfig.json` file for a JavaScript project. You can creat
   "include": ["src"]
 }
 ```
+Se você estiver usando TypeScript, você pode definir a configuração `baseUrl` dentro de `compilerOptions` do arquivo `tsconfig.json` do seu projeto.
 
-If you're using TypeScript, you can configure the `baseUrl` setting inside the `compilerOptions` of your project's `tsconfig.json` file.
-
-Now that you've configured your project to support absolute imports, if you want to import a module located at `src/components/Button.js`, you can import the module like so:
+Agora que você configurou seu projeto para suportar importações absolutas, se você deseja importar um módulo localizado em `src/components/Button.js`, você pode importar o módulo assim:
 
 ```js
 import Button from 'components/Button';
 ```
-
-For more information on these configuration files, see the [jsconfig.json reference](https://code.visualstudio.com/docs/languages/jsconfig) and [tsconfig.json reference](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) documentation.
+Para obter mais informações sobre esses arquivos de configuração, consulte a documentação [de referência jsconfig.json](https://code.visualstudio.com/docs/languages/jsconfig) e [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html).

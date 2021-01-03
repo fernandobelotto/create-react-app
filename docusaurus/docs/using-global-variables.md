@@ -1,16 +1,16 @@
 ---
 id: using-global-variables
-title: Using Global Variables
+title: Usando Variáveis ​​Globais
 ---
 
-When you include a script in the HTML file that defines global variables and try to use one of these variables in the code, the linter will complain because it cannot see the definition of the variable.
+Quando você inclui um script no arquivo HTML que define variáveis ​​globais e tenta usar uma dessas variáveis ​​no código, o linter reclamará porque não pode ver a definição da variável.
 
-You can avoid this by reading the global variable explicitly from the `window` object, for example:
+Você pode evitar isso lendo a variável global explicitamente do objeto `window`, por exemplo:
 
 ```js
 const $ = window.$;
 ```
 
-This makes it clear you are using a global variable intentionally rather than because of a typo.
+Isso deixa claro que você está usando uma variável global intencionalmente, e não por causa de um erro de digitação.
 
-Alternatively, you can force the linter to ignore any line by adding `// eslint-disable-line` after it.
+Alternativamente, você pode forçar o linter a ignorar qualquer linha adicionando `// eslint-disable-line` depois dela.

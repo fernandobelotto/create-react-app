@@ -12,7 +12,7 @@ Por exemplo, um componente básico de botão pode ter os seguintes estados:
 
 Normalmente, é difícil ver esses estados sem executar um aplicativo de amostra ou alguns exemplos.
 
-Create React App doesn’t include any tools for this by default, but you can add [Storybook for React](https://storybook.js.org) ([source](https://github.com/storybooks/storybook)) or [React Styleguidist](https://react-styleguidist.js.org/) ([source](https://github.com/styleguidist/react-styleguidist)) to your project. **These are third-party tools that let you develop components and see all their states in isolation from your app**.
+
 O Create React App não inclui nenhuma ferramenta para isso por padrão, mas você pode adicionar [Storybook for React](https://storybook.js.org) ([fonte](https://github.com/storybooks/storybook )) ou [React Styleguidist](https://react-styleguidist.js.org/) ([fonte](https://github.com/styleguidist/react-styleguidist)) ao seu projeto. **Estas são ferramentas de terceiros que permitem desenvolver componentes e ver todos os seus estados de forma isolada do seu aplicativo**.
 
 ![Demostração do Storybook para React](https://i.imgur.com/7CIAWpB.gif)

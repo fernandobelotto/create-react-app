@@ -1,30 +1,30 @@
 ---
 id: adding-css-reset
-title: Adding a CSS Reset
-sidebar_label: Adding CSS Reset
+title: Adicionando uma redefinição de CSS
+sidebar_label: Adicionando uma redefinição de CSS
 ---
 
-This project setup uses [PostCSS Normalize] for adding a [CSS Reset].
+Esta configuração de projeto usa [PostCSS Normalize] para adicionar um [CSS Reset].
 
-To start using it, add `@import-normalize;` anywhere in your CSS file(s). You only need to include it once and duplicate imports are automatically removed. Since you only need to include it once, a good place to add it is `index.css` or `App.css`.
+Para começar a usá-lo, adicione `@import-normalize;` em qualquer lugar em seu(s) arquivo(s) CSS. Você só precisa incluí-lo uma vez e as importações duplicadas são removidas automaticamente. Já que você só precisa incluí-lo uma vez, um bom lugar para adicioná-lo é `index.css` ou `App.css`.
 
 ## `index.css`
 
 ```css
-@import-normalize; /* bring in normalize.css styles */
+@import-normalize; /* trazer estilos normalize.css */
 
-/* rest of app styles */
+/* resto de estilos do aplicativos */
 ```
 
-> **Tip**: If you see an "_Unknown at rule @import-normalize css(unknownAtRules)_" warning in VSCode, change the `css.lint.unknownAtRules` setting to `ignore`.
+> **Dica**: Se você vir um aviso "_Unknown at rule @import-normalize css (unknownAtRules)_" no VSCode, altere a configuração `css.lint.unknownAtRules` para `ignore`.
 
-You can control which parts of [normalize.css] to use via your project's [browserslist].
+Você pode controlar quais partes de [normalize.css] usar por meio da [browserslist] do seu projeto.
 
-Results when [browserslist] is `last 3 versions`:
+Resultados quando [browserslist] são as `últimas 3 versões`:
 
 ```css
 /**
- * Add the correct display in IE 9-.
+ * Adicione a exibição correta em IE 9-.
  */
 
 audio,
@@ -33,7 +33,7 @@ video {
 }
 
 /**
- * Remove the border on images inside links in IE 10-.
+ * Remova a borda nas imagens dentro de links em IE 10-.
  */
 
 img {
@@ -45,7 +45,7 @@ Results when [browserslist] is `last 2 versions`:
 
 ```css
 /**
- * Remove the border on images inside links in IE 10-.
+ * Remova a borda em imagens dentro de links no IE 10-.
  */
 
 img {
@@ -53,17 +53,17 @@ img {
 }
 ```
 
-## Browser support
+## Suporte de navegador
 
-Browser support is dictated by what normalize.css [supports]. As of this writing, it includes:
+O suporte do navegador é ditado pelo que normalize.css [suporta]. No momento em que este documento foi escrito, ele inclui:
 
-- Chrome (last 3)
-- Edge (last 3)
-- Firefox (last 3)
+- Chrome (últimas 3 versões)
+- Edge (últimas 3 versões)
+- Firefox (últimas 3 versões)
 - Firefox ESR
-- Opera (last 3)
-- Safari (last 3)
-- iOS Safari (last 2)
+- Opera (últimas 3 versões)
+- Safari (últimas 3 versões)
+- iOS Safari (últimas 2 versões)
 - Internet Explorer 9+
 
 [browserslist]: http://browserl.ist/

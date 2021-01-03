@@ -1,56 +1,56 @@
 ---
 id: adding-a-sass-stylesheet
-title: Adding a Sass Stylesheet
-sidebar_label: Adding Sass Stylesheets
+title: Adicionando Stylesheet Sass
+sidebar_label: Adicionando Stylesheet Sass
 ---
 
-> Note: this feature is available with `react-scripts@2.0.0` and higher.
+> Nota: este recurso está disponível com `react-scripts@2.0.0` e superior.
 
-Generally, we recommend that you don’t reuse the same CSS classes across different components. For example, instead of using a `.Button` CSS class in `<AcceptButton>` and `<RejectButton>` components, we recommend creating a `<Button>` component with its own `.Button` styles, that both `<AcceptButton>` and `<RejectButton>` can render (but [not inherit](https://facebook.github.io/react/docs/composition-vs-inheritance.html)).
+Geralmente, recomendamos que você não reutilize as mesmas classes CSS em componentes diferentes. Por exemplo, em vez de usar uma classe CSS `.Button` nos componentes `<AcceptButton>` e `<RejectButton>`, recomendamos criar um componente `<Button>` com seus próprios estilos `.Button`, que ambos `<AcceptButton> `e` <RejectButton>` podem renderizar (mas [não herdar](https://facebook.github.io/react/docs/composition-vs-inheritance.html)).
 
-Following this rule often makes CSS preprocessors less useful, as features like mixins and nesting are replaced by component composition. You can, however, integrate a CSS preprocessor if you find it valuable.
+Seguir essa regra geralmente torna os pré-processadores CSS menos úteis, pois recursos como mixins e aninhamento são substituídos pela composição de componentes. Você pode, entretanto, integrar um pré-processador CSS se achar que é valioso.
 
-To use Sass, first install `node-sass`:
+Para usar Sass, primeiro instale `node-sass`:
 
 ```sh
 $ npm install node-sass --save
-$ # or
+$ # ou
 $ yarn add node-sass
 ```
 
-Now you can rename `src/App.css` to `src/App.scss` and update `src/App.js` to import `src/App.scss`.
-This file and any other file will be automatically compiled if imported with the extension `.scss` or `.sass`.
+Agora você pode renomear `src/App.css` para `src/App.scss` e atualizar `src/App.js` para importar `src/App.scss`.
+Este arquivo e qualquer outro arquivo será compilado automaticamente se importado com a extensão `.scss` ou `.sass`.
 
-To share variables between Sass files, you can use Sass imports. For example, `src/App.scss` and other component style files could include `@import "./shared.scss";` with variable definitions.
+Para compartilhar variáveis ​​entre arquivos Sass, você pode usar as importações Sass. Por exemplo, `src/App.scss` e outros arquivos de estilo de componente podem incluir `@import "./shared.scss";` com definições de variáveis.
 
-This will allow you to do imports like
+Isso permitirá que você faça importações como
 
 ```scss
-@import 'styles/_colors.scss'; // assuming a styles directory under src/
-@import '~nprogress/nprogress'; // importing a css file from the nprogress node module
+@import 'styles/_colors.scss'; // assumindo um diretório de estilos em src /
+@import '~nprogress/nprogress'; // importando um arquivo css do nprogress node module
 ```
 
-> **Note:** You must prefix imports from `node_modules` with `~` as displayed above.
+> **Nota:** Você deve prefixar as importações de `node_modules` com `~` conforme mostrado acima.
 
-`node-sass` also supports the `SASS_PATH` variable.
+`node-sass` também suporta a variável `SASS_PATH`.
 
-To use imports relative to a path you specify, and from `node_modules` without adding the `~` prefix, you can add a [`.env` file](https://github.com/facebook/create-react-app/blob/master/docusaurus/docs/adding-custom-environment-variables.md#adding-development-environment-variables-in-env) at the project root with the variable `SASS_PATH=node_modules:src`. To specify more directories you can add them to `SASS_PATH` separated by a `:` like `path1:path2:path3`.
+Para usar importações relativas a um caminho que você especificar, e de `node_modules` sem adicionar o prefixo `~`, você pode adicionar um [ arquivo `.env](https://github.com/facebook/create-react-app/blob/master/docusaurus/docs/adding-custom-environment-variables.md#adding-development-environment-variables-in-env) na raiz do projeto com a variável `SASS_PATH=node_modules:src`. Para especificar mais diretórios, você pode adicioná-los a `SASS_PATH` separados por um `:`como `path1: path2:path3`.
 
-If you set `SASS_PATH=node_modules:src`, this will allow you to do imports like
+Se você definir `SASS_PATH=node_modules:src`, isso permitirá que você faça importações como
 ```scss
-@import 'styles/colors'; // assuming a styles directory under src/, where _colors.scss partial file exists.
-@import 'nprogress/nprogress'; // importing a css file from the nprogress node module
+@import 'styles/colors'; // assumindo um diretório de estilos em src/, onde o arquivo parcial _colors.scss existe.
+@import 'nprogress/nprogress'; // importar um arquivo css do modulo nprogress
 ```
 
-> **Note:** For windows operating system, use below syntax
+> **Nota:** Para sistema operacional Windows, use a sintaxe abaixo
 >
 > ```
 > SASS_PATH=./node_modules;./src
 > ```
 
-> **Tip:** You can opt into using this feature with [CSS modules](adding-a-css-modules-stylesheet.md) too!
+> **Dica:** você também pode optar por usar este recurso com [módulos CSS](add-a-css-modules-stylesheet.md) também!
 
-> **Note:** If you're using Flow, override the [module.file_ext](https://flow.org/en/docs/config/options/#toc-module-file-ext-string) setting in your `.flowconfig` so it'll recognize `.sass` or `.scss` files. You will also need to include the `module.file_ext` default settings for `.js`, `.jsx`, `.mjs` and `.json` files.
+> **Observação:** se você estiver usando o Flow, substitua a configuração [module.file_ext](https://flow.org/en/docs/config/options/#toc-module-file-ext-string) em seu `.flowconfig` para que ele reconheça os arquivos `.sass` ou `.scss`. Você também precisará incluir as configurações padrão `module.file_ext` para os arquivos `.js`, `.jsx`, `.mjs` e `.json`.
 >
 > ```
 > [options]

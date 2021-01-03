@@ -1,66 +1,66 @@
 ---
 id: using-the-public-folder
-title: Using the Public Folder
+title: Usando a pasta Public
 ---
 
-> Note: this feature is available with `react-scripts@0.5.0` and higher.
+> Nota: este recurso está disponível com `react-scripts@0.5.0` e superior.
 
-## Changing the HTML
+## Alterando o HTML
 
-The `public` folder contains the HTML file so you can tweak it, for example, to [set the page title](title-and-meta-tags.md).
-The `<script>` tag with the compiled code will be added to it automatically during the build process.
+A pasta `public` contém o arquivo HTML para que você possa ajustá-lo, por exemplo, para [definir o título da página](title-and-meta-tags.md).
+A tag `<script>` com o código compilado será adicionada automaticamente durante o processo de construção.
 
-## Adding Assets Outside of the Module System
+## Adicionando ativos fora do sistema de módulo
 
-You can also add other assets to the `public` folder.
+Você também pode adicionar outros assets à pasta `public`.
 
-Note that we normally encourage you to `import` assets in JavaScript files instead.
-For example, see the sections on [adding a stylesheet](adding-a-stylesheet.md) and [adding images and fonts](adding-images-fonts-and-files.md).
-This mechanism provides a number of benefits:
+Observe que normalmente encorajamos você a `importar` assets em arquivos JavaScript.
+Por exemplo, veja as seções em [adicionar uma stylesheet](adding-a-stylesheet.md) e [adicionar imagens e fontes](adding-images-fonts-and-files.md).
+Este mecanismo oferece uma série de benefícios:
 
-- Scripts and stylesheets get minified and bundled together to avoid extra network requests.
-- Missing files cause compilation errors instead of 404 errors for your users.
-- Result filenames include content hashes so you don’t need to worry about browsers caching their old versions.
+- Scripts e stylesheets são minimizados e agrupados para evitar solicitações extras de rede.
+- Arquivos ausentes causam erros de compilação em vez de erros 404 para seus usuários.
+- Os nomes dos arquivos de resultados incluem hashes de conteúdo, então você não precisa se preocupar com os navegadores armazenando em cache suas versões antigas.
 
-However there is an **escape hatch** that you can use to add an asset outside of the module system.
+No entanto, há uma **saída de emergência** que você pode usar para adicionar um asset fora do sistema de módulo.
 
-If you put a file into the `public` folder, it will **not** be processed by webpack. Instead it will be copied into the build folder untouched. To reference assets in the `public` folder, you need to use an environment variable called `PUBLIC_URL`.
+Se você colocar um arquivo na pasta `public`, ele **não** será processado pelo webpack. Em vez disso, ele será copiado para a pasta de construção sem tocar. Para fazer referência a ativos na pasta `public`, você precisa usar uma variável de ambiente chamada `PUBLIC_URL`.
 
-Inside `index.html`, you can use it like this:
+Dentro de `index.html`, você pode usá-lo assim:
 
 ```html
 <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
 ```
 
-Only files inside the `public` folder will be accessible by `%PUBLIC_URL%` prefix. If you need to use a file from `src` or `node_modules`, you’ll have to copy it there to explicitly specify your intention to make this file a part of the build.
+Apenas os arquivos dentro da pasta `public` estarão acessíveis pelo prefixo `% PUBLIC_URL%`. Se você precisar usar um arquivo de `src` ou `node_modules`, você terá que copiá-lo para especificar explicitamente sua intenção de tornar este arquivo parte do build.
 
-When you run `npm run build`, Create React App will substitute `%PUBLIC_URL%` with a correct absolute path so your project works even if you use client-side routing or host it at a non-root URL.
+Quando você executa `npm run build`, Create React App substituirá `% PUBLIC_URL%` por um caminho absoluto correto para que seu projeto funcione mesmo se você usar o roteamento do lado do cliente ou hospedá-lo em uma URL não-root.
 
-In JavaScript code, you can use `process.env.PUBLIC_URL` for similar purposes:
+No código JavaScript, você pode usar `process.env.PUBLIC_URL` para fins semelhantes:
 
 ```js
 render() {
-  // Note: this is an escape hatch and should be used sparingly!
-  // Normally we recommend using `import` for getting asset URLs
-  // as described in “Adding Images and Fonts” above this section.
+  // Observação: esta é uma saída de emergência e deve ser usada com moderação!
+  // Normalmente recomendamos o uso de `import` para obter URLs de ativos
+  // conforme descrito em “Adicionar imagens e fontes” acima desta seção.
   return <img src={process.env.PUBLIC_URL + '/img/logo.png'} />;
 }
 ```
 
-Keep in mind the downsides of this approach:
+Lembre-se das desvantagens dessa abordagem:
 
-- None of the files in `public` folder get post-processed or minified.
-- Missing files will not be called at compilation time, and will cause 404 errors for your users.
-- Result filenames won’t include content hashes so you’ll need to add query arguments or rename them every time they change.
+- Nenhum dos arquivos na pasta `public` é pós-processado ou minimizado.
+- Arquivos ausentes não serão chamados no momento da compilação e causarão erros 404 para seus usuários.
+- Os nomes dos arquivos de resultados não incluirão hashes de conteúdo, portanto, você precisará adicionar argumentos de consulta ou renomeá-los sempre que forem alterados.
 
-## When to Use the `public` Folder
+## Quando usar a pasta `public`
 
-Normally we recommend importing [stylesheets](adding-a-stylesheet.md), [images, and fonts](adding-images-fonts-and-files.md) from JavaScript.
-The `public` folder is useful as a workaround for a number of less common cases:
+Normalmente, recomendamos importar [stylesheets](adding-a-stylesheet.md), [imagens e fontes](adding-images-fonts-and-files.md) do JavaScript.
+A pasta `public` é útil como uma solução alternativa para alguns casos menos comuns:
 
-- You need a file with a specific name in the build output, such as [`manifest.webmanifest`](https://developer.mozilla.org/en-US/docs/Web/Manifest).
-- You have thousands of images and need to dynamically reference their paths.
-- You want to include a small script like [`pace.js`](https://github.hubspot.com/pace/docs/welcome/) outside of the bundled code.
-- Some library may be incompatible with webpack and you have no other option but to include it as a `<script>` tag.
+- Você precisa de um arquivo com um nome específico na saída da compilação, como [`manifest.webmanifest`](https://developer.mozilla.org/en-US/docs/Web/Manifest).
+- Você tem milhares de imagens e precisa referenciar dinamicamente seus caminhos.
+- Você deseja incluir um pequeno script como [`pace.js`](https://github.hubspot.com/pace/docs/welcome/) fora do código empacotado.
+- Algumas bibliotecas podem ser incompatíveis com o webpack e você não tem outra opção a não ser incluí-la como uma tag `<script>`.
 
-Note that if you add a `<script>` that declares global variables, you should read the topic [Using Global Variables](using-global-variables.md) in the next section which explains how to reference them.
+Note que se você adicionar um `<script>` que declara variáveis ​​globais, você deve ler o tópico [Usando variáveis ​​globais](using-global-variables.md) na próxima seção que explica como referenciá-las.

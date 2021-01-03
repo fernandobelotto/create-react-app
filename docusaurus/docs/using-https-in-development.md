@@ -1,22 +1,21 @@
 ---
 id: using-https-in-development
-title: Using HTTPS in Development
-sidebar_label: HTTPS in Development
+title: Usando HTTPS em desenvolvimento
+sidebar_label: HTTPS em desenvolvimento
 ---
 
-> Note: this feature is available with `react-scripts@0.4.0` and higher.
+> Nota: este recurso está disponível com `react-scripts@0.4.0` e superior.
 
-You may require the dev server to serve pages over HTTPS. One particular case where this could be useful is when using [the "proxy" feature](proxying-api-requests-in-development.md) to proxy requests to an API server when that API server is itself serving HTTPS.
+Você pode exigir que o servidor dev sirva páginas sobre HTTPS. Um caso particular em que isso pode ser útil é ao usar [o recurso "proxy"](proxying-api-requests-in-development.md) para enviar solicitações a um servidor API quando esse servidor API está servindo HTTPS.
 
-To do this, set the `HTTPS` environment variable to `true`, then start the dev server as usual with `npm start`:
+Para fazer isso, defina a variável de ambiente `HTTPS` como `true`, em seguida, inicie o servidor de desenvolvimento normalmente com `npm start`:
 
 ### Windows (cmd.exe)
 
 ```cmd
 set HTTPS=true&&npm start
 ```
-
-(Note: the lack of whitespace is intentional.)
+(Observação: a falta de espaço em branco é intencional.)
 
 ### Windows (Powershell)
 
@@ -29,20 +28,18 @@ set HTTPS=true&&npm start
 ```sh
 HTTPS=true npm start
 ```
+Observe que o servidor usará um certificado autoassinado, então seu navegador quase definitivamente exibirá um aviso ao acessar a página.
 
-Note that the server will use a self-signed certificate, so your web browser will almost definitely display a warning upon accessing the page.
+## Certificado SSL personalizado
 
-## Custom SSL certificate
-
-To set a custom certificate, set the `SSL_CRT_FILE` and `SSL_KEY_FILE` environment variables to the path of the certificate and key files in the same way you do for `HTTPS` above. Note that you will also need to set `HTTPS=true`.
+Para definir um certificado personalizado, defina as variáveis ​​de ambiente `SSL_CRT_FILE` e `SSL_KEY_FILE` para o caminho do certificado e dos arquivos de chave da mesma forma que você fez para `HTTPS` acima. Observe que você também precisará definir `HTTPS=true`.
 
 ### Linux, macOS (Bash)
 
 ```bash
 HTTPS=true SSL_CRT_FILE=cert.crt SSL_KEY_FILE=cert.key npm start
 ```
-
-To avoid having to set the environment variable each time, you can either include in the `npm start` script like so:
+Para evitar ter que definir a variável de ambiente todas as vezes, você pode incluir no script `npm start` assim:
 
 ```json
 {
@@ -50,5 +47,5 @@ To avoid having to set the environment variable each time, you can either includ
 }
 ```
 
-Or you can create a `.env` file with `HTTPS=true` set.
-[Learn more about environment variables in CRA](https://create-react-app.dev/docs/adding-custom-environment-variables).
+Ou você pode criar um arquivo `.env` com `HTTPS = true` definido.
+[Saiba mais sobre variáveis ​​de ambiente em CRA](https://create-react-app.dev/docs/adding-custom-environment-variables).

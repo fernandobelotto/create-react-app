@@ -1,10 +1,10 @@
 ---
 id: adding-a-stylesheet
-title: Adding a Stylesheet
-sidebar_label: Adding Stylesheets
+title: Adicionando uma Stylesheet
+sidebar_label: Adicionando Stylesheets
 ---
 
-This project setup uses [webpack](https://webpack.js.org/) for handling all assets. webpack offers a custom way of “extending” the concept of `import` beyond JavaScript. To express that a JavaScript file depends on a CSS file, you need to **import the CSS from the JavaScript file**:
+Esta configuração de projeto usa [webpack](https://webpack.js.org/) para lidar com todos os assets. webpack oferece uma maneira personalizada de “estender” o conceito de `import` além do JavaScript. Para expressar que um arquivo JavaScript depende de um arquivo CSS, você precisa **importar o CSS do arquivo JavaScript**:
 
 ## `Button.css`
 
@@ -18,18 +18,18 @@ This project setup uses [webpack](https://webpack.js.org/) for handling all asse
 
 ```js
 import React, { Component } from 'react';
-import './Button.css'; // Tell webpack that Button.js uses these styles
+import './Button.css'; // Diga ao webpack que o Button.js usa esses estilos
 
 class Button extends Component {
   render() {
-    // You can use them as regular CSS styles
+    // Você pode usá-los como estilos CSS regulares
     return <div className="Button" />;
   }
 }
 ```
 
-**This is not required for React** but many people find this feature convenient. You can read about the benefits of this approach [here](https://medium.com/seek-blog/block-element-modifying-your-javascript-components-d7f99fcab52b). However you should be aware that this makes your code less portable to other build tools and environments than webpack.
+**Isso não é necessário para o React**, mas muitas pessoas acham esse recurso conveniente. Você pode ler sobre os benefícios dessa abordagem [aqui](https://medium.com/seek-blog/block-element-modifying-your-javascript-components-d7f99fcab52b). No entanto, você deve estar ciente de que isso torna seu código menos portátil para outras ferramentas e ambientes de construção do que o webpack.
 
-In development, expressing dependencies this way allows your styles to be reloaded on the fly as you edit them. In production, all CSS files will be concatenated into a single minified `.css` file in the build output.
+No desenvolvimento, expressar dependências dessa maneira permite que seus estilos sejam recarregados rapidamente conforme você os edita. Na produção, todos os arquivos CSS serão concatenados em um único arquivo `.css` reduzido na saída da compilação.
 
-If you are concerned about using webpack-specific semantics, you can put all your CSS right into `src/index.css`. It would still be imported from `src/index.js`, but you could always remove that import if you later migrate to a different build tool.
+Se você está preocupado em usar a semântica específica do webpack, pode colocar todo o seu CSS diretamente em `src/index.css`. Ele ainda seria importado de `src/index.js`, mas você sempre pode remover essa importação se mais tarde migrar para uma ferramenta de construção diferente.

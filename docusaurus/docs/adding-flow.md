@@ -1,28 +1,27 @@
 ---
 id: adding-flow
-title: Adding Flow
+title: Adicionando Flow
 ---
 
-Flow is a static type checker that helps you write code with fewer bugs. Check out this [introduction to using static types in JavaScript](https://medium.com/@preethikasireddy/why-use-static-types-in-javascript-part-1-8382da1e0adb) if you are new to this concept.
+Flow é um verificador de tipo estático que ajuda a escrever código com menos bugs. Confira esta [introdução ao uso de tipos estáticos em JavaScript](https://medium.com/@preethikasireddy/why-use-static-types-in-javascript-part-1-8382da1e0adb) se você for novo neste conceito.
 
-Recent versions of [Flow](https://flow.org/) work with Create React App projects out of the box.
+Versões recentes do [Flow](https://flow.org/) funcionam com projetos Create React App prontos para uso.
 
-To add Flow to a Create React App project, follow these steps:
+Para adicionar o Flow a um projeto Create React App, siga estas etapas:
 
-1. Run `npm install --save flow-bin` (or `yarn add flow-bin`).
-2. Add `"flow": "flow"` to the `scripts` section of your `package.json`.
-3. Run `npm run flow init` (or `yarn flow init`) to create a [`.flowconfig` file](https://flow.org/en/docs/config/) in the root directory.
-4. Add `// @flow` to any files you want to type check (for example, to `src/App.js`).
+1. Execute `npm install --save flow-bin` (ou` yarn add flow-bin`).
+2. Adicione `"flow": "flow"` à seção `scripts` do seu `package.json`.
+3. Execute `npm run flow init` (ou `yarn flow init`) para criar um [arquivo `.flowconfig`](https://flow.org/en/docs/config/) no diretório raiz.
+4. Adicione `// @flow` a qualquer arquivo que deseja checar a tipagem (por exemplo, `src/App.js`).
 
-Now you can run `npm run flow` (or `yarn flow`) to check the files for type errors.  
-You can optionally enable an extension for your IDE, such as [Flow Language Support](https://github.com/flowtype/flow-for-vscode) for Visual Studio Code, or leverage the Language Server Protocol standard (e.g. [vim LSP](https://github.com/prabirshrestha/vim-lsp/wiki/Servers-Flow)) to get hints while you type.
+Agora você pode executar `npm run flow` (ou `yarn flow`) para verificar se há erros de tipo nos arquivos.
+Opcionalmente, você pode ativar uma extensão para seu IDE, como [Flow Language Support](https://github.com/flowtype/flow-for-vscode) para Visual Studio Code, ou aproveitar o padrão Language Server Protocol (por exemplo, [vim LSP](https://github.com/prabirshrestha/vim-lsp/wiki/Servers-Flow)) para obter dicas enquanto você digita.
 
-If you'd like to use [absolute imports](/docs/importing-a-component#absolute-imports) with Flow,
-make sure to add the following line to your `.flowconfig` to make Flow aware of it:
+Se desejar usar [importação absolutas](/docs/importing-a-component#absolute-imports) com o Flow,
+certifique-se de adicionar a seguinte linha ao seu `.flowconfig` para tornar o Flow ciente disso:
 
 ```diff
   [options]
 + module.name_mapper='^\([^\.].*\)$' -> '<PROJECT_ROOT>/src/\1'
 ```
-
-To learn more about Flow, check out [its documentation](https://flow.org/).
+Para saber mais sobre o Flow, verifique [sua documentação](https://flow.org/).

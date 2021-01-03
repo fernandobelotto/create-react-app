@@ -1,63 +1,64 @@
 ---
 id: adding-bootstrap
-title: Adding Bootstrap
+title: Adicionando Bootstrap
 ---
 
-While you don’t have to use any specific library to integrate Bootstrap with React apps, it's often easier than trying to wrap the Bootstrap jQuery plugins. [React Bootstrap](https://react-bootstrap.netlify.com/) is the most popular option that strives for complete parity with Bootstrap. [reactstrap](https://reactstrap.github.io/) is also a good choice for projects looking for smaller builds at the expense of some features.
+Embora você não precise usar nenhuma biblioteca específica para integrar o Bootstrap aos aplicativos React, geralmente é mais fácil do que tentar envolver os plug-ins jQuery do Bootstrap. [React Bootstrap](https://react-bootstrap.netlify.com/) é a opção mais popular que busca a paridade completa com o Bootstrap. [reactstrap](https://reactstrap.github.io/) também é uma boa escolha para projetos que procuram compilações menores em detrimento de alguns recursos.
 
-Each project's respective documentation site has detailed instructions for installing and using them. Both depend on the Bootstrap css file so install that as well:
+O respectivo site de documentação de cada projeto possui instruções detalhadas para instalação e uso. Ambos dependem do arquivo css do Bootstrap, portanto, instale-o também:
 
 ```sh
 npm install --save bootstrap
 ```
 
-Alternatively you may use `yarn`:
+Alternativamente, você pode usar `yarn`:
 
 ```sh
 yarn add bootstrap
 ```
 
-Import Bootstrap CSS and optionally Bootstrap theme CSS in the beginning of your `src/index.js` file:
+Importe o CSS do Bootstrap e, opcionalmente, o CSS do tema do Bootstrap no início do seu arquivo `src/index.js`:
 
 ```js
 import 'bootstrap/dist/css/bootstrap.css';
-// Put any other imports below so that CSS from your
-// components takes precedence over default styles.
+// Coloque quaisquer outras importações abaixo para que o CSS dos seus
+// componentes tenha precedência sobre os estilos padrão.
 ```
 
-## Using a Custom Theme
+## Usando um tema personalizado
 
-> Note: this feature is available with `react-scripts@2.0.0` and higher.
+> Nota: este recurso está disponível com `react-scripts@2.0.0` e superior.
 
-Sometimes you might need to tweak the visual styles of Bootstrap (or equivalent package).
+Às vezes, você pode precisar ajustar os estilos visuais do Bootstrap (ou pacote equivalente).
 
-As of `react-scripts@2.0.0` you can import `.scss` files. This makes it possible to use a package's built-in Sass variables for global style preferences.
+A partir de `react-scripts@2.0.0` você pode importar arquivos `.scss`. Isso torna possível usar as variáveis ​​integradas do Sass em um pacote para preferências de estilo globais.
 
-To enable `scss` in Create React App you will need to install `node-sass`.
+Para habilitar o `scss` em Create React App, você precisará instalar o` node-sass`.
 
 ```sh
 npm install --save node-sass
 ```
 
-Alternatively you may use `yarn`:
+Alternativamente, você pode usar `yarn`:
 
 ```sh
 yarn add node-sass
 ```
 
-To customize Bootstrap, create a file called `src/custom.scss` (or similar) and import the Bootstrap source stylesheet. Add any overrides _before_ the imported file(s). You can reference [Bootstrap's documentation](https://getbootstrap.com/docs/4.1/getting-started/theming/#css-variables) for the names of the available variables.
+Para personalizar o Bootstrap, crie um arquivo chamado `src/custom.scss` (ou similar) e importe a stylesheet de origem do Bootstrap. Adicione quaisquer substituições _antes_ dos arquivos importados. Você pode consultar a [documentação do Bootstrap](https://getbootstrap.com/docs/4.1/getting-started/theming/#css-variables) para os nomes das variáveis ​​disponíveis.
+
 
 ```scss
-// Override default variables before the import
+// Substitui as variáveis ​​padrão antes da importação
 $body-bg: #000;
 
-// Import Bootstrap and its default variables
+// Importar Bootstrap e suas variáveis ​​padrão
 @import '~bootstrap/scss/bootstrap.scss';
 ```
 
-> **Note:** You must prefix imports from `node_modules` with `~` as displayed above.
+> ** Nota: ** Você deve prefixar as importações de `node_modules` com `~` conforme mostrado acima.
 
-Finally, import the newly created `.scss` file instead of the default Bootstrap `.css` in the beginning of your `src/index.js` file, for example:
+Finalmente, importe o arquivo `.scss` recém-criado em vez do Bootstrap `.css` padrão no início do seu arquivo `src/index.js`, por exemplo:
 
 ```javascript
 import './custom.scss';
