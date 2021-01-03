@@ -7,7 +7,7 @@ sidebar_label: Analisando o tamanho do bundle
 [Source map explorer](https://www.npmjs.com/package/source-map-explorer) analisa pacotes JavaScript usando os mapas de origem (source maps). Isso ajuda a entender de onde vem o inchaço do código (code bloat).
 
 To add Source map explorer to a Create React App project, follow these steps:
-Para adicionar o Source map explorer a um projeto Criar React App, siga estas etapas:
+Para adicionar o Source map explorer a um projeto Create React App, siga estas etapas:
 
 ```sh
 npm install --save source-map-explorer

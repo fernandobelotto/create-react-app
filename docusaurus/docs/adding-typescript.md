@@ -3,53 +3,52 @@ id: adding-typescript
 title: Adicionando TypeScript
 ---
 
-> Note: this feature is available with `react-scripts@2.1.0` and higher.
-> Note: this feature is available with `react-scripts@2.1.0` and higher.
+> Nota: este recurso está disponível com `react-scripts@2.1.0` e superior.
 
-[TypeScript](https://www.typescriptlang.org/) is a typed superset of JavaScript that compiles to plain JavaScript.
+[TypeScript](https://www.typescriptlang.org/) é um superconjunto tipado de JavaScript que compila para JavaScript simples.
 
-## Installation
+## Instalação
 
-To start a new Create React App project with [TypeScript](https://www.typescriptlang.org/), you can run:
+Para iniciar um novo projeto Create React App com [TypeScript](https://www.typescriptlang.org/), você pode executar:
 
 ```sh
 npx create-react-app my-app --template typescript
 
-# or
+# ou
 
 yarn create react-app my-app --template typescript
 ```
 
-> If you've previously installed `create-react-app` globally via `npm install -g create-react-app`, we recommend you uninstall the package using `npm uninstall -g create-react-app` or `yarn global remove create-react-app` to ensure that `npx` always uses the latest version.
+> Se você instalou anteriormente `create-react-app` globalmente via `npm install -g create-react-app`, recomendamos que você desinstale o pacote usando `npm uninstall -g create-react-app` ou `yarn global remove create-react-app` para garantir que `npx` sempre use a versão mais recente.
 >
-> Global installs of `create-react-app` are no longer supported.
+> Instalações globais de `create-react-app` não são mais suportadas.
 
-To add [TypeScript](https://www.typescriptlang.org/) to an existing Create React App project, first install it:
+Para adicionar [TypeScript](https://www.typescriptlang.org/) a um projeto Create React App existente, primeiro instale-o:
 
 ```sh
 npm install --save typescript @types/node @types/react @types/react-dom @types/jest
 
-# or
+# ou
 
 yarn add typescript @types/node @types/react @types/react-dom @types/jest
 ```
 
-Next, rename any file to be a TypeScript file (e.g. `src/index.js` to `src/index.tsx`) and **restart your development server**!
+Em seguida, renomeie qualquer arquivo para ser um arquivo TypeScript (por exemplo, `src/index.js` para `src/index.tsx`) e **reinicie seu servidor de desenvolvimento**!
 
-Type errors will show up in the same console as the build one. You'll have to fix these type errors before you continue development or build your project. For advanced configuration, [see here](advanced-configuration.md).
+Erros de tipo aparecerão no mesmo console do build. Você terá que corrigir esses erros de tipo antes de continuar o desenvolvimento ou construir seu projeto. Para configuração avançada, [veja aqui](advanced-configuration.md).
 
-## Getting Started with TypeScript and React
+## Primeiros passos com TypeScript e React
 
-You are not required to make a [`tsconfig.json` file](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html), one will be made for you. You are allowed to edit the generated TypeScript configuration.
+Você não é obrigado a fazer um [arquivo `tsconfig.json`](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html), um será feito para você. Você tem permissão para editar a configuração do TypeScript gerada.
 
 - [TypeScript Handbook](https://www.typescriptlang.org/)
 - [TypeScript Example on React](https://www.typescriptlang.org/play/index.html?jsx=2&esModuleInterop=true&e=196#example/typescript-with-react)
-- [React + TypeScript Cheatsheets](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet#reacttypescript-cheatsheets) has a good overview on how to use React with TypeScript
+- [React + TypeScript Cheatsheets](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet#reacttypescript-cheatsheets) tem uma boa visão geral sobre como usar React com TypeScript
 
-## Troubleshooting
+## Solução de problemas
 
-If your project is not created with TypeScript enabled, npx may be using a cached version of `create-react-app`. Remove previously installed versions with `npm uninstall -g create-react-app` or `yarn global remove create-react-app` (see [#6119](https://github.com/facebook/create-react-app/issues/6119#issuecomment-451614035)).
+Se o seu projeto não foi criado com TypeScript habilitado, npx pode estar usando uma versão em cache de `create-react-app`. Remova as versões instaladas anteriormente com `npm uninstall -g create-react-app` ou `yarn global remove create-react-app` (see [#6119](https://github.com/facebook/create-react-app/issues/6119#issuecomment-451614035)).
 
-If you are currently using [create-react-app-typescript](https://github.com/wmonk/create-react-app-typescript/), see [this blog post](https://vincenttunru.com/migrate-create-react-app-typescript-to-create-react-app/) for instructions on how to migrate to Create React App.
+Se você estiver usando [create-react-app-typescript](https://github.com/wmonk/create-react-app-typescript/), consulte [this blog post](https://vincenttunru.com/migrate-create-react-app-typescript-to-create-react-app/) para obter instruções sobre como migrar para Create React App.
 
-Constant enums and namespaces are not supported, you can learn about the constraints of [using Babel with TypeScript here](https://babeljs.io/docs/en/babel-plugin-transform-typescript#caveats).
+Enums e namespaces constantes não são suportados, você pode aprender sobre as restrições de [usando Babel com TypeScript aqui](https://babeljs.io/docs/en/babel-plugin-transform-typescript#caveats).
