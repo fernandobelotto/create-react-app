@@ -12,7 +12,7 @@ Você notará que os modelos personalizados são sempre nomeados no formato `cra
 Modelos de escopo também são suportados, sob o nome `@[nome-do-escopo]/cra-template` ou `@[nome-do-escopo]/cra-template-[nome-do-modelo]`, que podem ser instalados via `@[escopo]`e `@[escopo]/[nome-do-modelo]` respectivamente.
 
 ```sh
-npx create-react-app my-app --template [template-name]
+npx create-react-app my-app --template [nome-do-modelo]
 ```
 
 ## Encontrar modelos personalizados
@@ -31,7 +31,7 @@ Se você estiver interessado em construir um modelo personalizado, primeiro dê 
 Um modelo deve ter a seguinte estrutura:
 
 ```
-cra-template-[template-name]/
+cra-template-[nome-do-template]/
   README.md (para o npm)
   template.json
   package.json
@@ -41,7 +41,7 @@ cra-template-[template-name]/
     public/
       index.html
     src/
-      index.js (or index.tsx)
+      index.js (ou index.tsx)
 ```
 
 ### Testando um modelo
