@@ -38,7 +38,7 @@ Se a opção `proxy` **não** for flexível o suficiente para você, alternativa
 
 - [Configure o proxy você mesmo](#configurando-o-proxy-manualmente)
 - Habilite o CORS em seu servidor ([aqui está como fazê-lo com o Express](https://enable-cors.org/server_expressjs.html)).
-- Use [variáveis ​​de ambiente](add-custom-environment-variables.md) para injetar o host de servidor e a porta correta em seu aplicativo.
+- Use [variáveis ​​de ambiente](adding-custom-environment-variables.md) para injetar o host de servidor e a porta correta em seu aplicativo.
 
 ## Erros "Invalid Host Header" após configurar o proxy
 
