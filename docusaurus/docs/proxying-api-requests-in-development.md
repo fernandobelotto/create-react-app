@@ -42,47 +42,46 @@ Se a opção `proxy` **não** for flexível o suficiente para você, alternativa
 
 ## Erros "Invalid Host Header" após configurar o proxy
 
-When you enable the `proxy` option, you opt into a more strict set of host checks. This is necessary because leaving the backend open to remote hosts makes your computer vulnerable to DNS rebinding attacks. The issue is explained in [this article](https://medium.com/webpack/webpack-dev-server-middleware-security-issues-1489d950874a) and [this issue](https://github.com/webpack/webpack-dev-server/issues/887).
+Ao habilitar a opção `proxy`, você opta por um conjunto mais restrito de verificações de host. Isso é necessário porque deixar o back-end aberto para hosts remotos e torna seu computador vulnerável a ataques de religação de DNS. O problema é explicado [neste artigo](https://medium.com/webpack/webpack-dev-server-middleware-security-issues-1489d950874a) e [esta issue](https://github.com/webpack/webpack-dev-server/issues/887).
 
-This shouldn’t affect you when developing on `localhost`, but if you develop remotely like [described here](https://github.com/facebook/create-react-app/issues/2271), you will see this error in the browser after enabling the `proxy` option:
+Isso não deve afetá-lo ao desenvolver em `localhost`, mas se você desenvolver remotamente como [descrito aqui](https://github.com/facebook/create-react-app/issues/2271), você verá este erro no navegador após habilitar a opção `proxy`:
 
 > Invalid Host header
 
-To work around it, you can specify your public development host in a file called `.env.development` in the root of your project:
+Para contornar isso, você pode especificar seu host de desenvolvimento público em um arquivo chamado `.env.development` na raiz do seu projeto:
 
 ```
 HOST=mypublicdevhost.com
 ```
 
-If you restart the development server now and load the app from the specified host, it should work.
+Se você reiniciar o servidor de desenvolvimento agora e carregar o aplicativo do host especificado, ele deve funcionar.
 
-If you are still having issues or if you’re using a more exotic environment like a cloud editor, you can bypass the host check completely by adding a line to `.env.development.local`. **Note that this is dangerous and exposes your machine to remote code execution from malicious websites:**
+Se ainda estiver tendo problemas ou se estiver usando um ambiente mais exótico como um editor de nuvem, você pode ignorar a verificação do host completamente adicionando uma linha a `.env.development.local`. **Observe que isso é perigoso e expõe sua máquina à execução remota de código de sites maliciosos:**
 
 ```
-# NOTE: THIS IS DANGEROUS!
-# It exposes your machine to attacks from the websites you visit.
+# NOTA: ISTO É PERIGOSO!
+# Expõe sua máquina a ataques dos sites que você visita.
 DANGEROUSLY_DISABLE_HOST_CHECK=true
 ```
 
-We don’t recommend this approach.
+Não recomendamos essa abordagem.
 
 ## Configurando o Proxy Manualmente
 
-> Note: this feature is available with `react-scripts@2.0.0` and higher.
+> Nota: este recurso está disponível com `react-scripts@2.0.0` e superior.
 
-If the `proxy` option is **not** flexible enough for you, you can get direct access to the Express app instance and hook up your own proxy middleware.
+Se a opção `proxy` **não** for flexível o suficiente para você, você pode obter acesso direto à instância do aplicativo Express e conectar seu próprio middleware de proxy.
 
-You can use this feature in conjunction with the `proxy` property in `package.json`, but it is recommended you consolidate all of your logic into `src/setupProxy.js`.
+Você pode usar este recurso em conjunto com a propriedade `proxy` em `package.json`, mas é recomendado que você consolide toda a sua lógica em `src/setupProxy.js`.
 
-First, install `http-proxy-middleware` using npm or Yarn:
+Primeiro, instale `http-proxy-middleware` usando npm ou Yarn:
 
 ```sh
 $ npm install http-proxy-middleware --save
 $ # ou
 $ yarn add http-proxy-middleware
 ```
-
-Next, create `src/setupProxy.js` and place the following contents in it:
+Em seguida, crie o arquivo em `src/setupProxy.js` e coloque o seguinte conteúdo nele:
 
 ```js
 const { createProxyMiddleware } = require('http-proxy-middleware');
