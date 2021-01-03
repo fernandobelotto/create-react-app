@@ -7,7 +7,7 @@
 
 const siteConfig = {
   title: 'Create React App',
-  tagline: 'Set up a modern web app by running one command.',
+  tagline: 'Configure um aplicativo da web moderno executando um comando.',
   url: 'https://create-react-app.dev',
   baseUrl: '/',
   projectName: 'create-react-app',
@@ -47,7 +47,7 @@ const siteConfig = {
         { to: 'docs/getting-started', label: 'Docs', position: 'right' },
         {
           href: 'https://reactjs.org/community/support.html',
-          label: 'Help',
+          label: 'Ajuda',
           position: 'right',
         },
         {
@@ -64,17 +64,17 @@ const siteConfig = {
           title: 'Docs',
           items: [
             {
-              label: 'Get Started',
+              label: 'Comece Agora',
               to: 'docs/getting-started',
             },
             {
-              label: 'Learn React',
+              label: 'Aprenda React',
               href: 'https://reactjs.org/',
             },
           ],
         },
         {
-          title: 'Community',
+          title: 'Comunidade',
           items: [
             {
               label: 'Stack Overflow',
@@ -110,7 +110,7 @@ const siteConfig = {
         alt: 'Facebook Open Source Logo',
         src: 'img/oss_logo.png',
       },
-      copyright: `Copyright © ${new Date().getFullYear()} Facebook, Inc.`,
+      copyright: `Direitos autorais © ${new Date().getFullYear()} Facebook, Inc.`,
     },
   },
 };

@@ -1,46 +1,47 @@
 ---
 id: setting-up-your-editor
-title: Setting Up Your Editor
-sidebar_label: Editor Setup
+title: Configurando Seu Editor
+sidebar_label: Configuração de Editor
 ---
 
-Create React App comes with a bunch of tools that improve the editing experience - if configured correctly. Here's a few tips to maximize your productivity:
+O Create React App vem com várias ferramentas que melhoram a experiência de edição - se configurado corretamente. Aqui estão algumas dicas para maximizar sua produtividade:
 
-## Syntax highlighting
+## Realce de sintaxe
 
-To configure the syntax highlighting in your favorite text editor, head to the [relevant Babel documentation page](https://babeljs.io/docs/editors) and follow the instructions. Some of the most popular editors are covered.
+Para configurar o realce de sintaxe em seu editor de texto favorito, vá para a [página de documentação relevante do Babel](https://babeljs.io/docs/editors) e siga as instruções. Alguns dos editores mais populares são cobertos.
 
-## Displaying Lint Output in the Editor
+## Exibindo Output do Lint no Editor
 
-> Note: this feature is available with `react-scripts@0.2.0` and higher.
+> Nota: este recurso está disponível com `react-scripts@0.2.0` e superior.
 
-> It works out of the box for newly created projects with `react-scripts@2.0.3` and higher.
+> Já funciona direto para projetos recém-criados com `react-scripts @ 2.0.3` e superior.
 
-> It also only works with npm 3 or higher.
+> Também funciona apenas com npm 3 ou superior.
 
-Some editors, including Sublime Text, Atom, and Visual Studio Code, provide plugins for ESLint.
+Alguns editores, incluindo Sublime Text, Atom e Visual Studio Code, fornecem plug-ins para ESLint.
 
-They are not required for linting. You should see the linter output right in your terminal as well as the browser console. If you prefer the lint results to appear right in your editor, please make sure you install an ESLint plugin/extension.
+Eles não são necessários para linting. Você deve ver a saída do linter diretamente no seu terminal, bem como no console do navegador. Se você preferir que os resultados do lint apareçam no seu editor, certifique-se de instalar o plugin/extensão do ESLint.
 
-Note that even if you customise your ESLint config, these changes will **only affect the editor integration**. They won’t affect the terminal and in-browser lint output. This is because Create React App intentionally provides a minimal set of rules that find common mistakes.
+Observe que, mesmo se você personalizar sua configuração ESLint, essas alterações **afetarão apenas a integração do editor**. Eles não afetarão o terminal e a saída do lint no navegador. Isso ocorre porque Create React App intencionalmente fornece um conjunto mínimo de regras que localizam erros comuns.
 
-If you want to enforce a coding style for your project, consider using [Prettier](https://github.com/jlongster/prettier) instead of ESLint style rules.
+Se você deseja impor um estilo de codificação para seu projeto, considere usar [Prettier](https://github.com/jlongster/prettier) em vez de regras de estilo ESLint.
 
-### Extending or replacing the default ESLint config
+### Estendendo ou substituindo a configuração padrão do ESLint
 
-You can extend our base ESLint config, or replace it completely if you need.
+Você pode estender nossa configuração ESLint básica ou substituí-la completamente, se necessário.
 
-There are a few things to remember:
+Existem algumas coisas para lembrar:
 
-1. We highly recommend extending the base config, as removing it could introduce hard-to-find issues.
-1. When working with TypeScript, you'll need to provide an `overrides` object for rules that should _only_ target TypeScript files.
-1. It's important to note that any rules that are set to `"error"` will stop the project from building.
+1. É altamente recomendável estender a configuração básica, pois removê-la pode apresentar problemas difíceis de encontrar.
+2. Ao trabalhar com TypeScript, você precisará fornecer um objeto `overrides` para regras que devem _apenas_ almejar arquivos TypeScript.
+3. É importante notar que quaisquer regras definidas como `"erro"` interromperão a construção do projeto.
 
 In the below example:
+No exemplo abaixo:
 
-- the base config has been extended by a shared ESLint config,
-- a new rule has been set that applies to all JavaScript and TypeScript files, and
-- a new rule has been set that only targets TypeScript files.
+- a configuração de base foi estendida por uma configuração ESLint compartilhada,
+- uma nova regra foi definida que se aplica a todos os arquivos JavaScript e TypeScript, e
+- uma nova regra foi definida que visa apenas arquivos TypeScript.
 
 ```json
 {
@@ -61,17 +62,18 @@ In the below example:
 }
 ```
 
-## Debugging in the Editor
+## Depurando no Editor
 
 **This feature is currently only supported by [Visual Studio Code](https://code.visualstudio.com) and [WebStorm](https://www.jetbrains.com/webstorm/).**
+**Este recurso é atualmente compatível apenas com [Visual Studio Code](https://code.visualstudio.com) e [WebStorm](https://www.jetbrains.com/webstorm/). **
 
-Visual Studio Code and WebStorm support debugging out of the box with Create React App. This enables you as a developer to write and debug your React code without leaving the editor, and most importantly it enables you to have a continuous development workflow, where context switching is minimal, as you don’t have to switch between tools.
+O Visual Studio Code e o WebStorm oferecem suporte à depuração pronto para uso com o Create React App. Isso permite que você, como desenvolvedor, escreva e depure seu código React sem sair do editor e, o mais importante, permite que você tenha um fluxo de trabalho de desenvolvimento contínuo, onde a troca de contexto é mínima, pois você não precisa alternar entre as ferramentas.
 
 ### Visual Studio Code
 
-You need to have the latest version of [VS Code](https://code.visualstudio.com) and VS Code [Chrome Debugger Extension](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome) installed.
+Você precisa ter a versão mais recente do [VS Code](https://code.visualstudio.com) e da extensão do [Chrome Debugger ](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome) instalados.
 
-Then add the block below to your `launch.json` file and put it inside the `.vscode` folder in your app’s root directory.
+Em seguida, adicione o bloco abaixo ao seu arquivo `launch.json` e coloque-o dentro da pasta `.vscode` no diretório raiz do seu aplicativo.
 
 ```json
 {
@@ -91,47 +93,46 @@ Then add the block below to your `launch.json` file and put it inside the `.vsco
 }
 ```
 
-> Note: the URL may be different if you've made adjustments via the [HOST or PORT environment variables](advanced-configuration.md).
+> Observação: o URL pode ser diferente se você fez ajustes por meio das [variáveis ​​de ambiente HOST ou PORT](advanced-configuration.md).
 
-Start your app by running `npm start`, and start debugging in VS Code by pressing `F5` or by clicking the green debug icon. You can now write code, set breakpoints, make changes to the code, and debug your newly modified code—all from your editor.
+Inicie seu aplicativo executando `npm start` e inicie a depuração no VS Code pressionando `F5` ou clicando no ícone de depuração verde. Agora você pode escrever código, definir pontos de interrupção, fazer alterações no código e depurar seu código recém-modificado - tudo no seu editor.
 
-Having problems with VS Code Debugging? Please see their [troubleshooting guide](https://github.com/Microsoft/vscode-chrome-debug/blob/master/README.md#troubleshooting).
+Está tendo problemas com o Debugging no VS Code? Consulte o [guia de solução de problemas](https://github.com/Microsoft/vscode-chrome-debug/blob/master/README.md#troutroubleshooting).
 
 ### WebStorm
 
-You need to have [WebStorm](https://www.jetbrains.com/webstorm/) and [JetBrains IDE Support](https://chrome.google.com/webstore/detail/jetbrains-ide-support/hmhgeddbohgjknpmjagkdomcpobmllji) Chrome extension installed.
+Você precisa ter [WebStorm](https://www.jetbrains.com/webstorm/) e a extensão do Chrome da [JetBrains IDE Support](https://chrome.google.com/webstore/detail/jetbrains-ide-support/hmhgeddbohgjknpmjagkdomcpobmllji) instalada.
 
-In the WebStorm menu `Run` select `Edit Configurations...`. Then click `+` and select `JavaScript Debug`. Paste `http://localhost:3000` into the URL field and save the configuration.
+No menu WebStorm `Executar` selecione `Editar configurações...`. Em seguida, clique em `+` e selecione `JavaScript Debug`. Cole `http://localhost:3000` no campo URL e salve a configuração.
 
-> Note: the URL may be different if you've made adjustments via the [HOST or PORT environment variables](advanced-configuration.md).
+> Observação: o URL pode ser diferente se você fez ajustes por meio das [variáveis ​​de ambiente HOST ou PORT](advanced-configuration.md).
 
-Start your app by running `npm start`, then press `^D` on macOS or `F9` on Windows and Linux or click the green debug icon to start debugging in WebStorm.
+Inicie seu aplicativo executando `npm start` e pressione `^D` no macOS ou `F9` no Windows e Linux ou clique no ícone de depuração verde para iniciar a depuração no WebStorm.
 
-The same way you can debug your application in IntelliJ IDEA Ultimate, PhpStorm, PyCharm Pro, and RubyMine.
+Da mesma forma, você pode depurar seu aplicativo no IntelliJ IDEA Ultimate, PhpStorm, PyCharm Pro e RubyMine.
 
-## Formatting Code Automatically
+## Formatando Código Automaticamente
 
-Prettier is an opinionated code formatter with support for JavaScript, CSS and JSON. With Prettier you can format the code you write automatically to ensure a code style within your project. See [Prettier's GitHub page](https://github.com/prettier/prettier) for more information, and look at this [page to see it in action](https://prettier.io/playground/).
+Prettier é um formatador de código opinativo com suporte para JavaScript, CSS e JSON. Com o Prettier, você pode formatar o código que escreve automaticamente para garantir um estilo de código em seu projeto. Veja a [página do Prettier no GitHub](https://github.com/prettier/prettier) para mais informações e veja esta [página para vê-lo em ação](https://prettier.io/playground/).
 
-To format our code whenever we make a commit in git, we need to install the following dependencies:
+Para formatar seu código sempre que fizermos um commit no git, precisamos instalar as seguintes dependências:
 
 ```sh
 npm install --save husky lint-staged prettier
 ```
-
-Alternatively you may use `yarn`:
+Alternativamente, você pode usar `yarn`:
 
 ```sh
 yarn add husky lint-staged prettier
 ```
 
-- `husky` makes it possible to use githooks as if they are npm scripts.
-- `lint-staged` allows us to run scripts on staged files in git. See this [blog post about lint-staged to learn more about it](https://medium.com/@okonetchnikov/make-linting-great-again-f3890e1ad6b8).
-- `prettier` is the JavaScript formatter we will run before commits.
+- `husky` torna possível usar githooks como se fossem scripts npm.
+- `lint-staged` nos permite executar scripts em arquivos testados no git. Veja esta [postagem do blog sobre lint-staged para saber mais sobre ele](https://medium.com/@okonetchnikov/make-linting-great-again-f3890e1ad6b8).
+- `prettier` é o formatador JavaScript que rodaremos antes dos commits.
 
-Now we can make sure every file is formatted correctly by adding a few lines to the `package.json` in the project root.
+Agora podemos ter certeza de que cada arquivo está formatado corretamente adicionando algumas linhas ao `package.json` na raiz do projeto.
 
-Add the following field to the `package.json` section:
+Adicione o seguinte campo à seção `package.json`:
 
 ```diff
 +  "husky": {
@@ -141,7 +142,7 @@ Add the following field to the `package.json` section:
 +  }
 ```
 
-Next we add a 'lint-staged' field to the `package.json`, for example:
+Em seguida, adicionamos um campo 'lint-staged' ao `package.json`, por exemplo:
 
 ```diff
   "dependencies": {
@@ -155,6 +156,6 @@ Next we add a 'lint-staged' field to the `package.json`, for example:
   "scripts": {
 ```
 
-Now, whenever you make a commit, Prettier will format the changed files automatically. You can also run `./node_modules/.bin/prettier --write "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}"` to format your entire project for the first time.
+Agora, sempre que você fizer um commit, Prettier irá formatar os arquivos alterados automaticamente. Você também pode executar `./node_modules/.bin/prettier --write "src/**/*.{js,jsx,ts,tx,json,css,scss,md}"` para formatar todo o seu projeto pela o primeira vez.
 
-Next you might want to integrate Prettier in your favorite editor. Read the section on [Editor Integration](https://prettier.io/docs/en/editors.html) on the Prettier GitHub page.
+Em seguida, você pode querer integrar o Prettier em seu editor favorito. Leia a seção sobre [Integração do Editor](https://prettier.io/docs/en/editors.html) na página do Prettier no GitHub.

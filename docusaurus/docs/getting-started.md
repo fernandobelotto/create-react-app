@@ -1,42 +1,40 @@
 ---
 id: getting-started
-title: Getting Started
+title: Começando
 ---
 
-Create React App is an officially supported way to create single-page React
-applications. It offers a modern build setup with no configuration.
+Create React App é a forma oficialmente suportada de criar aplicativos React de página única (SPA's). Ele oferece uma configuração de construção moderna sem nenhuma configuração.
 
-## Quick Start
+## Começo rápido
 
 ```sh
 npx create-react-app my-app
 cd my-app
 npm start
 ```
+> Se você instalou anteriormente `create-react-app` globalmente via `npm install -g create-react-app`, recomendamos que você desinstale o pacote usando `npm uninstall -g create-react-app` ou `yarn global remova create-react-app` para garantir que `npx` sempre use a versão mais recente.
 
-> If you've previously installed `create-react-app` globally via `npm install -g create-react-app`, we recommend you uninstall the package using `npm uninstall -g create-react-app` or `yarn global remove create-react-app` to ensure that `npx` always uses the latest version.
+_([npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b) vem com npm 5.2+ e superior, consulte [instruções para versões anteriores de npm](https://gist.github.com/gaearon/4064d3c23a77c74a3614c498a8bb1c5f))_
 
-_([npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b) comes with npm 5.2+ and higher, see [instructions for older npm versions](https://gist.github.com/gaearon/4064d3c23a77c74a3614c498a8bb1c5f))_
+Em seguida, abra [http://localhost:3000/](http://localhost:3000/) para ver seu aplicativo.
 
-Then open [http://localhost:3000/](http://localhost:3000/) to see your app.
-
-When you’re ready to deploy to production, create a minified bundle with `npm run build`.
+Quando estiver pronto para implantar na produção, crie um pacote minimizado com `npm run build`.
 
 <p align='center'>
 <img src='https://cdn.jsdelivr.net/gh/facebook/create-react-app@27b42ac7efa018f2541153ab30d63180f5fa39e0/screencast.svg' width='600' alt='npm start' />
 </p>
 
-### Get Started Immediately
+### Comece imediatamente
 
-You **don’t** need to install or configure tools like webpack or Babel. They are preconfigured and hidden so that you can focus on the code.
+Você **não** precisa instalar ou configurar ferramentas como webpack ou Babel. Eles são pré-configurados e ocultados para que você possa se concentrar no código.
 
-Create a project, and you’re good to go.
+Crie um projeto e está pronto para começar.
 
-## Creating an App
+## Criando um aplicativo
 
-**You’ll need to have Node >= 10 on your local development machine** (but it’s not required on the server). You can use [nvm](https://github.com/creationix/nvm#installation) (macOS/Linux) or [nvm-windows](https://github.com/coreybutler/nvm-windows#node-version-manager-nvm-for-windows) to switch Node versions between different projects.
+**Você precisará ter Node >= 10 em sua máquina de desenvolvimento local** (mas não é obrigatório no servidor). Você pode usar [nvm](https://github.com/creationix/nvm#installation) (macOS / Linux) ou [nvm-windows](https://github.com/coreybutler/nvm-windows#node-version-manager-nvm-for-windows) para alternar as versões do Node entre diferentes projetos.
 
-To create a new app, you may choose one of the following methods:
+Para criar um novo aplicativo, você pode escolher um dos seguintes métodos:
 
 ### npx
 
@@ -60,45 +58,42 @@ _`npm init <initializer>` is available in npm 6+_
 yarn create react-app my-app
 ```
 
-_`yarn create` is available in Yarn 0.25+_
+_`yarn create` está disponível no Yarn 0.25+_
 
-### Selecting a template
+### Selecionando um template
 
-You can now optionally start a new app from a template by appending `--template [template-name]` to the creation command.
+Agora você pode opcionalmente iniciar um novo aplicativo a partir de um modelo anexando `--template [template-name]` ao comando de criação.
 
-If you don't select a template, we'll create your project with our base template.
+Se você não selecionar um modelo, criaremos seu projeto com nosso modelo base.
 
-Templates are always named in the format `cra-template-[template-name]`, however you only need to provide the `[template-name]` to the creation command.
+Os modelos são sempre nomeados no formato `cra-template-[template-name]`, entretanto você só precisa fornecer o `[template-name]` para o comando de criação.
 
 ```sh
 npx create-react-app my-app --template [template-name]
 ```
+> Você pode encontrar uma lista de modelos disponíveis procurando por ["cra-template-\*"](https://www.npmjs.com/search?q=cra-template-*) no npm.
 
-> You can find a list of available templates by searching for ["cra-template-\*"](https://www.npmjs.com/search?q=cra-template-*) on npm.
+Nossa documentação [Templates Customizados](custom-templates.md) descreve como você pode construir seu próprio template.
 
-Our [Custom Templates](custom-templates.md) documentation describes how you can build your own template.
+#### Criando um aplicativo TypeScript
 
-#### Creating a TypeScript app
-
-You can start a new TypeScript app using templates. To use our provided TypeScript template, append `--template typescript` to the creation command.
+Você pode iniciar um novo aplicativo TypeScript usando modelos. Para usar nosso template TypeScript, acrescente `--template typescript` ao comando de criação.
 
 ```sh
 npx create-react-app my-app --template typescript
 ```
+Se você já tem um projeto e gostaria de adicionar TypeScript, consulte nossa documentação [Adicionando TypeScript](add-typescript.md).
 
-If you already have a project and would like to add TypeScript, see our [Adding TypeScript](adding-typescript.md) documentation.
+### Selecionando um package manager
 
-### Selecting a package manager
-
-When you create a new app, the CLI will use [Yarn](https://yarnpkg.com/) to install dependencies (when available). If you have Yarn installed, but would prefer to use npm, you can append `--use-npm` to the creation command. For example:
+Quando você cria um novo aplicativo, a CLI usará [Yarn](https://yarnpkg.com/) para instalar dependências (quando disponíveis). Se você tem o Yarn instalado, mas prefere usar o npm, você pode adicionar `--use-npm` ao comando de criação. Por exemplo:
 
 ```sh
 npx create-react-app my-app --use-npm
 ```
+## Resultado
 
-## Output
-
-Running any of these commands will create a directory called `my-app` inside the current folder. Inside that directory, it will generate the initial project structure and install the transitive dependencies:
+Executar qualquer um desses comandos criará um diretório chamado `my-app` dentro da pasta atual. Dentro desse diretório, ele irá gerar a estrutura inicial do projeto e instalar as dependências transitivas:
 
 ```
 my-app
@@ -124,7 +119,7 @@ my-app
     └── setupTests.js
 ```
 
-No configuration or complicated folder structures, only the files you need to build your app. Once the installation is done, you can open your project folder:
+Nenhuma configuração ou estruturas de pasta complicadas, apenas os arquivos de que você precisa para construir seu aplicativo. Assim que a instalação for concluída, você pode abrir a pasta do projeto:
 
 ```sh
 cd my-app
@@ -132,28 +127,28 @@ cd my-app
 
 ## Scripts
 
-Inside the newly created project, you can run some built-in commands:
+Dentro do projeto recém-criado, você pode executar alguns comandos integrados:
 
-### `npm start` or `yarn start`
+### `npm start` ou `yarn start`
 
-Runs the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Executa o aplicativo em modo de desenvolvimento. Abra [http://localhost:3000](http://localhost:3000) para visualizá-lo no navegador.
 
-The page will automatically reload if you make changes to the code. You will see the build errors and lint warnings in the console.
+A página será recarregada automaticamente se você fizer alterações no código. Você verá os erros de compilação e avisos de lint no console.
 
 <p align='center'>
 <img src='https://cdn.jsdelivr.net/gh/marionebl/create-react-app@9f6282671c54f0874afd37a72f6689727b562498/screencast-error.svg' width='600' alt='Build errors' />
 </p>
 
-### `npm test` or `yarn test`
+### `npm test` ou `yarn test`
 
-Runs the test watcher in an interactive mode. By default, runs tests related to files changed since the last commit.
+Executa o inspetor de teste em modo interativo. Por padrão, executa testes relacionados aos arquivos alterados desde o último commit.
 
-[Read more about testing](running-tests.md).
+[Leia mais sobre testes](running-tests.md).
 
-### `npm run build` or `yarn build`
+### `npm run build` ou `yarn build`
 
-Builds the app for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance.
+Compila o aplicativo para produção na pasta `build`. Ele agrupa corretamente o React no modo de produção e otimiza a construção para o melhor desempenho.
 
-The build is minified and the filenames include the hashes.
+A compilação é reduzida e os nomes dos arquivos incluem os hashes.
 
-Your app is ready to be deployed.
+Seu aplicativo está pronto para ser implantado.

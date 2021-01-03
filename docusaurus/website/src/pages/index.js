@@ -19,19 +19,19 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: 'Less to Learn',
+    title: 'Menos para aprender',
     content:
-      "You don't need to learn and configure many build tools. Instant reloads help you focus on development. When it's time to deploy, your bundles are optimized automatically.",
+      "Você não precisa aprender e configurar muitas ferramentas de build. Reloads instantâneos ajudam você a se concentrar no desenvolvimento. Quando é hora de implantar, seus pacotes são otimizados automaticamente.",
   },
   {
-    title: 'Only One Dependency',
+    title: 'Apenas Uma Dependência',
     content:
-      'Your app only needs one build dependency. We test Create React App to make sure that all of its underlying pieces work together seamlessly – no complicated version mismatches.',
+      'Seu aplicativo só precisa de uma dependência de compilação. Testamos o Create React App para garantir que todas as suas peças subjacentes funcionem juntas perfeitamente - sem incompatibilidades de versão complicadas.',
   },
   {
-    title: 'No Lock-In',
+    title: 'Sem bloqueio',
     content:
-      'Under the hood, we use webpack, Babel, ESLint, and other amazing projects to power your app. If you ever want an advanced configuration, you can ”eject” from Create React App and edit their config files directly.',
+      "Nos bastidores, usamos webpack, Babel, ESLint e outros projetos incríveis para potencializar seu aplicativo. Se você quiser uma configuração avançada, pode 'ejetar' do Create React App e editar seus arquivos de configuração diretamente.",
   },
 ];
 
@@ -42,7 +42,7 @@ function Home() {
   return (
     <Layout
       permalink={'/'}
-      description={'Set up a modern web app by running one command.'}
+      description={'Configure um aplicativo da web moderno executando um comando.'}
     >
       <div className={clsx('hero hero--dark', styles.heroBanner)}>
         <div className="container">
@@ -58,7 +58,7 @@ function Home() {
               className="button button--outline button--primary button--lg"
               to={useBaseUrl('docs/getting-started')}
             >
-              Get Started
+              Comece Agora
             </Link>
           </div>
         </div>
@@ -84,13 +84,13 @@ function Home() {
         <div className="container padding-vert--xl text--left">
           <div className="row">
             <div className="col col--4 col--offset-1">
-              <h2>Get started in seconds</h2>
+              <h2>Comece em segundos</h2>
               <p>
-                Whether you’re using React or another library, Create React App
-                lets you <strong>focus on code, not build tools</strong>.
+                Esteja você usando o React ou outra biblioteca, Create React App
+                permite que você <strong>foco no código, não em build tools</strong>.
                 <br />
                 <br />
-                To create a project called <i>my-app</i>, run this command:
+                Para criar um projeto chamado <i>my-app</i>, execute este comando:
               </p>
               <CodeBlock className="language-sh">
                 npx create-react-app my-app
@@ -100,7 +100,7 @@ function Home() {
             <div className="col col--5 col--offset-1">
               <img
                 className={styles.featureImage}
-                alt="Easy to get started in seconds"
+                alt="Fácil de começar em segundos"
                 src={
                   'https://camo.githubusercontent.com/29765c4a32f03bd01d44edef1cd674225e3c906b/68747470733a2f2f63646e2e7261776769742e636f6d2f66616365626f6f6b2f6372656174652d72656163742d6170702f323762343261632f73637265656e636173742e737667'
                 }
@@ -115,16 +115,16 @@ function Home() {
             <div className="col col--4 col--offset-1">
               <img
                 className={styles.featureImage}
-                alt="Easy to update"
+                alt="Fácil de atualizar"
                 src={useBaseUrl('img/update.png')}
               />
             </div>
             <div className="col col--5 col--offset-1">
-              <h2>Easy to Maintain</h2>
+              <h2>Fácil manutenção</h2>
               <p>
-                Updating your build tooling is typically a daunting and
-                time-consuming task. When new versions of Create React App are
-                released, you can upgrade using a single command:
+                  Atualizar suas ferramentas de construção é geralmente uma tarefa difícil e
+                  demorada. Quando novas versões do aplicativo Create React são
+                  lançado, você pode atualizar usando um único comando:
               </p>
               <CodeBlock className="language-sh">
                 npm install react-scripts@latest

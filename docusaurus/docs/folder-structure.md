@@ -1,9 +1,9 @@
 ---
 id: folder-structure
-title: Folder Structure
+title: Estrutura de Pastas
 ---
 
-After creation, your project should look like this:
+Após a criação, seu projeto deve ficar assim:
 
 ```
 my-app/
@@ -22,17 +22,17 @@ my-app/
     logo.svg
 ```
 
-For the project to build, **these files must exist with exact filenames**:
+Para que o projeto seja construído (build), **esses arquivos devem existir com nomes exatos**:
 
-- `public/index.html` is the page template;
-- `src/index.js` is the JavaScript entry point.
+- `public/index.html` é o página template;
+- `src/index.js` é o ponto de entrada do JavaScript.
 
-You can delete or rename the other files.
+Você pode excluir ou renomear os outros arquivos.
 
-You may create subdirectories inside `src`. For faster rebuilds, only files inside `src` are processed by webpack. You need to **put any JS and CSS files inside `src`**, otherwise webpack won’t see them.
+Você pode criar subdiretórios dentro de `src`. Para reconstruções mais rápidas, apenas os arquivos dentro de `src` são processados ​​pelo webpack. Você precisa **colocar quaisquer arquivos JS e CSS dentro de `src`**, caso contrário, o webpack não os verá.
 
-Only files inside `public` can be used from `public/index.html`. Read instructions below for using assets from JavaScript and HTML.
+Apenas arquivos dentro de `public` podem ser usados ​​em `public/index.html`. Leia as instruções abaixo para usar recursos de JavaScript e HTML.
 
-You can, however, create more top-level directories. They will not be included in the production build so you can use them for things like documentation.
+Você pode, no entanto, criar mais diretórios de nível superior. Eles não serão incluídos na construção de produção, portanto, você pode usá-los para coisas como documentação.
 
-If you have Git installed and your project is not part of a larger repository, then a new repository will be initialized resulting in an additional top-level `.git` directory.
+Se você tiver o Git instalado e seu projeto não fizer parte de um repositório maior, um novo repositório será inicializado, resultando em um diretório `.git` de nível superior adicional.

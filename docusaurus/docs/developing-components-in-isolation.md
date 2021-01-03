@@ -1,59 +1,60 @@
 ---
 id: developing-components-in-isolation
-title: Developing Components in Isolation
+title: Desenvolvendo componentes isoladamente
 ---
 
-Usually, in an app, you have a lot of UI components, and each of them has many different states.
-For an example, a basic button component could have the following states:
+Normalmente, em um aplicativo, você tem muitos componentes de UI e cada um deles tem muitos estados diferentes.
+Por exemplo, um componente básico de botão pode ter os seguintes estados:
 
-- In a regular state, with a text label.
-- In the disabled mode.
-- In a loading state.
+- Em estado normal, com uma label de texto.
+- Em modo desativado.
+- Em estado de carregamento.
 
-Usually, it’s hard to see these states without running a sample app or some examples.
+Normalmente, é difícil ver esses estados sem executar um aplicativo de amostra ou alguns exemplos.
 
 Create React App doesn’t include any tools for this by default, but you can add [Storybook for React](https://storybook.js.org) ([source](https://github.com/storybooks/storybook)) or [React Styleguidist](https://react-styleguidist.js.org/) ([source](https://github.com/styleguidist/react-styleguidist)) to your project. **These are third-party tools that let you develop components and see all their states in isolation from your app**.
+O Create React App não inclui nenhuma ferramenta para isso por padrão, mas você pode adicionar [Storybook for React](https://storybook.js.org) ([fonte](https://github.com/storybooks/storybook )) ou [React Styleguidist](https://react-styleguidist.js.org/) ([fonte](https://github.com/styleguidist/react-styleguidist)) ao seu projeto. **Estas são ferramentas de terceiros que permitem desenvolver componentes e ver todos os seus estados de forma isolada do seu aplicativo**.
 
-![Storybook for React Demo](https://i.imgur.com/7CIAWpB.gif)
+![Demostração do Storybook para React](https://i.imgur.com/7CIAWpB.gif)
 
-You can also deploy your Storybook or style guide as a static app. This way, everyone in your team can view and review different states of UI components without starting a backend server or creating an account in your app.
+Você também pode implantar seu Storybook ou guia de estilo como um aplicativo estático. Dessa forma, todos em sua equipe podem visualizar e revisar diferentes estados de componentes de UI sem iniciar um servidor de back-end ou criar uma conta em seu aplicativo.
 
-## Getting Started with Storybook
+## Introdução ao Storybook
 
-Storybook is a development environment for React UI components. It allows you to browse a component library, view the different states of each component, and interactively develop and test components.
+Storybook é um ambiente de desenvolvimento para componentes React. Ele permite que você navegue em uma biblioteca de componentes, visualize os diferentes estados de cada componente e desenvolva e teste componentes interativamente.
 
-Run the following command inside your app’s directory:
+Execute o seguinte comando dentro do diretório do seu aplicativo:
 
 ```sh
 npx -p @storybook/cli sb init
 ```
 
-After that, follow the instructions on the screen.
+Depois disso, siga as instruções na tela.
 
-Learn more about React Storybook:
+Saiba mais sobre o React Storybook:
 
-- [Learn Storybook (tutorial)](https://learnstorybook.com)
-- [Documentation](https://storybook.js.org/basics/introduction/)
-- [GitHub Repo](https://github.com/storybooks/storybook)
-- [Snapshot Testing UI](https://github.com/storybooks/storybook/tree/master/addons/storyshots) with Storybook + addon/storyshot
+- [Aprender Storybook (tutorial)](https://learnstorybook.com)
+- [Documentação](https://storybook.js.org/basics/introduction/)
+- [Repositório no GitHub](https://github.com/storybooks/storybook)
+- [Snapshot Testing UI](https://github.com/storybooks/storybook/tree/master/addons/storyshots) com Storybook + addon/storyshot
 
-## Getting Started with Styleguidist
+## Introdução ao Styleguidist
 
-Styleguidist combines a style guide, where all your components are presented on a single page with their props documentation and usage examples, with an environment for developing components in isolation, similar to Storybook. In Styleguidist you write examples in Markdown, where each code snippet is rendered as a live editable playground.
+Styleguidist combina um guia de estilo, onde todos os seus componentes são apresentados em uma única página com sua documentação de props e exemplos de uso, com um ambiente para desenvolver componentes de forma isolada, semelhante ao Storybook. Em Styleguidist, você escreve exemplos em Markdown, onde cada fragmento de código é renderizado como um playground editável ao vivo.
 
-First, install Styleguidist:
+Primeiro, instale o Styleguidist:
 
 ```sh
 npm install --save react-styleguidist
 ```
 
-Alternatively you may use `yarn`:
+Alternativamente, você pode usar `yarn`:
 
 ```sh
 yarn add react-styleguidist
 ```
 
-Then, add these scripts to your `package.json`:
+Em seguida, adicione esses scripts ao seu `package.json`:
 
 ```diff
    "scripts": {
@@ -62,15 +63,15 @@ Then, add these scripts to your `package.json`:
      "start": "react-scripts start",
 ```
 
-Then, run the following command inside your app’s directory:
+Em seguida, execute o seguinte comando dentro do diretório do seu aplicativo:
 
 ```sh
 npm run styleguide
 ```
 
-After that, follow the instructions on the screen.
+Depois disso, siga as instruções na tela.
 
-Learn more about React Styleguidist:
+Saiba mais sobre o React Styleguidist:
 
-- [GitHub Repo](https://github.com/styleguidist/react-styleguidist)
-- [Documentation](https://react-styleguidist.js.org/docs/getting-started.html)
+- [Repositório no GitHub](https://github.com/styleguidist/react-styleguidist)
+- [Documentação](https://react-styleguidist.js.org/docs/getting-started.html)

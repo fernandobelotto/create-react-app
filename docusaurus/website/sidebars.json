@@ -1,20 +1,20 @@
 {
   "docs": {
-    "Welcome": ["documentation-intro"],
-    "Getting Started": [
+    "Bem-vindo": ["documentation-intro"],
+    "Começando": [
       "getting-started",
       "folder-structure",
       "available-scripts",
       "supported-browsers-features",
       "updating-to-new-releases"
     ],
-    "Development": [
+    "Desenvolvimento": [
       "setting-up-your-editor",
       "developing-components-in-isolation",
       "analyzing-the-bundle-size",
       "using-https-in-development"
     ],
-    "Styles and Assets": [
+    "Estilização e Assets": [
       "adding-a-stylesheet",
       "adding-a-css-modules-stylesheet",
       "adding-a-sass-stylesheet",
@@ -25,7 +25,7 @@
       "using-the-public-folder",
       "code-splitting"
     ],
-    "Building your App": [
+    "Construindo seu aplicativo": [
       "installing-a-dependency",
       "importing-a-component",
       "using-global-variables",
@@ -39,21 +39,21 @@
       "measuring-performance",
       "production-build"
     ],
-    "Testing": ["running-tests", "debugging-tests"],
-    "Back-End Integration": [
+    "Testando": ["running-tests", "debugging-tests"],
+    "Integração com Back-End": [
       "proxying-api-requests-in-development",
       "fetching-data-with-ajax-requests",
       "integrating-with-an-api-backend",
       "title-and-meta-tags"
     ],
-    "Deployment": ["deployment"],
-    "Advanced Usage": [
+    "Implantação": ["deployment"],
+    "Uso Avançado": [
       "custom-templates",
       "can-i-use-decorators",
       "pre-rendering-into-static-html-files",
       "advanced-configuration",
       "alternatives-to-ejecting"
     ],
-    "Support": ["troubleshooting"]
+    "Ajuda": ["troubleshooting"]
   }
 }

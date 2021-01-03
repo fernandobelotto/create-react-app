@@ -1,20 +1,20 @@
 ---
 id: updating-to-new-releases
-title: Updating to New Releases
+title: Atualizando para novos lançamentos
 ---
 
-Create React App is divided into two packages:
+O Create React App é dividido em dois pacotes:
 
-- `create-react-app` is a global command-line utility that you use to create new projects.
-- `react-scripts` is a development dependency in the generated projects (including this one).
+- `create-react-app` é um utilitário de linha de comando (CLI) global que você usa para criar novos projetos.
+- `react-scripts` é uma dependência de desenvolvimento nos projetos gerados (incluindo este).
 
-When you run `npx create-react-app my-app` it automatically installs the latest version of Create React App.  
-> If you've previously installed `create-react-app` globally via `npm install -g create-react-app`, please visit [Getting Started](getting-started.md) to learn about current installation steps. 
+Quando você executa `npx create-react-app my-app`, ele instala automaticamente a versão mais recente de Create React App.
+> Se você instalou anteriormente `create-react-app` globalmente via `npm install -g create-react-app`, visite [Getting Started](getting-started.md) para aprender sobre as etapas de instalação atuais.
 
-Create React App creates the project with the latest version of `react-scripts` so you’ll get all the new features and improvements in newly created apps automatically.
+Create React App cria o projeto com a versão mais recente de `react-scripts` para que você obtenha todos os novos recursos e melhorias em aplicativos recém-criados automaticamente.
 
-To update an existing project to a new version of `react-scripts`, [open the changelog](https://github.com/facebook/create-react-app/blob/master/CHANGELOG.md), find the version you’re currently on (check `package.json` in this folder if you’re not sure), and apply the migration instructions for the newer versions.
+Para atualizar um projeto existente para uma nova versão de `react-scripts`, [abra o changelog](https://github.com/facebook/create-react-app/blob/master/CHANGELOG.md), encontre a versão você está atualmente (verifique `package.json` nesta pasta se não tiver certeza) e aplique as instruções de migração para as versões mais recentes.
 
-In most cases bumping the `react-scripts` version in `package.json` and running `npm install` (or `yarn install`) in this folder should be enough, but it’s good to consult the [changelog](https://github.com/facebook/create-react-app/blob/master/CHANGELOG.md) for potential breaking changes.
+Na maioria dos casos, alterar a versão `react-scripts` em `package.json` e executar `npm install` (ou `yarn install`) nesta pasta deve ser o suficiente, mas é bom consultar o [changelog](https://github.com/facebook/create-react-app/blob/master/CHANGELOG.md) para possíveis alterações importantes.
 
-We commit to keeping the breaking changes minimal so you can upgrade `react-scripts` painlessly.
+Comprometemo-nos a manter o mínimo de alterações significativas para que você possa atualizar os `react-scripts` sem dor.

@@ -1,25 +1,25 @@
 ---
 id: documentation-intro
-title: About the Documentation
-sidebar_label: About Docs
+title: Sobre a Documentação
+sidebar_label: Sobre o Docs
 ---
 
-Welcome to the Create React App documentation!
+Bem-vindo à documentação do Create React App!
 
-## Navigation
+## Navegação
 
-You can find different topics in the table of contents. On desktop, you should see it in the left sidebar. On mobile, you should see it after pressing an icon with arrows in the top left corner.
+Você pode encontrar diferentes tópicos no índice. No desktop, você deve vê-lo na barra lateral esquerda. No celular, você deve vê-lo depois de pressionar um ícone com setas no canto superior esquerdo.
 
-## Looking for React Docs?
+## Procurando pela documentação do React?
 
-The documentation for React itself is located on a separate website: **[reactjs.org](https://reactjs.org/)**.
+A documentação do próprio React está localizada em um site separado: **[reactjs.org](https://reactjs.org/)**.
 
-This website is only about Create React App.
+Este site é apenas sobre Create React App.
 
-## Something Missing?
+## Algo faltando?
 
-If you have ideas for more “How To” recipes that should be on this page, [let us know](https://github.com/facebook/create-react-app/issues) or [contribute some!](https://github.com/facebook/create-react-app/tree/master/docusaurus/docs)
+Se você tiver ideias para mais receitas “Como fazer” que deveriam estar nesta página, [informe-nos](https://github.com/facebook/create-react-app/issues) ou [contribua com algumas!](https://github.com/facebook/create-react-app/tree/master/docusaurus/docs)
 
 ## Feedback
 
-We are always open to [your feedback](https://github.com/facebook/create-react-app/issues).
+Estamos sempre abertos para o [seu feedback](https://github.com/facebook/create-react-app/issues).
