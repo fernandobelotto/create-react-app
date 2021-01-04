@@ -1,37 +1,38 @@
 ---
 id: deployment
-title: Deployment
-sidebar_label: Deployment
+title: Implantação
+sidebar_label: Implantação
 ---
 
-`npm run build` creates a `build` directory with a production build of your app. Set up your favorite HTTP server so that a visitor to your site is served `index.html`, and requests to static paths like `/static/js/main.<hash>.js` are served with the contents of the `/static/js/main.<hash>.js` file. For more information see the [production build](production-build.md) section.
 
-## Static Server
+`npm run build` cria um diretório `build` com uma construção de produção de seu aplicativo. Configure seu servidor HTTP favorito para que um visitante de seu site receba `index.html`, e solicitações para caminhos estáticos como `/static/ js/main.<hash>.js` são atendidos com o conteúdo do arquivo `/static/js/main.<hash>.js`. Para obter mais informações, consulte a seção [build de produção](production-build.md).
 
-For environments using [Node](https://nodejs.org/), the easiest way to handle this would be to install [serve](https://github.com/zeit/serve) and let it handle the rest:
+## Servidor Estático
+
+Para ambientes que usam [Node](https://nodejs.org/), a maneira mais fácil de lidar com isso seria instalar [serve](https://github.com/zeit/serve) e deixá-lo lidar com o resto:
 
 ```sh
 npm install -g serve
 serve -s build
 ```
 
-The last command shown above will serve your static site on the port **5000**. Like many of [serve](https://github.com/zeit/serve)’s internal settings, the port can be adjusted using the `-l` or `--listen` flags:
+O último comando mostrado acima servirá seu site estático na porta **5000**. Como muitas das configurações internas de [serve](https://github.com/zeit/serve), a porta pode ser ajustada usando os flags `-l` ou `--listen`:
 
 ```sh
 serve -s build -l 4000
 ```
 
-Run this command to get a full list of the options available:
+Execute este comando para obter uma lista completa das opções disponíveis:
 
 ```sh
 serve -h
 ```
 
-## Other Solutions
+## Outras Soluções
 
-You don’t necessarily need a static server in order to run a Create React App project in production. It also works well when integrated into an existing server side app.
+Você não precisa necessariamente de um servidor estático para executar um projeto Create React App em produção. Ele também funciona bem quando integrado a um aplicativo existente do lado do servidor.
 
-Here’s a programmatic example using [Node](https://nodejs.org/) and [Express](https://expressjs.com/):
+Aqui está um exemplo programático usando [Node](https://nodejs.org/) e [Express](https://expressjs.com/):
 
 ```javascript
 const express = require('express');
@@ -47,17 +48,18 @@ app.get('/', function (req, res) {
 app.listen(9000);
 ```
 
-The choice of your server software isn’t important either. Since Create React App is completely platform-agnostic, there’s no need to explicitly use Node.
+A escolha de seu software de servidor também não é importante. Como o Create React App é totalmente independente de plataforma, não há necessidade de usar o Node explicitamente.
 
-The `build` folder with static assets is the only output produced by Create React App.
+A pasta `build` com ativos estáticos é a única saída produzida pelo Create React App.
 
-However this is not quite enough if you use client-side routing. Read the next section if you want to support URLs like `/todos/42` in your single-page app.
+No entanto, isso não é suficiente se você usar o roteamento do lado do cliente. Leia a próxima seção se você deseja suportar URLs como `/todos/42` em seu aplicativo de página única.
 
-## Serving Apps with Client-Side Routing
+## Servindo aplicativos com roteamento do lado do cliente
 
-If you use routers that use the HTML5 [`pushState` history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API#Adding_and_modifying_history_entries) under the hood (for example, [React Router](https://github.com/ReactTraining/react-router) with `browserHistory`), many static file servers will fail. For example, if you used React Router with a route for `/todos/42`, the development server will respond to `localhost:3000/todos/42` properly, but an Express serving a production build as above will not.
 
-This is because when there is a fresh page load for a `/todos/42`, the server looks for the file `build/todos/42` and does not find it. The server needs to be configured to respond to a request to `/todos/42` by serving `index.html`. For example, we can amend our Express example above to serve `index.html` for any unknown paths:
+Se você usa roteadores que usam HTML5 [API de histórico `pushState`](https://developer.mozilla.org/en-US/docs/Web/API/History_API#Adding_and_modifying_history_entries) em segundo plano (por exemplo, [React Router](https://github.com/ReactTraining/react-router) com `browserHistory`), muitos servidores de arquivos estáticos irão falhar. Por exemplo, se você usou o React Router com uma rota para `/todos/42`, o servidor de desenvolvimento responderá a `localhost:3000/todos/42` apropriadamente, mas um servidor com Express não.
+
+Isso ocorre porque quando há um novo carregamento de página para `/todos/42`, o servidor procura o arquivo `build/todos/42` e não o encontra. O servidor precisa ser configurado para responder a uma solicitação para `/todos/42` servindo `index.html`. Por exemplo, podemos corrigir nosso exemplo com Express acima para servir `index.html` para qualquer caminho desconhecido:
 
 ```diff
  app.use(express.static(path.join(__dirname, 'build')));
@@ -68,7 +70,7 @@ This is because when there is a fresh page load for a `/todos/42`, the server lo
  });
 ```
 
-If you’re using [Apache HTTP Server](https://httpd.apache.org/), you need to create a `.htaccess` file in the `public` folder that looks like this:
+Se você estiver usando o [Apache HTTP Server](https://httpd.apache.org/), será necessário criar um arquivo `.htaccess` na pasta` public` semelhante a este:
 
 ```
     Options -MultiViews
@@ -77,77 +79,70 @@ If you’re using [Apache HTTP Server](https://httpd.apache.org/), you need to c
     RewriteRule ^ index.html [QSA,L]
 ```
 
-It will get copied to the `build` folder when you run `npm run build`.
+Ele será copiado para a pasta `build` quando você executar `npm run build`.
 
-If you’re using [Apache Tomcat](https://tomcat.apache.org/), you need to follow [this Stack Overflow answer](https://stackoverflow.com/a/41249464/4878474).
+Se você estiver usando o [Apache Tomcat](https://tomcat.apache.org/), deverá seguir [esta resposta do Stack Overflow](https://stackoverflow.com/a/41249464/4878474).
 
-Now requests to `/todos/42` will be handled correctly both in development and in production.
+Agora as solicitações para `/todos/42` serão tratadas corretamente tanto no desenvolvimento quanto na produção.
 
-On a production build, and when you've [opted-in](making-a-progressive-web-app.md#why-opt-in),
-a [service worker](https://developers.google.com/web/fundamentals/primers/service-workers/) will automatically handle all navigation requests, like for
-`/todos/42`, by serving the cached copy of your `index.html`. This
-service worker navigation routing can be configured or disabled by
-[`eject`ing](available-scripts.md#npm-run-eject) and then modifying the
-[`navigateFallback`](https://github.com/GoogleChrome/sw-precache#navigatefallback-string)
-and [`navigateFallbackWhitelist`](https://github.com/GoogleChrome/sw-precache#navigatefallbackwhitelist-arrayregexp)
-options of the `SWPrecachePlugin` configuration.
+Em uma versão de produção, e quando você [ativou](making-a-progressive-web-app.md#why-opt-in), um [service worker](https://developers.google.com/web/fundals/primers/service-workers/) tratará automaticamente todas as solicitações de navegação, como para `/todos/42`, servindo a cópia em cache do seu `index.html`. Este roteamento de navegação do service worker pode ser configurado ou desativado [`eject`ing](available-scripts.md#npm-run-eject)e, em seguida, modificando o [`navigateFallback`](https://github.com/GoogleChrome/sw-precache#navigatefallback-string) e [`navigateFallbackWhitelist`](https://github.com/GoogleChrome/sw-precache#navigatefallbackwhitelist-arrayregexp) opções da configuração `SWPrecachePlugin`.
 
-When users install your app to the homescreen of their device the default configuration will make a shortcut to `/index.html`. This may not work for client-side routers which expect the app to be served from `/`. Edit the web app manifest at `public/manifest.json` and change `start_url` to match the required URL scheme, for example:
+Quando os usuários instalam seu aplicativo na tela inicial de seus dispositivos, a configuração padrão cria um atalho para `/index.html`. Isso pode não funcionar para roteadores do lado do cliente que esperam que o aplicativo seja servido de `/`. Edite o manifesto do aplicativo da web em `public/manifest.json` e altere `start_url` para corresponder ao esquema de URL necessário, por exemplo:
 
 ```js
   "start_url": ".",
 ```
 
-## Building for Relative Paths
+## Construindo para caminhos relativos
 
-By default, Create React App produces a build assuming your app is hosted at the server root.
+Por padrão, Create React App produz um build assumindo que seu aplicativo está hospedado na raiz do servidor.
 
-To override this, specify the `homepage` in your `package.json`, for example:
+Para substituir isso, especifique a `homepage` em seu `package.json`, por exemplo:
 
 ```js
   "homepage": "http://mywebsite.com/relativepath",
 ```
 
-This will let Create React App correctly infer the root path to use in the generated HTML file.
+Isso permitirá ao Create React App inferir corretamente o caminho raiz a ser usado no arquivo HTML gerado.
 
-**Note**: If you are using `react-router@^4`, you can root `<Link>`s using the `basename` prop on any `<Router>`.
+**Nota**: Se você estiver usando `react-router@^4`, você pode enraizar `<Link> `s usando o prop `basename` em qualquer `<Router>`.
 
-More information [here](https://reacttraining.com/react-router/web/api/BrowserRouter/basename-string).
+Mais informações acesse [aqui](https://reacttraining.com/react-router/web/api/BrowserRouter/basename-string).
 
-For example:
+Por exemplo:
 
 ```js
 <BrowserRouter basename="/calendar"/>
-<Link to="/today"/> // renders <a href="/calendar/today">
+<Link to="/today"/> // renderiza <a href="/calendar/today">
 ```
 
-### Serving the Same Build from Different Paths
+### Servindo a mesma compilação a partir de paths diferentes
 
-> Note: this feature is available with `react-scripts@0.9.0` and higher.
+> Nota: este recurso está disponível com `react-scripts@0.9.0` e superior.
 
-If you are not using the HTML5 `pushState` history API or not using client-side routing at all, it is unnecessary to specify the URL from which your app will be served. Instead, you can put this in your `package.json`:
+Se você não estiver usando a API de histórico `pushState` HTML5 ou não usar o roteamento do lado do cliente, não é necessário especificar a URL a partir da qual seu aplicativo será servido. Em vez disso, você pode colocar isso em seu `package.json`:
 
 ```js
   "homepage": ".",
 ```
 
-This will make sure that all the asset paths are relative to `index.html`. You will then be able to move your app from `http://mywebsite.com` to `http://mywebsite.com/relativepath` or even `http://mywebsite.com/relative/path` without having to rebuild it.
+Isso garantirá que todos os caminhos de ativos sejam relativos a `index.html`. Você poderá então mover seu aplicativo de `http://mywebsite.com` para` http://mywebsite.com/relativepath` ou mesmo `http://mywebsite.com/relative/path` sem ter que reconstruir isto.
 
-## Customizing Environment Variables for Arbitrary Build Environments
+## Personalizando Variáveis ​​de Ambiente para Ambientes de Compilação Arbitrária
 
-You can create an arbitrary build environment by creating a custom `.env` file and loading it using [env-cmd](https://www.npmjs.com/package/env-cmd).
+Você pode criar um ambiente de construção arbitrário criando um arquivo `.env` personalizado e carregando-o usando [env-cmd](https://www.npmjs.com/package/env-cmd).
 
-For example, to create a build environment for a staging environment:
+Por exemplo, para criar um ambiente de construção para um ambiente de teste:
 
-1. Create a file called `.env.staging`
-1. Set environment variables as you would any other `.env` file (e.g. `REACT_APP_API_URL=http://api-staging.example.com`)
-1. Install [env-cmd](https://www.npmjs.com/package/env-cmd)
+1. Crie um arquivo chamado `.env.staging`
+2. Defina as variáveis ​​de ambiente como você faria com qualquer outro arquivo `.env` (e.g. `REACT_APP_API_URL=http://api-staging.example.com`)
+3. instale [env-cmd](https://www.npmjs.com/package/env-cmd)
    ```sh
    $ npm install env-cmd --save
-   $ # or
+   $ # ou
    $ yarn add env-cmd
    ```
-1. Add a new script to your `package.json`, building with your new environment:
+4. Adicione um novo script ao seu `package.json`, construindo com seu novo ambiente:
    ```json
    {
      "scripts": {
@@ -156,39 +151,39 @@ For example, to create a build environment for a staging environment:
    }
    ```
 
-Now you can run `npm run build:staging` to build with the staging environment config.
-You can specify other environments in the same way.
+Agora você pode executar `npm run build: staging` para gerar o build com a configuração do ambiente de teste.
+Você pode especificar outros ambientes da mesma maneira.
 
-Variables in `.env.production` will be used as fallback because `NODE_ENV` will always be set to `production` for a build.
+Variáveis ​​em `.env.production` serão usadas como fallback porque `NODE_ENV` sempre será definido como `production` para o build.
 
 ## [AWS Amplify](http://console.amplify.aws)
 
-The AWS Amplify Console provides continuous deployment and hosting for modern web apps (single page apps and static site generators) with serverless backends. The Amplify Console offers globally available CDNs, custom domain setup, feature branch deployments, and password protection.
+O AWS Amplify Console fornece implantação e hospedagem contínuas para aplicativos da web modernos (aplicativos de página única e geradores de sites estáticos) com back-ends sem servidor. O Console Amplify oferece CDNs disponíveis globalmente, configuração de domínio personalizado, implantações de ramificação de recursos e proteção por senha.
 
-1. Login to the Amplify Console [here](https://console.aws.amazon.com/amplify/home).
-1. Connect your Create React App repo and pick a branch. If you're looking for a Create React App+Amplify starter, try the [create-react-app-auth-amplify starter](https://github.com/swaminator/create-react-app-auth-amplify) that demonstrates setting up auth in 10 minutes with Create React App.
-1. The Amplify Console automatically detects the build settings. Choose Next.
-1. Choose _Save and deploy_.
+1. Faça login no Console do Amplify [aqui](https://console.aws.amazon.com/amplify/home).
+2. Conecte seu repositório Create React App e escolha um branch. Se você está procurando um iniciador Create React App + Amplify, experimente o [iniciador create-react-app-auth-amplify](https://github.com/swaminator/create-react-app-auth-amplify) que demonstra a configuração de autenticação em 10 minutos com o aplicativo Create React.
+3. O Console do Amplify detecta automaticamente as configurações de construção. Escolha "Next".
+4. Escolha _Save and deploy_.
 
-If the build succeeds, the app is deployed and hosted on a global CDN with an amplifyapp.com domain. You can now continuously deploy changes to your frontend or backend. Continuous deployment allows developers to deploy updates to their frontend and backend on every code commit to their Git repository.
+Se o build for bem-sucedido, o aplicativo será implantado e hospedado em um CDN global com um domínio amplifyapp.com. Agora você pode implantar alterações continuamente em seu front-end ou back-end. A implantação contínua permite que os desenvolvedores implantem atualizações em seu front-end e back-end em cada confirmação de código em seu repositório Git.
 
 ## [Azure](https://azure.microsoft.com/)
 
-Azure Static Web Apps creates an automated build and deploy pipeline for your React app powered by GitHub Actions. Applications are geo-distributed by default with multiple points of presence. PR's are built automatically for staging environment previews.
+O Azure Static Web Apps cria um pipeline automatizado de compilação e implantação para o seu aplicativo React desenvolvido com GitHub Actions. Os aplicativos são distribuídos geograficamente por padrão com vários pontos de presença. Os PRs são criados automaticamente para visualizações do ambiente de teste.
 
-1. Create a new Static Web App [here](https://ms.portal.azure.com/#create/Microsoft.StaticApp).
-1. Add in the details and connect to your GitHub repo.
-1. Make sure the build folder is set correctly on the "build" tab and create the resource.
+1. Crie um novo aplicativo da Web estático [aqui](https://ms.portal.azure.com/#create/Microsoft.StaticApp).
+2. Adicione os detalhes e conecte-se ao seu repositório GitHub.
+3. Certifique-se de que a pasta de build esteja configurada corretamente na guia "build" e crie o recurso.
 
-Azure Static Web Apps will automatically configure a GitHub Action in your repo and begin the deployment.
+Os aplicativos da Web estáticos do Azure configurarão automaticamente uma ação do GitHub em seu repo e iniciarão a implantação.
 
-See the [Azure Static Web Apps documentation](https://aka.ms/swadocs) for more information on routing, APIs, authentication and authorization, custom domains and more.
+Consulte a [documentação do Azure Static Web Apps](https://aka.ms/swadocs) para obter mais informações sobre roteamento, APIs, autenticação e autorização, domínios personalizados e muito mais.
 
 ## [Firebase](https://firebase.google.com/)
 
-Install the Firebase CLI if you haven’t already by running `npm install -g firebase-tools`. Sign up for a [Firebase account](https://console.firebase.google.com/) and create a new project. Run `firebase login` and login with your previous created Firebase account.
+Instale a Firebase CLI, caso ainda não o tenha feito, executando `npm install -g firebase-tools`. Inscreva-se em uma [conta Firebase](https://console.firebase.google.com/) e crie um novo projeto. Execute `firebase login` e faça login com sua conta Firebase criada anteriormente.
 
-Then run the `firebase init` command from your project’s root. You need to choose the **Hosting: Configure and deploy Firebase Hosting sites** and choose the Firebase project you created in the previous step. You will need to agree with `database.rules.json` being created, choose `build` as the public directory, and also agree to **Configure as a single-page app** by replying with `y`.
+Em seguida, execute o comando `firebase init` a partir da raiz do seu projeto. Você precisa escolher **Hosting: configurar e implantar sites do Firebase Hosting** e escolher o projeto do Firebase que você criou na etapa anterior. Você precisará concordar com a criação de `database.rules.json`, escolher `build` como o diretório público e também concordar em **Configurar como um aplicativo de página única** respondendo com `y`.
 
 ```sh
     === Project Setup
@@ -225,7 +220,7 @@ Then run the `firebase init` command from your project’s root. You need to cho
     ✔  Firebase initialization complete!
 ```
 
-IMPORTANT: you need to set proper HTTP caching headers for `service-worker.js` file in `firebase.json` file or you will not be able to see changes after first deployment ([issue #2440](https://github.com/facebook/create-react-app/issues/2440)). It should be added inside `"hosting"` key like next:
+IMPORTANTE: você precisa definir cabeçalhos de cache HTTP adequados para o arquivo `service-worker.js` no arquivo `firebase.json` ou não conseguirá ver as alterações após a primeira implantação ([issue #2440](https://github.com/facebook/create-react-app/issues/2440)). Deve ser adicionado dentro da chave `"hosting"` como a seguir:
 
 ```json
 {
@@ -237,7 +232,7 @@ IMPORTANT: you need to set proper HTTP caching headers for `service-worker.js` f
     ...
 ```
 
-Now, after you create a production build with `npm run build`, you can deploy it by running `firebase deploy`.
+Agora, depois de criar um build de produção com `npm run build`, você pode implementá-lo executando `firebase deploy`.
 
 ```sh
     === Deploying to 'example-app-fd690'...
@@ -259,51 +254,50 @@ For more information see [Firebase Hosting](https://firebase.google.com/docs/hos
 
 ## [GitHub Pages](https://pages.github.com/)
 
-> Note: this feature is available with `react-scripts@0.2.0` and higher.
+> Nota: este recurso está disponível com `react-scripts@0.2.0` e superior.
 
-### Step 1: Add `homepage` to `package.json`
+### Etapa 1: Adicionar `homepage` ao `package.json`
 
-**The step below is important!**<br/>
+**O passo abaixo é importante!** <br/>
 
-**If you skip it, your app will not deploy correctly.**
+**Se você pular, seu aplicativo não será implantado corretamente.**
 
-Open your `package.json` and add a `homepage` field for your project:
+Abra seu `package.json` e adicione um campo `homepage` para seu projeto:
 
 ```json
   "homepage": "https://myusername.github.io/my-app",
 ```
 
-or for a GitHub user page:
+ou para uma página de usuário do GitHub:
 
 ```json
   "homepage": "https://myusername.github.io",
 ```
 
-or for a custom domain page:
+ou para uma página de domínio personalizada:
 
 ```json
   "homepage": "https://mywebsite.com",
 ```
 
-Create React App uses the `homepage` field to determine the root URL in the built HTML file.
+O Create React App usa o campo `homepage` para determinar a URL raiz no arquivo HTML construído.
 
-### Step 2: Install `gh-pages` and add `deploy` to `scripts` in `package.json`
+### Etapa 2: Instale `gh-pages` e adicione `deploy` aos `scripts` em `package.json`
 
-Now, whenever you run `npm run build`, you will see a cheat sheet with instructions on how to deploy to GitHub Pages.
+Agora, sempre que você executar `npm run build`, verá uma cheat sheet de dicas com instruções sobre como implantar nas páginas do GitHub.
 
-To publish it at [https://myusername.github.io/my-app](https://myusername.github.io/my-app), run:
+Para publicá-lo em [https://myusername.github.io/my-app](https://myusername.github.io/my-app), execute:
 
 ```sh
 npm install --save gh-pages
 ```
 
-Alternatively you may use `yarn`:
+Alternativamente, você pode usar `yarn`:
 
 ```sh
 yarn add gh-pages
 ```
-
-Add the following scripts in your `package.json`:
+Adicione os seguintes scripts em seu `package.json`:
 
 ```diff
   "scripts": {
@@ -313,12 +307,11 @@ Add the following scripts in your `package.json`:
     "build": "react-scripts build",
 ```
 
-The `predeploy` script will run automatically before `deploy` is run.
+O script `predeploy` será executado automaticamente antes de `deploy` ser executado.
 
-If you are deploying to a GitHub user page instead of a project page you'll need to make one
-additional modification:
+Se estiver implantando em uma página de usuário do GitHub em vez de em uma página de projeto, você precisará fazer uma modificação adicional:
 
-1. Tweak your `package.json` scripts to push deployments to **master**:
+1. Ajuste seus scripts `package.json` para enviar implantações para **master**:
 
 ```diff
   "scripts": {
@@ -327,68 +320,68 @@ additional modification:
 +   "deploy": "gh-pages -b master -d build",
 ```
 
-### Step 3: Deploy the site by running `npm run deploy`
+### Etapa 3: implantar o site executando `npm run deploy`
 
-Then run:
+Então execute:
 
 ```sh
 npm run deploy
 ```
 
-### Step 4: For a project page, ensure your project’s settings use `gh-pages`
+### Etapa 4: para uma página de projeto, certifique-se de que as configurações de seu projeto usem `gh-pages`
 
-Finally, make sure **GitHub Pages** option in your GitHub project settings is set to use the `gh-pages` branch:
+Por fim, certifique-se de que a opção **GitHub Pages** nas configurações do projeto GitHub esteja definida para usar o branch `gh-pages`:
 
 <img src="https://i.imgur.com/HUjEr9l.png" width="500" alt="gh-pages branch setting" />
 
-### Step 5: Optionally, configure the domain
+### Etapa 5: Opcionalmente, configure o domínio
 
-You can configure a custom domain with GitHub Pages by adding a `CNAME` file to the `public/` folder.
+Você pode configurar um domínio personalizado com páginas GitHub adicionando um arquivo `CNAME` à pasta `public/`.
 
-Your CNAME file should look like this:
+Seu arquivo CNAME deve ser assim:
 
 ```
 mywebsite.com
 ```
 
-### Notes on client-side routing
+### Notas sobre o roteamento do lado do cliente
 
-GitHub Pages doesn’t support routers that use the HTML5 `pushState` history API under the hood (for example, React Router using `browserHistory`). This is because when there is a fresh page load for a url like `http://user.github.io/todomvc/todos/42`, where `/todos/42` is a frontend route, the GitHub Pages server returns 404 because it knows nothing of `/todos/42`. If you want to add a router to a project hosted on GitHub Pages, here are a couple of solutions:
+O GitHub Pages não oferece suporte a routers que usam a API de histórico `pushState` do HTML5 (por exemplo, React Router usando `browserHistory`). Isso ocorre porque quando há um novo carregamento de página para um url como `http://user.github.io/todomvc/todos/42`, onde `/todos/42` é uma rota de front-end, o servidor GitHub Pages retorna 404 porque não sabe nada de `/todos/42`. Se você deseja adicionar um roteador a um projeto hospedado no GitHub Pages, aqui estão algumas soluções:
 
-- You could switch from using HTML5 history API to routing with hashes. If you use React Router, you can switch to `hashHistory` for this effect, but the URL will be longer and more verbose (for example, `http://user.github.io/todomvc/#/todos/42?_k=yknaj`). [Read more](https://reacttraining.com/react-router/web/api/Router) about different history implementations in React Router.
-- Alternatively, you can use a trick to teach GitHub Pages to handle 404s by redirecting to your `index.html` page with a custom redirect parameter. You would need to add a `404.html` file with the redirection code to the `build` folder before deploying your project, and you’ll need to add code handling the redirect parameter to `index.html`. You can find a detailed explanation of this technique [in this guide](https://github.com/rafrex/spa-github-pages).
+- Você pode mudar do uso da API de histórico do HTML5 para o roteamento com hashes. Se você usar o React Router, você pode mudar para `hashHistory` para este efeito, mas a URL será mais longa e detalhada (por exemplo,`http://user.github.io/todomvc/#/todos/42?_k=yknaj`). [Leia mais](https://reacttraining.com/react-router/web/api/Router) sobre diferentes implementações de histórico no Roteador React.
+- Como alternativa, você pode usar um truque para ensinar as páginas do GitHub a lidar com 404s, redirecionando para a página `index.html` com um parâmetro de redirecionamento personalizado. Você precisaria adicionar um arquivo `404.html` com o código de redirecionamento para a pasta `build` antes de implantar seu projeto, e você precisará adicionar o código que manipula o parâmetro de redirecionamento para `index.html`. Você pode encontrar uma explicação detalhada dessa técnica [neste guia](https://github.com/rafrex/spa-github-pages).
 
-### Troubleshooting
+### Solução de problemas
 
 #### "/dev/tty: No such a device or address"
 
-If, when deploying, you get `/dev/tty: No such a device or address` or a similar error, try the following:
+Se, ao implantar, você obtiver `/dev/tty: No such tal device or address` ou um erro semelhante, tente o seguinte:
 
-1. Create a new [Personal Access Token](https://github.com/settings/tokens)
-2. `git remote set-url origin https://<user>:<token>@github.com/<user>/<repo>` .
-3. Try `npm run deploy` again
+1. Crie um novo [token de acesso pessoal](https://github.com/settings/tokens)
+2. `git remote set-url origin https://<user>:<token>@ github.com/<user>/<repo>`.
+3. Tente `npm runploy` novamente
 
 #### "Cannot read property 'email' of null"
 
-If, when deploying, you get `Cannot read property 'email' of null`, try the following:
+Se, durante a implantação, você obtiver `Cannot read property 'email' of null`, tente o seguinte:
 
 1. `git config --global user.name '<your_name>'`
 2. `git config --global user.email '<your_email>'`
-3. Try `npm run deploy` again
+3. Tente executar `npm run deploy` novamente
 
 ## [Heroku](https://www.heroku.com/)
 
-Use the [Heroku Buildpack for Create React App](https://github.com/mars/create-react-app-buildpack).
+Use o [Heroku Buildpack para Create React App](https://github.com/mars/create-react-app-buildpack).
 
-You can find instructions in [Deploying React with Zero Configuration](https://blog.heroku.com/deploying-react-with-zero-configuration).
+Você pode encontrar instruções em [Deploying React with Zero Configuration](https://blog.heroku.com/deploying-react-with-zero-configuration).
 
-### Resolving Heroku Deployment Errors
+### Resolvendo erros de implantação do Heroku
 
-Sometimes `npm run build` works locally but fails during deploy via Heroku. Following are the most common cases.
+Às vezes, `npm run build` funciona localmente, mas falha durante a implantação via Heroku. A seguir estão os casos mais comuns.
 
 #### "Module not found: Error: Cannot resolve 'file' or 'directory'"
 
-If you get something like this:
+Se você receber algo assim:
 
 ```
 remote: Failed to create a production build. Reason:
@@ -396,13 +389,13 @@ remote: Module not found: Error: Cannot resolve 'file' or 'directory'
 MyDirectory in /tmp/build_1234/src
 ```
 
-It means you need to ensure that the lettercase of the file or directory you `import` matches the one you see on your filesystem or on GitHub.
+Isso significa que você precisa garantir que a caixa de letras do arquivo ou diretório que você `importou` corresponda àquela que você vê no seu sistema de arquivos ou no GitHub.
 
-This is important because Linux (the operating system used by Heroku) is case sensitive. So `MyDirectory` and `mydirectory` are two distinct directories and thus, even though the project builds locally, the difference in case breaks the `import` statements on Heroku remotes.
+Isso é importante porque o Linux (o sistema operacional usado pelo Heroku) faz distinção entre maiúsculas e minúsculas. Portanto, `MyDirectory` e `mydirectory` são dois diretórios distintos e, portanto, embora o projeto seja compilado localmente, a diferença no caso de quebrar as instruções `import` nos Heroku remotes.
 
 #### "Could not find a required file."
 
-If you exclude or ignore necessary files from the package you will see a error similar this one:
+Se você excluir ou ignorar os arquivos necessários do pacote, verá um erro semelhante a este:
 
 ```
 remote: Could not find a required file.
@@ -413,96 +406,98 @@ remote: npm ERR! Linux 3.13.0-105-generic
 remote: npm ERR! argv "/tmp/build_a2875fc163b209225122d68916f1d4df/.heroku/node/bin/node" "/tmp/build_a2875fc163b209225122d68916f1d4df/.heroku/node/bin/npm" "run" "build"
 ```
 
-In this case, ensure that the file is there with the proper lettercase and that’s not ignored on your local `.gitignore` or `~/.gitignore_global`.
+Nesse caso, certifique-se de que o arquivo esteja com as letras maiúsculas adequadas e que não seja ignorado em seu `.gitignore` ou` ~/.gitignore_global` local.
 
 ## [Netlify](https://www.netlify.com/)
 
-**To do a manual deploy to Netlify’s CDN:**
+**Para fazer uma implantação manual no CDN da Netlify:**
 
 ```sh
 npm install netlify-cli -g
 netlify deploy
 ```
 
-Choose `build` as the path to deploy.
+Escolha `build` como o caminho para implantar.
 
-**To setup continuous delivery:**
+**Para configurar entrega contínua:**
 
-With this setup Netlify will build and deploy when you push to git or open a pull request:
+Com esta configuração, o Netlify criará e implantará quando você enviar para git ou abrir uma solicitação pull:
 
-1. [Start a new netlify project](https://app.netlify.com/signup)
-2. Pick your Git hosting service and select your repository
-3. Click `Build your site`
+1. [Inicie um novo projeto netlify](https://app.netlify.com/signup)
+2. Escolha seu serviço de hospedagem Git e selecione seu repositório
+3. Clique em `Build your site`
 
-**Support for client-side routing:**
+**Suporte para roteamento do lado do cliente:**
 
-To support `pushState`, make sure to create a `public/_redirects` file with the following rewrite rules:
+Para suportar `pushState`, certifique-se de criar um arquivo `public/_redirects` com as seguintes regras de reescrita:
 
 ```
 /*  /index.html  200
 ```
 
-When you build the project, Create React App will place the `public` folder contents into the build output.
+Ao construir o projeto, Create React App colocará o conteúdo da pasta `public` na saída do build.
 
 ## [Vercel](https://vercel.com)
 
-[Vercel](https://vercel.com/home) is a cloud platform that enables developers to host Jamstack websites and web services that deploy instantly, scale automatically, and requires no supervision, all with zero configuration. They provide a global edge network, SSL encryption, asset compression, cache invalidation, and more.
+[Vercel](https://vercel.com/home) é uma plataforma de nuvem que permite aos desenvolvedores hospedar sites Jamstack e serviços da web que são implantados instantaneamente, escalonados automaticamente e não requerem supervisão, tudo com configuração zero. Eles fornecem uma rede de borda global, criptografia SSL, compactação de assets, invalidação de cache e muito mais.
 
-### Step 1: Deploying your React project to Vercel
+### Etapa 1: Implantando seu projeto React no Vercel
 
-To deploy your React project with a [Vercel for Git Integration](https://vercel.com/docs/git-integrations), make sure it has been pushed to a Git repository.
+Para implantar seu projeto React com um [Vercel for Git Integration](https://vercel.com/docs/git-integrations), certifique-se de que ele foi enviado para um repositório Git.
 
-Import the project into Vercel using the [Import Flow](https://vercel.com/import/git). During the import, you will find all relevant [options](https://vercel.com/docs/build-step#build-&-development-settings) preconfigured for you with the ability to change as needed.
+Importe o projeto para o Vercel usando o [Fluxo de importação](https://vercel.com/import/git). Durante a importação, você encontrará todas as [opções](https://vercel.com/docs/build-step#build-&-development-settings) relevantes pré-configuradas para você com a capacidade de alterar conforme necessário.
 
 After your project has been imported, all subsequent pushes to branches will generate [Preview Deployments](https://vercel.com/docs/platform/deployments#preview), and all changes made to the [Production Branch](https://vercel.com/docs/git-integrations#production-branch) (commonly "master" or "main") will result in a [Production Deployment](https://vercel.com/docs/platform/deployments#production).
+Depois que seu projeto foi importado, todos os envios subsequentes para branches irão gerar [Preview Deployments](https://vercel.com/docs/platform/deployments#preview), e todas as mudanças feitas no [Production Branch](https://vercel.com/docs/git-integrations#production-branch) (geralmente "master" ou "principal") resultará em uma [implantação de produção](https://vercel.com/docs/platform/deployments#production) .
 
-Once deployed, you will get a URL to see your app live, such as the following: https://create-react-app-example.vercel.app/.
+Depois de implantado, você receberá um URL para ver seu aplicativo ativo, como o seguinte: https://create-react-app-example.vercel.app/.
 
-### Step 2 (optional): Using a Custom Domain
+### Etapa 2 (opcional): usando um domínio personalizado
 
-If you want to use a Custom Domain with your Vercel deployment, you can **Add** or **Transfer in** your domain via your Vercel [account Domain settings.](https://vercel.com/dashboard/domains)
+Se quiser usar um domínio personalizado com a implantação do Vercel, você pode **Adicionar** ou **transferir** um domínio por meio de suas [configurações de domínio da conta](https://vercel.com/dashboard/domains.)
 
-To add your domain to your project, navigate to your [Project](https://vercel.com/docs/platform/projects) from the Vercel Dashboard. Once you have selected your project, click on the "Settings" tab, then select the **Domains** menu item. From your projects **Domain** page, enter the domain you wish to add to your project.
+Para adicionar seu domínio ao seu projeto, navegue até seu [Projeto](https://vercel.com/docs/platform/projects) no Painel do Vercel. Depois de selecionar seu projeto, clique na guia "Configurações" e selecione o item de menu **Domínios**. Na página **Domínio** de seus projetos, insira o domínio que deseja adicionar ao seu projeto.
 
-Once the domain as been added, you will be presented with different methods for configuring it.
+Depois que o domínio for adicionado, você verá diferentes métodos para configurá-lo.
 
-### Deploying a fresh React project
+### Implementando um novo projeto React
 
-You can deploy a fresh React project, with a Git repository set up for you, with the following Deploy Button:
+Você pode implantar um novo projeto React, com um repositório Git configurado para você, com o seguinte botão de implantação:
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/git?s=https%3A%2F%2Fgithub.com%2Fvercel%2Fvercel%2Ftree%2Fmaster%2Fexamples%2Fcreate-react-app)
 
-### Vercel References:
+### Referências da Vercel:
 
-- [Example Source](https://github.com/vercel/vercel/tree/master/examples/create-react-app)
-- [Official Vercel Guide](https://vercel.com/guides/deploying-react-with-vercel-cra)
-- [Vercel Deployment Docs](https://vercel.com/docs)
-- [Vercel Custom Domain Docs](https://vercel.com/docs/custom-domains)
+- [Fonte de exemplo](https://github.com/vercel/vercel/tree/master/examples/create-react-app)
+- [Guia Oficial Vercel](https://vercel.com/guides/deploying-react-with-vercel-cra)
+- [Documentos de implantação do Vercel](https://vercel.com/docs)
+- [Documentos de domínio personalizado Vercel](https://vercel.com/docs/custom-domains)
 
 ## [Render](https://render.com)
 
-Render offers free [static site](https://render.com/docs/static-sites) hosting with fully managed SSL, a global CDN and continuous auto deploys from GitHub.
+Render oferece [site estático](https://render.com/docs/static-sites) gratuito, hospedagem com SSL totalmente gerenciado, um CDN global e implantações automáticas contínuas do GitHub.
 
 Deploy your app in only a few minutes by following the [Create React App deployment guide](https://render.com/docs/deploy-create-react-app).
+Implante seu aplicativo em apenas alguns minutos, seguindo o [guia de implantação Create React App] (https://render.com/docs/deploy-create-react-app).
 
-Use invite code `cra` to sign up or use [this link](https://render.com/i/cra).
+Use o código de convite `cra` para se inscrever ou use [este link](https://render.com/i/cra).
 
-## [S3](https://aws.amazon.com/s3) and [CloudFront](https://aws.amazon.com/cloudfront/)
+## [S3](https://aws.amazon.com/s3) e [CloudFront](https://aws.amazon.com/cloudfront/)
 
-See this [blog post](https://medium.com/@omgwtfmarc/deploying-create-react-app-to-s3-or-cloudfront-48dae4ce0af) on how to deploy your React app to Amazon Web Services S3 and CloudFront. If you are looking to add a custom domain, HTTPS and continuous deployment see this [blog post](https://medium.com/dailyjs/a-guide-to-deploying-your-react-app-with-aws-s3-including-https-a-custom-domain-a-cdn-and-58245251f081).
+Veja esta [postagem do blog](https://medium.com/@omgwtfmarc/deploying-create-react-app-to-s3-or-cloudfront-48dae4ce0af) sobre como implantar seu aplicativo React para Amazon Web Services S3 e CloudFront . Se você deseja adicionar um domínio personalizado, HTTPS e implantação contínua, consulte esta [postagem do blog](https://medium.com/dailyjs/a-guide-to-deploying-your-react-app-with-aws-s3-including-https-a-custom-domain-a-cdn-and-58245251f081).
 
 ## [Surge](https://surge.sh/)
 
-Install the Surge CLI if you haven’t already by running `npm install -g surge`. Run the `surge` command and log in you or create a new account.
+Instale o Surge CLI se ainda não o fez, executando `npm install -g surge`. Execute o comando `surge` e faça o login ou crie uma nova conta.
 
-When asked about the project path, make sure to specify the `build` folder, for example:
+Quando questionado sobre o caminho do projeto, certifique-se de especificar a pasta `build`, por exemplo:
 
 ```sh
        project path: /path/to/project/build
 ```
 
-Note that in order to support routers that use HTML5 `pushState` API, you may want to rename the `index.html` in your build folder to `200.html` before deploying to Surge. This [ensures that every URL falls back to that file](https://surge.sh/help/adding-a-200-page-for-client-side-routing).
+Note que para suportar roteadores que usam a API HTML5 `pushState`, você pode querer renomear `index.html` em sua pasta de construção para `200.html` antes de implantar no Surge. Isso [garante que cada URL retorne a esse arquivo](https://surge.sh/help/adding-a-200-page-for-client-side-routing).
 
-## Publishing Components To npm
+## Publicação de componentes para npm
 
-Create React App doesn't provide any built-in functionality to publish a component to npm. If you're ready to extract a component from your project so other people can use it, we recommend moving it to a separate directory outside of your project and then using a tool like [nwb](https://github.com/insin/nwb#react-components-and-libraries) to prepare it for publishing.
+O aplicativo Create React não fornece nenhuma funcionalidade integrada para publicar um componente no npm. Se você estiver pronto para extrair um componente do seu projeto para que outras pessoas possam usá-lo, recomendamos movê-lo para um diretório separado fora do seu projeto e, em seguida, usar uma ferramenta como [nwb](https://github.com/insin/nwb#react-components-and-libraries) para prepará-lo para publicação.
